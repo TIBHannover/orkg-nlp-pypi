@@ -1,0 +1,20 @@
+{
+  "cs-ner": [
+    {
+      "repo_id": "orkg/orkgnlp-cs-ner-titles",
+      "files": [
+        "glove.6B.100d.txt",
+        "orkgnlp-cs-ner-titles.dset",
+        "orkgnlp-cs-ner-titles.model"
+      ]
+    },
+    {
+      "repo_id": "orkg/orkgnlp-cs-ner-abstracts",
+      "files": [
+        "glove.6B.100d.txt",
+        "orkgnlp-cs-ner-abstracts.dset",
+        "orkgnlp-cs-ner-abstracts.model"
+      ]
+    }
+  ]
+}
