@@ -1,11 +1,24 @@
 [tool.poetry]
-name = "orkg-nlp"
-version = "0.1.0"
+name = "orkgnlp"
+version = "0.1.2"
 description = "Python package wrapping the ORKG NLP Services."
-authors = ["Omar Arab Oghli"]
+license = "MIT"
+authors = ["Omar Arab Oghli <omar.araboghli@outlook.com>"]
+maintainers = ["Omar Arab Oghli"]
+readme = "README.md"
+homepage = "http://orkg.org/about"
+repository = "https://gitlab.com/TIBHannover/orkg/nlp/orkg-nlp-pypi"
+documentation = "https://orkg-nlp-pypi.readthedocs.io/en/latest/"
+keywords = ["ORKG", "NLP", "Scholarly Communication", "Digital Library"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.10"
+]
+include = ["CHANGELOG.md"]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+huggingface-hub = "^0.5.1"
 
 [tool.poetry.dev-dependencies]
 
