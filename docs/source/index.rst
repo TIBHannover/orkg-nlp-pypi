@@ -3,48 +3,38 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to orkg-nlp's documentation!
-====================================
+Welcome to orkg-nlp's python package documentation!
+====================================================
+
+With the ``orkg-nlp`` python package we provide a wrapper to our NLP services.
+
+Right after executing the following command,
+
+.. code-block:: bash
+
+    pip install orkgnlp
+
+start navigating through our documentation structure below to gain some insights into our package and its background.
+
+Please visit the ORKG's `help-center <https://www.orkg.org/orkg/help-center>`_ to know more about the ORKG project and do NOT hesitate to `get involved <https://www.orkg.org/orkg/about/21/Get_involved>`_ in the team!
+
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+    :maxdepth: 3
+
+    introduction
+    installation
+    usage
+    services
+    configure
+    api
+
+..
+    Indices and tables
+    ==================
+
+    * :ref:`genindex`
+    * :ref:`modindex`
+    * :ref:`search`
 
 
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-
-ORKG-NLP Models
-****************
-
-.. list-table::
-   :header-rows: 1
-
-   * - ORKG Model
-     - Huggingface Repository
-     - Description
-   * - **cs-ner**
-     -
-         * `orkg/orkgnlp-cs-ner-titles <https://huggingface.co/orkg/orkgnlp-cs-ner-titles>`_
-         * `orkg/orkgnlp-cs-ner-abstracts <https://huggingface.co/orkg/orkgnlp-cs-ner-abstracts>`_
-
-     - Describe me
-
-Environment Variables
-**********************
-
-.. list-table::
-   :header-rows: 1
-
-   * - Environment Variable
-     - Default
-     - Description
-   * - ORKG_NLP_DATA_CACHE_ROOT
-     - ``$USER_HOME/orkgnlp_data``
-     - Path of root cache directory where the required models and datasets are downloaded.

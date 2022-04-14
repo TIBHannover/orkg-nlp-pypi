@@ -1,3 +1,7 @@
+"""
+Root package of orkgnlp.
+"""
+
 import logging
 
 from orkgnlp.tools import *
