@@ -1,3 +1,4 @@
+""" Predicates recommendation service. """
 import numpy as np
 import onnxruntime as rt
 
@@ -9,6 +10,11 @@ from orkgnlp.util.decorators import singleton
 
 @singleton
 class PredicatesRecommender:
+    """
+    The PredicatesRecommender follows the singleton pattern, i.e. only one instance can be obtained from it.
+
+    It recommends a set of predicates TODO: continue from here
+    """
 
     def __init__(self):
         downloader.exists_or_download(config['service_name'])

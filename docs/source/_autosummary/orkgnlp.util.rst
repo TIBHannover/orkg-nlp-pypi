@@ -27,6 +27,8 @@ orkgnlp.util
    :recursive:
 
    orkgnlp.util.datastructure
+   orkgnlp.util.decorators
    orkgnlp.util.exceptions
    orkgnlp.util.io
+   orkgnlp.util.text
 

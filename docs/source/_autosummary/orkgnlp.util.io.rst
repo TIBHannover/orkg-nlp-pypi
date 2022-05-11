@@ -15,7 +15,9 @@ orkgnlp.util.io
       :toctree:
       :nosignatures:
    
+      read_df_from_json
       read_json
+      read_onnx
    
    
 

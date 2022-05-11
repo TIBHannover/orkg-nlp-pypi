@@ -1,7 +1,7 @@
-orkgnlp.tools.downloader
-========================
+orkgnlp.util.text
+=================
 
-.. automodule:: orkgnlp.tools.downloader
+.. automodule:: orkgnlp.util.text
 
    
    
@@ -15,8 +15,9 @@ orkgnlp.tools.downloader
       :toctree:
       :nosignatures:
    
-      download
-      exists_or_download
+      lemmatize
+      remove_punctuation
+      remove_stopwords
    
    
 

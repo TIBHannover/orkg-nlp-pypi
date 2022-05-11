@@ -21,7 +21,6 @@ include = ["CHANGELOG.md"]
 [tool.poetry.dependencies]
 python = "^3.8"
 huggingface-hub = "^0.5.1"
-sphinx-autodoc-typehints = "^1.18.1"
 onnxruntime = "1.11.1"
 onnx = "1.11.0"
 pandas = "1.4.2"

@@ -1,5 +1,5 @@
 """
-A script for downloading ORKG-NLP models and data needed to use the supported :doc:`../services`.
+A script for downloading ORKG-NLP models and data needed to use the supported :doc:`../services/services`.
 
 This script depends mainly on the ``huggingface_hub`` client and fetches the files from our
 huggingface `repositories <https://huggingface.co/orkg>`_.
@@ -35,7 +35,7 @@ def download(services):
     The download destination is given by ``ORKG_NLP_DATA_CACHE_ROOT``.
     You can also check how to :doc:`../configure` its value.
 
-    :param services: a string representing a service name or a list of them. Check :doc:`../services` for a full list.
+    :param services: a string representing a service name or a list of them. Check :doc:`../services/services` for a full list.
     :type services: str or list[str]
     :raise orkgnlp.util.exceptions.ORKGNLPValidationError: If one of the known passed service names is unknown.
     """
@@ -64,7 +64,7 @@ def exists_or_download(service):
     """
     Checks the presence of the required files for executing the given service and downloads them in case of absence.
 
-    :param service: a string representing a ORKG-NLP service name. Check :doc:`../services` for a full list.
+    :param service: a string representing a ORKG-NLP service name. Check :doc:`../services/services` for a full list.
     :type service: str
     :return:
     """

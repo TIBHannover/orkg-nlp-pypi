@@ -1,7 +1,7 @@
-orkgnlp.tools.downloader
-========================
+orkgnlp.util.decorators
+=======================
 
-.. automodule:: orkgnlp.tools.downloader
+.. automodule:: orkgnlp.util.decorators
 
    
    
@@ -15,8 +15,7 @@ orkgnlp.tools.downloader
       :toctree:
       :nosignatures:
    
-      download
-      exists_or_download
+      singleton
    
    
 
