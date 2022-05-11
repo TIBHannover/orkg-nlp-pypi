@@ -10,14 +10,21 @@ import logging
 from huggingface_hub import hf_hub_download
 
 from orkgnlp.config import orkgnlp_context
-from orkgnlp.util import io
 from orkgnlp.util.exceptions import ORKGNLPValidationError
 
 logger = logging.getLogger(__name__)
-CURRENT_DIR = os.path.dirname(os.path.realpath(__file__))
 
 
-def _repos_are_known(services, orkg_services):
+def _services_are_known(services, orkg_services):
+    """
+    Returns True if the given services names are subset of the known ORKG-NLP services
+
+    :param services: list of service names
+    :type services: list[str]
+    :param orkg_services: list of ORKG-NLP service names
+    :type services: list[str]
+    :return:
+    """
     return set(services).issubset(orkg_services.keys())
 
 
@@ -35,19 +42,32 @@ def download(services):
     if isinstance(services, str):
         services = [services]
 
-    orkg_services = io.read_json(os.path.join(CURRENT_DIR, '../huggingface_repos.json'))
-    if not _repos_are_known(services, orkg_services):
+    orkg_services = orkgnlp_context.get('HUGGINGFACE_REPOS')
+    if not _services_are_known(services, orkg_services):
         raise ORKGNLPValidationError('Unknown model name(s) given {}. Please check the following known services: {}'
                               .format(services, list(orkg_services.keys())))
 
     cache_root = orkgnlp_context.get('ORKG_NLP_DATA_CACHE_ROOT')
     logger.info('Downloading to {}'.format(cache_root))
-    for model in services:
-        for repo in orkg_services[model]:
-            for filename in repo['files']:
+    for service in services:
+        for repo in orkg_services[service]:
+            for filename in repo['files'].values():
                 hf_hub_download(
                     repo_id=repo['repo_id'],
                     filename=filename,
                     force_filename=filename,
-                    cache_dir=os.path.join(cache_root, model)
+                    cache_dir=os.path.join(cache_root, service)
                 )
+
+
+def exists_or_download(service):
+    """
+    Checks the presence of the required files for executing the given service and downloads them in case of absence.
+
+    :param service: a string representing a ORKG-NLP service name. Check :doc:`../services` for a full list.
+    :type service: str
+    :return:
+    """
+    service_dir = os.path.join(orkgnlp_context.get('ORKG_NLP_DATA_CACHE_ROOT'), service)
+    if not os.path.exists(service_dir):
+        download(service)

@@ -1,0 +1,10 @@
+{
+  "service_name": [
+    {
+      "repo_id": "ID of the first repository",
+      "files": {
+        "internal file name": "file name on huggingface"
+      }
+    }
+  ]
+}

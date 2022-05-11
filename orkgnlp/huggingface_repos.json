@@ -2,19 +2,30 @@
   "cs-ner": [
     {
       "repo_id": "orkg/orkgnlp-cs-ner-titles",
-      "files": [
-        "glove.6B.100d.txt",
-        "orkgnlp-cs-ner-titles.dset",
-        "orkgnlp-cs-ner-titles.model"
-      ]
+      "files": {
+        "embeddings": "glove.6B.100d.txt",
+        "titles_dset": "orkgnlp-cs-ner-titles.dset",
+        "titles_model": "orkgnlp-cs-ner-titles.model"
+      }
     },
     {
       "repo_id": "orkg/orkgnlp-cs-ner-abstracts",
-      "files": [
-        "glove.6B.100d.txt",
-        "orkgnlp-cs-ner-abstracts.dset",
-        "orkgnlp-cs-ner-abstracts.model"
-      ]
+      "files": {
+        "embeddings": "glove.6B.100d.txt",
+        "abstract_dset": "orkgnlp-cs-ner-abstracts.dset",
+        "abstract_model": "orkgnlp-cs-ner-abstracts.model"
+      }
+    }
+  ],
+  "predicates-clustering": [
+    {
+      "repo_id": "orkg/orkgnlp-predicates-clustering",
+      "files": {
+        "model": "orkgnlp-predicates-kmeans-1850.onnx",
+        "vectorizer": "orkgnlp-predicates-tfidf.onnx",
+        "training_data": "training_set.json",
+        "predicates": "comparisons_predicates.json"
+      }
     }
   ]
 }
