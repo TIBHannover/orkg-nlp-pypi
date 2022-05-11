@@ -61,4 +61,4 @@ class PredicatesRecommender:
         q = text.remove_punctuation(q)
         q = text.remove_stopwords(q)
         q = text.lemmatize(q)
-        return q
+        return q.lower()

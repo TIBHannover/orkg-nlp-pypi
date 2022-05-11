@@ -25,7 +25,7 @@ def _services_are_known(services, orkg_services):
     :type services: list[str]
     :return:
     """
-    return set(services).issubset(orkg_services.keys())
+    return set(services).issubset(orkg_services)
 
 
 def download(services):
@@ -43,7 +43,7 @@ def download(services):
         services = [services]
 
     orkg_services = orkgnlp_context.get('HUGGINGFACE_REPOS')
-    if not _services_are_known(services, orkg_services):
+    if not _services_are_known(services, orkg_services.keys()):
         raise ORKGNLPValidationError('Unknown model name(s) given {}. Please check the following known services: {}'
                               .format(services, list(orkg_services.keys())))
 
