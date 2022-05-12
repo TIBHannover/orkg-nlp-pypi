@@ -16,6 +16,7 @@ orkgnlp.util.datastructure.StrictDict
    .. autosummary::
       :nosignatures:
    
+      ~StrictDict.check
       ~StrictDict.clear
       ~StrictDict.copy
       ~StrictDict.fromkeys

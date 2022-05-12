@@ -1,7 +1,7 @@
-﻿orkgnlp
-=======
+orkgnlp.clustering
+==================
 
-.. automodule:: orkgnlp
+.. automodule:: orkgnlp.clustering
 
    
    
@@ -26,8 +26,5 @@
    :template: custom-module-template.rst
    :recursive:
 
-   orkgnlp.clustering
-   orkgnlp.config
-   orkgnlp.tools
-   orkgnlp.util
+   orkgnlp.clustering.predicates
 
