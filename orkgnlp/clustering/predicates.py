@@ -13,18 +13,31 @@ class PredicatesRecommender:
     """
     The PredicatesRecommender follows the singleton pattern, i.e. only one instance can be obtained from it.
 
-    It recommends a set of predicates TODO: continue from here
+    It requires a clustering model, vectorizer, training set and predicates. The required files are downloaded while
+    initiation, if it has not happened before.
+
+    :note: This class documentation will not be generated with sphinx :autosummary:, because the @singleton decorator
+    returns a function that cannot be detected as a class. TODO: fix this issue!
     """
 
     def __init__(self):
         downloader.exists_or_download(config['service_name'])
 
-        self._vectorizer = io.read_onnx(config['paths']['vectorizer'])
         self._model = io.read_onnx(config['paths']['model'])
+        self._vectorizer = io.read_onnx(config['paths']['vectorizer'])
         self._train_df = io.read_df_from_json(config['paths']['training_data'], key='instances')
         self._predicates = io.read_json(config['paths']['predicates'])
 
     def recommend(self, title, abstract):
+        """
+        Recommends predicates for a research paper.
+
+        :param title: Title of the research paper.
+        :type title: str
+        :param abstract: Abstract of the research paper.
+        :type abstract: str
+        :return: List of predicates.
+        """
         return self._recommend(q='{} {}'.format(title, abstract))
 
     def _recommend(self, q):

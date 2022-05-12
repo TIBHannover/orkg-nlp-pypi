@@ -7,8 +7,8 @@ def singleton(cls):
 
     Only one instance can be obtained from a singleton class.
 
-    :param cls:
-    :return:
+    :param cls: The decorated class.
+    :return: Function responsible for returning a pre-initiated instance of the given ``cls``.
     """
 
     instances = {}

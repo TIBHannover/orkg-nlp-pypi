@@ -41,7 +41,7 @@ def read_df_from_json(input_path, key=None):
 
 def read_onnx(input_path):
     """
-    Reads the ``onnx`` file of the given ``input_path``
+    Reads the ``onnx`` file of the given ``input_path``.
 
     :param input_path: Path to the onnx file
     :type input_path: str
