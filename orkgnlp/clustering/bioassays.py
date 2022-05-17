@@ -1,3 +1,5 @@
+""" BioAssays semantification service. """
+
 import onnxruntime as rt
 
 from orkgnlp.util import io, text

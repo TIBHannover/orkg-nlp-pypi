@@ -1,4 +1,4 @@
-orkgnlp.clustering
+﻿orkgnlp.clustering
 ==================
 
 .. automodule:: orkgnlp.clustering
@@ -26,5 +26,6 @@ orkgnlp.clustering
    :template: custom-module-template.rst
    :recursive:
 
+   orkgnlp.clustering.bioassays
    orkgnlp.clustering.predicates
 
