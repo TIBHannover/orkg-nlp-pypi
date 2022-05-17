@@ -26,7 +26,7 @@ class PredicatesRecommender:
         self._model = io.read_onnx(config['paths']['model'])
         self._vectorizer = io.read_onnx(config['paths']['vectorizer'])
         self._train_df = io.read_df_from_json(config['paths']['training_data'], key='instances')
-        self._predicates = io.read_json(config['paths']['predicates'])
+        self._predicates = io.read_json(config['paths']['mapping'])
 
     def recommend(self, title, abstract):
         """
