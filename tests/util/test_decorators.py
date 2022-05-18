@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from orkgnlp.util.decorators import singleton
+from orkgnlp.common.util.decorators import singleton
 
 
 @singleton

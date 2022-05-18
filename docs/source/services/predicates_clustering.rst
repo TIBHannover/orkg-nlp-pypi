@@ -22,4 +22,14 @@ Usage
     predicates = predicates_recommender.recommend(title='paper title', abstract='long abstract text here')
     print(predicates)
 
-    # output: [{"id": "P1234", "label": "some predicate"}, {"id": "P4321", "label": "another predicate"}]
+and the output has the following schema:
+
+.. code-block:: javascript
+
+    [
+        {
+            "id": "some_id",
+            "label": "some_label"
+        }
+        ...
+    ]

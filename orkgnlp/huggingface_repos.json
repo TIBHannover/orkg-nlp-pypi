@@ -17,6 +17,7 @@
       }
     }
   ],
+
   "predicates-clustering": [
     {
       "repo_id": "orkg/orkgnlp-predicates-clustering",
@@ -24,7 +25,18 @@
         "model": "orkgnlp-predicates-kmeans-1850.onnx",
         "vectorizer": "orkgnlp-predicates-tfidf.onnx",
         "training_data": "training_set.json",
-        "predicates": "comparisons_predicates.json"
+        "mapping": "comparisons_predicates.json"
+      }
+    }
+  ],
+
+    "bioassays-semantification": [
+    {
+      "repo_id": "orkg/orkgnlp-bioassays-semantification",
+      "files": {
+        "model": "orkgnlp-bioassays-kmeans-700.onnx",
+        "vectorizer": "orkgnlp-bioassays-tfidf.onnx",
+        "mapping": "mapping.json"
       }
     }
   ]

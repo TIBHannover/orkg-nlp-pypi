@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "orkgnlp"
-version = "0.1.8"
+version = "0.1.9"
 description = "Python package wrapping the ORKG NLP Services."
 license = "MIT"
 authors = ["Omar Arab Oghli <omar.araboghli@outlook.com>"]

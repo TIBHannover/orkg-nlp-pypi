@@ -1,7 +1,7 @@
-orkgnlp.clustering
-==================
+orkgnlp.common.tools
+====================
 
-.. automodule:: orkgnlp.clustering
+.. automodule:: orkgnlp.common.tools
 
    
    
@@ -26,6 +26,5 @@ orkgnlp.clustering
    :template: custom-module-template.rst
    :recursive:
 
-   orkgnlp.clustering.bioassays
-   orkgnlp.clustering.predicates
+   orkgnlp.common.tools.downloader
 

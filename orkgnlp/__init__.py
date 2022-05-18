@@ -6,7 +6,8 @@ __version__ = '0.1.6'
 
 import logging
 
-from orkgnlp.tools import *
+from orkgnlp.common import *
+from orkgnlp.common.tools import *
 
 # Root logger configuration
 logger = logging.getLogger(__name__)

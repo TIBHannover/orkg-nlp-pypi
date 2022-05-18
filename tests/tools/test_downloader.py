@@ -1,9 +1,9 @@
 import os
 from unittest import TestCase
 
-from orkgnlp.config import orkgnlp_context
-from orkgnlp.tools import downloader
-from orkgnlp.util.exceptions import ORKGNLPValidationError
+from orkgnlp.common.config import orkgnlp_context
+from orkgnlp.common.tools import downloader
+from orkgnlp.common.util.exceptions import ORKGNLPValidationError
 
 
 class TestDownloader(TestCase):
