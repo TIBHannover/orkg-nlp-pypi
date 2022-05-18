@@ -8,20 +8,20 @@ from orkgnlp.common.util import io, text
 from orkgnlp.common.util.decorators import singleton
 
 
-@singleton
 class PredicatesRecommender(ORKGNLPBase):
     """
     The PredicatesRecommender follows the singleton pattern, i.e. only one instance can be obtained from it.
 
     It requires a clustering model, vectorizer, training set and predicates. The required files are downloaded while
     initiation, if it has not happened before.
-
-    :note: This class documentation will not be generated with sphinx :autosummary:, because the @singleton decorator
-    returns a function that cannot be detected as a class. TODO: fix this issue!
     """
 
-    def __init__(self, force_download=False):
-        super().__init__(config['service_name'], force_download)
+    @singleton
+    def __new__(cls):
+        pass
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(config['service_name'], *args, **kwargs)
 
         self._model = io.read_onnx(config['paths']['model'])
         self._vectorizer = io.read_onnx(config['paths']['vectorizer'])

@@ -10,7 +10,7 @@ class ORKGNLPBase:
     def __init__(self, service, force_download=False):
         """
 
-        :param force_download: Indicates whether the required files are to be downloaded again.
+        :param force_download: Indicates whether the required files are to be downloaded again. Defaults to False
         :type force_download: bool
         """
         self.force_download = force_download

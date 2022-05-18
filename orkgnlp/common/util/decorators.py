@@ -1,21 +1,19 @@
 """ Defines decorators used within the package """
 
 
-def singleton(cls):
+def singleton(_):
     """
-    Reflects the singleton pattern and can be used to decorate classes.
+    This decorator can only be used above the __new__ function of a class. It's responsible for returning a pre-created
+    instance of the respective class or create a new one, if not have happened before.
 
-    Only one instance can be obtained from a singleton class.
-
-    :param cls: The decorated class.
-    :return: Function responsible for returning a pre-initiated instance of the given ``cls``.
+    :param _: The __new__ function.
+    :return:
     """
 
-    instances = {}
+    def apply_pattern(cls, *args, **kwargs):
+        # attention: *args and **kwargs must be included even if not used!
+        if not hasattr(cls, 'instance'):
+            cls.instance = super(cls.__class__, cls).__new__(cls)
+        return cls.instance
 
-    def getinstance(**kwargs):
-        if cls not in instances:
-            instances[cls] = cls(**kwargs)
-        return instances[cls]
-
-    return getinstance
+    return apply_pattern
