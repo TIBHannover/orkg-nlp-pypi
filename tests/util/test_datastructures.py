@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from orkgnlp.util.datastructure import StrictDict
+from orkgnlp.common.util.datastructure import StrictDict
 
 
 class TestStrictDict(TestCase):

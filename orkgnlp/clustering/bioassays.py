@@ -2,14 +2,14 @@
 
 import onnxruntime as rt
 
-from orkgnlp.util import io, text
-from orkgnlp.tools import downloader
-from orkgnlp.util.decorators import singleton
+from orkgnlp.common.base import ORKGNLPBase
+from orkgnlp.common.util import io, text
+from orkgnlp.common.util.decorators import singleton
 from orkgnlp.clustering._bioassays_config import config
 
 
 @singleton
-class BioassaysSemantifier:
+class BioassaysSemantifier(ORKGNLPBase):
     """
     The BioassaysSemantifier follows the singleton pattern, i.e. only one instance can be obtained from it.
 
@@ -20,8 +20,8 @@ class BioassaysSemantifier:
     returns a function that cannot be detected as a class. TODO: fix this issue!
     """
 
-    def __init__(self):
-        downloader.exists_or_download(config['service_name'])
+    def __init__(self, force_download=False):
+        super().__init__(config['service_name'], force_download)
 
         self._model = io.read_onnx(config['paths']['model'])
         self._vectorizer = io.read_onnx(config['paths']['vectorizer'])
@@ -38,7 +38,7 @@ class BioassaysSemantifier:
 
         cluster_label = self._predict_cluster(vectorized_text)
 
-        return self._mapping[str(cluster_label)]
+        return self._mapping[str(cluster_label)]['labels']
 
     def _vectorize_input(self, q):
         preprocessed_text = self._text_process(q)

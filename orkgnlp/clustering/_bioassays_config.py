@@ -2,8 +2,8 @@
 
 import os
 
-from orkgnlp.config import orkgnlp_context
-from orkgnlp.util.datastructure import StrictDict
+from orkgnlp.common.config import orkgnlp_context
+from orkgnlp.common.util.datastructure import StrictDict
 
 _service_data_dir = os.path.join(
     orkgnlp_context.get('ORKG_NLP_DATA_CACHE_ROOT'),

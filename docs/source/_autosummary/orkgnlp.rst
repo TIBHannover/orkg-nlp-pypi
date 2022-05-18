@@ -27,7 +27,5 @@
    :recursive:
 
    orkgnlp.clustering
-   orkgnlp.config
-   orkgnlp.tools
-   orkgnlp.util
+   orkgnlp.common
 

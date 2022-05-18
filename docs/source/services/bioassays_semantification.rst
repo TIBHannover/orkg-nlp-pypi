@@ -4,7 +4,10 @@ BioAssays Semantification
 Overview
 *********
 
-TODO
+The bioassay semantification service automatically semantifies bioassay descriptions based on the semantic model
+of the `Bioassay ontology <http://bioassayontology.org/>`_. More information on the supporting clustering algorithm of
+the service implementation, its development gold-standard dataset, and its performance results can be found
+in our `publication <https://doi.org/10.48550/arXiv.2111.15182>`_.
 
 Usage
 ******
@@ -14,36 +17,28 @@ Usage
     from orkgnlp.clustering import BioassaysSemantifier
 
     bioassays_semantifier = BioassaysSemantifier() # This will also download the required model files.
-    result = bioassays_semantifier.semantify(text='BioAssay text description here')
-    print(result)
+    labels = bioassays_semantifier.semantify(text='BioAssay text description here')
+    print(labels)
 
 
 and the output has the following schema:
 
 .. code-block:: javascript
 
-    {
-        "properties": [
-            {
+    [
+        {
+            "property": {
                 "id": "some_id",
                 "label": "some_label"
-            }
-            ...
-        ],
-        "resources": [
-            {
-                "id": "some_id",
-                "label": "some_label"
-            }
-            ...
-        ],
-        "labels": {
-            "some_property_label": "some_resource_label",
-            "another_property_label": [
-                "some_resource_label",
-                "another_resource_label"
+            },
+            "resources": [
+                {
+                    "id": "some_id",
+                    "label": "some_label"
+                }
                 ...
-            ],
-            ...
+            ]
         }
-    }
+        ...
+    ]
+

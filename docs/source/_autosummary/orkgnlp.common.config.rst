@@ -1,7 +1,7 @@
-orkgnlp.clustering
-==================
+orkgnlp.common.config
+=====================
 
-.. automodule:: orkgnlp.clustering
+.. automodule:: orkgnlp.common.config
 
    
    
@@ -26,6 +26,5 @@ orkgnlp.clustering
    :template: custom-module-template.rst
    :recursive:
 
-   orkgnlp.clustering.bioassays
-   orkgnlp.clustering.predicates
+   orkgnlp.common.config.context
 

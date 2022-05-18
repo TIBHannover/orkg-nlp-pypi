@@ -3,13 +3,13 @@ import numpy as np
 import onnxruntime as rt
 
 from orkgnlp.clustering._predicates_config import config
-from orkgnlp.tools import downloader
-from orkgnlp.util import io, text
-from orkgnlp.util.decorators import singleton
+from orkgnlp.common.base import ORKGNLPBase
+from orkgnlp.common.util import io, text
+from orkgnlp.common.util.decorators import singleton
 
 
 @singleton
-class PredicatesRecommender:
+class PredicatesRecommender(ORKGNLPBase):
     """
     The PredicatesRecommender follows the singleton pattern, i.e. only one instance can be obtained from it.
 
@@ -20,8 +20,8 @@ class PredicatesRecommender:
     returns a function that cannot be detected as a class. TODO: fix this issue!
     """
 
-    def __init__(self):
-        downloader.exists_or_download(config['service_name'])
+    def __init__(self, force_download=False):
+        super().__init__(config['service_name'], force_download)
 
         self._model = io.read_onnx(config['paths']['model'])
         self._vectorizer = io.read_onnx(config['paths']['vectorizer'])

@@ -1,5 +1,5 @@
 from unittest import TestCase
-from orkgnlp.util import text
+from orkgnlp.common.util import text
 
 
 class TestText(TestCase):
