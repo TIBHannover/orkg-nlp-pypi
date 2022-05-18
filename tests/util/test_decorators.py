@@ -3,14 +3,18 @@ from unittest import TestCase
 from orkgnlp.common.util.decorators import singleton
 
 
-@singleton
 class A:
-    pass
+
+    @singleton
+    def __new__(cls):
+        pass
 
 
-@singleton
 class B:
-    pass
+
+    @singleton
+    def __new__(cls):
+        pass
 
 
 class C:

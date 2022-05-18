@@ -6,7 +6,7 @@ from orkgnlp.clustering import PredicatesRecommender
 class TestPredicatesRecommender(TestCase):
 
     def setUp(self):
-        self.recommender = PredicatesRecommender()
+        self.recommender = PredicatesRecommender(force_download=False)
 
     def test_singleton(self):
         another_recommender = PredicatesRecommender()
