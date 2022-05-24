@@ -16,7 +16,7 @@ Supported Concepts
    * - **Title**
      - ``RESEARCH_PROBLEM``, ``SOLUTION``, ``RESOURCE``, ``LANGUAGE``, ``TOOL``, ``METHOD``, ``DATASET``.
    * - **Abstract**
-     - ``RESEARCH_PROBLEM``, ``METHOD``
+     - ``RESEARCH_PROBLEM``, ``METHOD``.
 
 Usage
 ******
@@ -35,17 +35,20 @@ and the output has the following schema:
 .. code-block:: javascript
 
     {
-        "title_annotations": {
-            "concept": ["annotated text part", "another annotated part", ... ],
-            "another_concept": [ ... ],
+        "title": [
+            {
+                "concept": "some_concept",
+                "entities": ["annotated entity", "another annotated entity", ... ]
+            }
             ....
-
-        },
-        "abstract_annotations": {
-            "concept": ["annotated text part", "another annotated part", ... ],
-            "another_concept": [ ... ],
+        ],
+        "abstract": [
+            {
+                "concept": "some_concept",
+                "entities": ["annotated entity", "another annotated entity", ... ]
+            }
             ....
-        }
+        ]
     }
 
 If you don't need to extract the annotations for both the abstract and the title, you can also extract them separately.
@@ -65,8 +68,10 @@ and then each output has the following schema:
 
 .. code-block:: javascript
 
-    {
-        "concept": ["annotated text part", "another annotated part", ... ],
-        "another_concept": [ ... ],
+    [
+        {
+            "concept": "some_concept",
+            "entities": ["annotated entity", "another annotated entity", ... ]
+        }
         ....
-    }
+    ]

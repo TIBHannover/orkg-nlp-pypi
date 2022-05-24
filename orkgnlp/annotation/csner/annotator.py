@@ -62,15 +62,27 @@ class CSNer(ORKGNLPBase):
         :return: A dict representing the annotated parts for each of the given ``title`` and ``abstract``.
         """
         return {
-            'title_annotations': self.annotate_title(title),
-            'abstract_annotations': self.annotate_abstract(abstract)
+            'title': self.annotate_title(title),
+            'abstract': self.annotate_abstract(abstract)
         }
 
-    @staticmethod
-    def _annotate(q, data, model):
+    def _annotate(self, q, data, model):
         data.generate_instance(q)
         results = evaluation.predict(data, model)
-        return data.get_entities(results)
+        entities = data.get_entities(results)
+        return self._prepare_annotations(entities)
+
+    @staticmethod
+    def _prepare_annotations(entities):
+        annotations = []
+
+        for concept in entities:
+            annotations.append({
+                'concept': concept,
+                'entities': entities[concept]
+            })
+
+        return annotations
 
     @staticmethod
     def _create_model(data, model_path):

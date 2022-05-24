@@ -17,25 +17,33 @@ class TestCSNer(TestCase):
     def test_annotate_title(self):
         annotations = self.annotator.annotate_title(title=self.title)
 
-        self.assertIsInstance(annotations, dict)
-        for key in annotations:
-            self.assertIsInstance(annotations[key], list)
+        self.assertIsInstance(annotations, list)
+        for annotation in annotations:
+            self.assertIsInstance(annotation, dict)
+            self.assertIn('concept', annotation)
+            self.assertIn('entities', annotation)
 
     def test_annotate_abstract(self):
         annotations = self.annotator.annotate_abstract(abstract=self.abstract)
 
-        self.assertIsInstance(annotations, dict)
-        for key in annotations:
-            self.assertIsInstance(annotations[key], list)
+        self.assertIsInstance(annotations, list)
+        for annotation in annotations:
+            self.assertIsInstance(annotation, dict)
+            self.assertIn('concept', annotation)
+            self.assertIn('entities', annotation)
 
     def test_annotate(self):
         result = self.annotator.annotate(title=self.title, abstract=self.abstract)
 
         self.assertIsInstance(result, dict)
         self.assertEqual(2, len(result))
+        self.assertIn('title', result)
+        self.assertIn('abstract', result)
 
-        for annotations in result:
-            self.assertIsInstance(result[annotations], dict)
+        for key in result:
+            self.assertIsInstance(result[key], list)
 
-            for key in result[annotations]:
-                self.assertIsInstance(result[annotations][key], list)
+            for annotation in result[key]:
+                self.assertIsInstance(annotation, dict)
+                self.assertIn('concept', annotation)
+                self.assertIn('entities', annotation)
