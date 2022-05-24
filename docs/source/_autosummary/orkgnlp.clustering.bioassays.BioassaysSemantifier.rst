@@ -16,7 +16,6 @@ orkgnlp.clustering.bioassays.BioassaysSemantifier
    .. autosummary::
       :nosignatures:
    
-      ~BioassaysSemantifier.download
       ~BioassaysSemantifier.semantify
    
    

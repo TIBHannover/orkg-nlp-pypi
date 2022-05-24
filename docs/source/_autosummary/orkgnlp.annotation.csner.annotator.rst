@@ -1,7 +1,7 @@
-orkgnlp.clustering.bioassays
-============================
+orkgnlp.annotation.csner.annotator
+==================================
 
-.. automodule:: orkgnlp.clustering.bioassays
+.. automodule:: orkgnlp.annotation.csner.annotator
 
    
    
@@ -20,7 +20,7 @@ orkgnlp.clustering.bioassays
       :template: custom-class-template.rst
       :nosignatures:
    
-      BioassaysSemantifier
+      CSNer
    
    
 

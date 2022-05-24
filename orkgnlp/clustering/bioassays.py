@@ -14,6 +14,8 @@ class BioassaysSemantifier(ORKGNLPBase):
 
     It requires a clustering model, vectorizer and mapping. The required files are downloaded while
     initiation, if it has not happened before.
+
+    You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
 
     @singleton

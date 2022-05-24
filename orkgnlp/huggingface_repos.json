@@ -3,7 +3,6 @@
     {
       "repo_id": "orkg/orkgnlp-cs-ner-titles",
       "files": {
-        "embeddings": "glove.6B.100d.txt",
         "titles_dset": "orkgnlp-cs-ner-titles.dset",
         "titles_model": "orkgnlp-cs-ner-titles.model"
       }
@@ -11,9 +10,8 @@
     {
       "repo_id": "orkg/orkgnlp-cs-ner-abstracts",
       "files": {
-        "embeddings": "glove.6B.100d.txt",
-        "abstract_dset": "orkgnlp-cs-ner-abstracts.dset",
-        "abstract_model": "orkgnlp-cs-ner-abstracts.model"
+        "abstracts_dset": "orkgnlp-cs-ner-abstracts.dset",
+        "abstracts_model": "orkgnlp-cs-ner-abstracts.model"
       }
     }
   ],

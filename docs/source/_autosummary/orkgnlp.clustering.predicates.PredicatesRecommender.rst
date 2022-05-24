@@ -16,7 +16,6 @@ orkgnlp.clustering.predicates.PredicatesRecommender
    .. autosummary::
       :nosignatures:
    
-      ~PredicatesRecommender.download
       ~PredicatesRecommender.recommend
    
    

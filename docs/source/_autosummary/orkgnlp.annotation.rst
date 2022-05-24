@@ -1,7 +1,7 @@
-﻿orkgnlp
-=======
+orkgnlp.annotation
+==================
 
-.. automodule:: orkgnlp
+.. automodule:: orkgnlp.annotation
 
    
    
@@ -26,7 +26,5 @@
    :template: custom-module-template.rst
    :recursive:
 
-   orkgnlp.annotation
-   orkgnlp.clustering
-   orkgnlp.common
+   orkgnlp.annotation.csner
 
