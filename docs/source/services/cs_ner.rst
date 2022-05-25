@@ -3,7 +3,6 @@ CS-NER: Computer Science Named Entity Recognition
 
 Overview
 *********
-TODO:
 
 
 Supported Concepts
