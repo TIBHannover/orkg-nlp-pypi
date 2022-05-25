@@ -3,6 +3,9 @@ Includes Input/Output (I/O) functionalities like reading and writing from and in
 """
 
 import json
+import pickle
+import torch
+
 import onnx
 
 import pandas as pd
@@ -48,3 +51,31 @@ def read_onnx(input_path):
     :return: A loaded onnx object.
     """
     return onnx.load(input_path)
+
+
+def read_pickle(input_path):
+    """
+    Reads the ``pickle`` file of the given ``input_path``.
+
+    :param input_path: Path to the pickle file
+    :type input_path: str
+    :return: A loaded pickle object.
+    """
+    with open(input_path, 'rb') as f:
+        loaded_object = pickle.load(f)
+
+    return loaded_object
+
+
+def load_torch(input_path, device_name='cpu'):
+    """
+    Loads the ``torch model`` file of the given ``input_path``.
+
+    :param input_path: Path to the torch model file
+    :type input_path: str
+    :param device_name: Defaults to ``cpu``
+    :type device_name: str
+    :return: A loaded torch model file.
+    """
+
+    return torch.load(input_path, map_location=torch.device(device_name))

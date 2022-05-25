@@ -16,7 +16,6 @@ orkgnlp.common.base.ORKGNLPBase
    .. autosummary::
       :nosignatures:
    
-      ~ORKGNLPBase.download
    
    
 

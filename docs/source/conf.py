@@ -58,7 +58,7 @@ master_doc = 'index'
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
-autosummary_mock_imports = ['orkgnlp.annotation']
+autosummary_mock_imports = []  # include 'orkgnlp.annotations' to recursively ignore generating doc for this package.
 
 # -- Options for HTML output -------------------------------------------------
 
