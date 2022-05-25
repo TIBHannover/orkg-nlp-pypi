@@ -9,7 +9,7 @@ import contextlib
 with contextlib.redirect_stdout(io.StringIO()):
     spacy.cli.download('en_core_web_md', False, False, '--quiet')
     spacy_nlp = spacy.load(
-        'en_core_web_md', disable=['tokenizer', 'tagger', 'ner', 'textcat']
+        'en_core_web_md', disable=['tokenizer', 'tagger', 'ner', 'textcat', 'lemmatizer']
     )
 
 
