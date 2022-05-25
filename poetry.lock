@@ -69,20 +69,6 @@ optional = false
 python-versions = "*"
 
 [[package]]
-name = "en-core-web-md"
-version = "3.3.0"
-description = "English pipeline optimized for CPU. Components: tok2vec, tagger, parser, senter, ner, attribute_ruler, lemmatizer."
-category = "main"
-optional = false
-python-versions = "*"
-
-[package.dependencies]
-spacy = ">=3.3.0.dev0,<3.4.0"
-
-[package.source]
-type = "url"
-url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.3.0/en_core_web_md-3.3.0.tar.gz"
-[[package]]
 name = "filelock"
 version = "3.7.0"
 description = "A platform independent file lock."
@@ -645,7 +631,7 @@ testing = ["pytest (>=6)", "pytest-checkdocs (>=2.4)", "pytest-flake8", "pytest-
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.7.1,<3.10"
-content-hash = "9f5da0d520da77d9ed6646f5e2d9f83c43c5577b0b29a0fe6b00cbf28fe0cafd"
+content-hash = "8a9e50dec91001ac93950a524b1a4c4a889f5ae1d72407863045f29e526d7946"
 
 [metadata.files]
 blis = [
@@ -710,7 +696,6 @@ cymem = [
     {file = "cymem-2.0.6-cp39-cp39-win_amd64.whl", hash = "sha256:c59293b232b53ebb47427f16cf648e937022f489cff36c11d1d8a1f0075b6609"},
     {file = "cymem-2.0.6.tar.gz", hash = "sha256:169725b5816959d34de2545b33fee6a8021a6e08818794a426c5a4f981f17e5e"},
 ]
-en-core-web-md = []
 filelock = [
     {file = "filelock-3.7.0-py3-none-any.whl", hash = "sha256:c7b5fdb219b398a5b28c8e4c1893ef5f98ece6a38c6ab2c22e26ec161556fed6"},
     {file = "filelock-3.7.0.tar.gz", hash = "sha256:b795f1b42a61bbf8ec7113c341dad679d772567b936fbd1bf43c9a238e673e20"},

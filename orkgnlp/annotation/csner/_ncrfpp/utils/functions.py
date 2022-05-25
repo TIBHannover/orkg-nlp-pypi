@@ -1,12 +1,16 @@
 from __future__ import print_function
 from __future__ import absolute_import
+
+import io
 import sys
 import spacy
+import contextlib
 
-# Load a model and disable some components from the pipeline (use only the parser)
-spacy_nlp = spacy.load(
-    "en_core_web_md", disable=["tokenizer", "tagger", "ner", "textcat"]
-)
+with contextlib.redirect_stdout(io.StringIO()):
+    spacy.cli.download('en_core_web_md', False, False, '--quiet')
+    spacy_nlp = spacy.load(
+        'en_core_web_md', disable=['tokenizer', 'tagger', 'ner', 'textcat']
+    )
 
 
 def normalize_word(word):
