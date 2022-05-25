@@ -4,6 +4,10 @@ CS-NER: Computer Science Named Entity Recognition
 Overview
 *********
 
+The ORKG CS-NER system is based on a standardized set of seven contribution-centric scholarly entities viz.,
+research problem, solution, resource, language, tool, method, and dataset. It can automatically extract all seven
+entity types from Computer Science publication titles. Furthermore, it can extract research problem and method entity
+types from Computer Science publication abstracts.
 
 Supported Concepts
 ^^^^^^^^^^^^^^^^^^
