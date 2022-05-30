@@ -1,9 +1,9 @@
-orkgnlp.common.base.ORKGNLPBase
-===============================
+orkgnlp.common.base.ORKGNLPBaseDecoder
+======================================
 
 .. currentmodule:: orkgnlp.common.base
 
-.. autoclass:: ORKGNLPBase
+.. autoclass:: ORKGNLPBaseDecoder
    :members:
    :show-inheritance:
    :inherited-members:
@@ -16,6 +16,7 @@ orkgnlp.common.base.ORKGNLPBase
    .. autosummary::
       :nosignatures:
    
+      ~ORKGNLPBaseDecoder.decode
    
    
 

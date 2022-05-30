@@ -3,12 +3,12 @@ from orkgnlp.annotation.csner._annotator_config import config
 from orkgnlp.annotation.csner._ncrfpp import evaluation
 from orkgnlp.annotation.csner._ncrfpp.model.seqlabel import SeqLabel
 from orkgnlp.annotation.csner._ncrfpp.utils.data import Data
-from orkgnlp.common.base import ORKGNLPBase
+from orkgnlp.common.base import ORKGNLPBaseService
 from orkgnlp.common.util import io
 from orkgnlp.common.util.decorators import singleton
 
 
-class CSNer(ORKGNLPBase):
+class CSNer(ORKGNLPBaseService):
     """
     The CSNer follows the singleton pattern, i.e. only one instance can be obtained from it.
 

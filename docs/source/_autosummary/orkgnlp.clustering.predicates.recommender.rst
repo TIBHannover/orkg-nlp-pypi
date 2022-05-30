@@ -1,7 +1,7 @@
-orkgnlp.common.base
-===================
+orkgnlp.clustering.predicates.recommender
+=========================================
 
-.. automodule:: orkgnlp.common.base
+.. automodule:: orkgnlp.clustering.predicates.recommender
 
    
    
@@ -20,10 +20,7 @@ orkgnlp.common.base
       :template: custom-class-template.rst
       :nosignatures:
    
-      ORKGNLPBaseDecoder
-      ORKGNLPBaseEncoder
-      ORKGNLPBaseRunner
-      ORKGNLPBaseService
+      PredicatesRecommender
    
    
 

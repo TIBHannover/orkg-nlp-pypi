@@ -16,9 +16,7 @@ for repo in orkgnlp_context.get('HUGGINGFACE_REPOS')[orkgnlp_context.get('CS_NER
 config = StrictDict({
     'service_name': orkgnlp_context.get('CS_NER_SERVICE_NAME'),
     'paths': {
-        'titles_dset': os.path.join(_service_data_dir, _service_data_files['titles_dset']),
         'titles_model': os.path.join(_service_data_dir, _service_data_files['titles_model']),
-        'abstracts_dset': os.path.join(_service_data_dir, _service_data_files['abstracts_dset']),
         'abstracts_model': os.path.join(_service_data_dir, _service_data_files['abstracts_model'])
     }
 })

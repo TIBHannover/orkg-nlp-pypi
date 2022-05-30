@@ -13,15 +13,6 @@ orkgnlp.clustering.predicates
 
    
    
-   .. rubric:: Classes
-
-   .. autosummary::
-      :toctree:
-      :template: custom-class-template.rst
-      :nosignatures:
-   
-      PredicatesRecommender
-   
    
 
    
@@ -29,4 +20,12 @@ orkgnlp.clustering.predicates
    
 
 
+
+.. autosummary::
+   :toctree:
+   :template: custom-module-template.rst
+   :recursive:
+
+   orkgnlp.clustering.predicates.decoder
+   orkgnlp.clustering.predicates.recommender
 

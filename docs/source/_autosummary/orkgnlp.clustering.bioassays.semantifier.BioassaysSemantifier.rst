@@ -1,7 +1,7 @@
-orkgnlp.clustering.bioassays.BioassaysSemantifier
-=================================================
+orkgnlp.clustering.bioassays.semantifier.BioassaysSemantifier
+=============================================================
 
-.. currentmodule:: orkgnlp.clustering.bioassays
+.. currentmodule:: orkgnlp.clustering.bioassays.semantifier
 
 .. autoclass:: BioassaysSemantifier
    :members:
@@ -16,7 +16,6 @@ orkgnlp.clustering.bioassays.BioassaysSemantifier
    .. autosummary::
       :nosignatures:
    
-      ~BioassaysSemantifier.semantify
    
    
 

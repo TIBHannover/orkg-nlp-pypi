@@ -15,4 +15,4 @@ class TestPredicatesRecommender(TestCase):
     def test_recommend(self):
         title = 'long title'
         abstract = 'long abstract'
-        self.assertIsInstance(self.recommender.recommend(title=title, abstract=abstract), list)
+        self.assertIsInstance(self.recommender(title=title, abstract=abstract), list)

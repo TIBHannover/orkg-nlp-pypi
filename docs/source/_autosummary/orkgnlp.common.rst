@@ -28,6 +28,7 @@ orkgnlp.common
 
    orkgnlp.common.base
    orkgnlp.common.config
+   orkgnlp.common.runners
    orkgnlp.common.tools
    orkgnlp.common.util
 

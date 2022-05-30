@@ -1,7 +1,7 @@
-orkgnlp.clustering.predicates.PredicatesRecommender
-===================================================
+orkgnlp.clustering.predicates.recommender.PredicatesRecommender
+===============================================================
 
-.. currentmodule:: orkgnlp.clustering.predicates
+.. currentmodule:: orkgnlp.clustering.predicates.recommender
 
 .. autoclass:: PredicatesRecommender
    :members:
@@ -16,7 +16,6 @@ orkgnlp.clustering.predicates.PredicatesRecommender
    .. autosummary::
       :nosignatures:
    
-      ~PredicatesRecommender.recommend
    
    
 
