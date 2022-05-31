@@ -3,8 +3,8 @@
 from orkgnlp.clustering.predicates._config import config
 from orkgnlp.clustering.encoders import TfidfKmeansEncoder
 from orkgnlp.clustering.predicates.decoder import PredicatesRecommenderDecoder
-from orkgnlp.common.base import ORKGNLPBaseService
-from orkgnlp.common.runners import ORKGNLPONNXRunner
+from orkgnlp.common.service.base import ORKGNLPBaseService
+from orkgnlp.common.service.runners import ORKGNLPONNXRunner
 from orkgnlp.common.util import io
 from orkgnlp.common.util.decorators import singleton
 
@@ -26,12 +26,13 @@ class PredicatesRecommender(ORKGNLPBaseService):
     def __init__(self, *args, **kwargs):
         super().__init__(config['service_name'], *args, **kwargs)
 
-        self._encoder = TfidfKmeansEncoder(io.read_onnx(config['paths']['vectorizer']))
-        self._runner = ORKGNLPONNXRunner(io.read_onnx(config['paths']['model']))
-        self._decoder = PredicatesRecommenderDecoder(
+        encoder = TfidfKmeansEncoder(io.read_onnx(config['paths']['vectorizer']))
+        runner = ORKGNLPONNXRunner(io.read_onnx(config['paths']['model']))
+        decoder = PredicatesRecommenderDecoder(
             io.read_df_from_json(config['paths']['training_data'], key='instances'),
             io.read_json(config['paths']['mapping'])
         )
+        self._register_pipeline('main', encoder, runner, decoder)
 
     def __call__(self, title, abstract):
         """

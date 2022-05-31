@@ -12,7 +12,7 @@ class ORKGNLPValidationError(Exception):
         super().__init__(message)
 
 
-class ORKGNLPIllegalStateException(RuntimeError):
+class ORKGNLPIllegalStateError(RuntimeError):
     """
     Indicates an incorrect order of function calls by the caller.
     """

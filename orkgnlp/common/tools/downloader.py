@@ -70,6 +70,7 @@ def exists_or_download(service):
     :type service: str
     :return:
     """
+    # TODO: check for all required files and not only the dir.
     service_dir = os.path.join(orkgnlp_context.get('ORKG_NLP_DATA_CACHE_ROOT'), service)
     if not os.path.exists(service_dir):
         download(service)

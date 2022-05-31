@@ -1,24 +1,23 @@
 """ Base interfaces. """
 from overrides import EnforceOverrides
 
+from orkgnlp.common.service.executors import PiplineExecutor
 from orkgnlp.common.tools import downloader
-from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateException
+from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateError, ORKGNLPValidationError
 
 
 class ORKGNLPBaseService:
     """
         Base class for shared config parameters and functionalities.
     """
+
     def __init__(self, service, force_download=False):
         """
 
         :param force_download: Indicates whether the required files are to be downloaded again. Defaults to False.
         :type force_download: bool
         """
-
-        self._encoder = None
-        self._runner = None
-        self._decoder = None
+        self._pipline_executors = {}
         self._force_download = force_download
         self._download(service)
 
@@ -35,29 +34,57 @@ class ORKGNLPBaseService:
         else:
             downloader.exists_or_download(service)
 
-    def _run(self, raw_input, **kwargs):
+    def _run(self, raw_input, pipline_executor_name=None, **kwargs):
         """
-        Executes a full pipline of the common service workflow:
-
-        1. Runs the service encoder with the user's input.
-        2. The encoded input is passed to the model runner, which in turn is executed.
-        3. The model's output is decoded to a user-friendly format using the service's decoder.
+        Executes the only PipelineExecutor registered for the service, or one of them given its name.
 
         :param raw_input: User's input to be encoded.
         :type raw_input: Any.
+        :param pipline_executor_name: Name of the PipelineExecutor to run.
+        :type pipline_executor_name: str.
         :param kwargs: Named parameters for further processing config. Please check your used component documentation
             for specific parameter description.
         :type kwargs: Dict[str, Any].
         :return: The decoded user-friendly output.
-        :raise orkgnlp.common.util.exceptions.ORKGNLPIllegalStateException: if either [Encoder, Runner, Decoder] is not
+        :raise orkgnlp.common.util.exceptions.ORKGNLPIllegalStateException: If either [Encoder, Runner, Decoder] is not
             initialized.
+        :raise orkgnlp.common.util.exceptions.ORKGNLPValidationError: If the given ``pipline_executor_name`` is unknown
+            or not given, in case of multiple registered ones.
         """
-        if not (self._encoder and self._runner and self._decoder):
-            raise ORKGNLPIllegalStateException('Encoder, Runner and Decoder must be initialized!')
+        if not self._pipline_executors:
+            raise ORKGNLPIllegalStateError('There is no PipelineRunner registered. Please consider registering'
+                                           'one using the _register_pipline_runner() function.')
 
-        inputs = self._encoder.encode(raw_input, **kwargs)
-        output = self._runner.run(inputs, **kwargs)
-        return self._decoder.decode(output, **kwargs)
+        if pipline_executor_name:
+
+            if pipline_executor_name not in self._pipline_executors:
+                raise ORKGNLPValidationError('PiplineExecutor name is unknown.')
+
+            return self._pipline_executors[pipline_executor_name].run(raw_input, **kwargs)
+
+        if len(self._pipline_executors) > 1:
+            raise ORKGNLPValidationError('PiplineExecutor is ambiguous. Consider passing pipline_executor_name in the '
+                                         'input.')
+
+        return next(iter(self._pipline_executors.values())).run(raw_input, **kwargs)
+
+    def _register_pipeline(self, name, encoder, runner, decoder):
+        """
+        Registers a PiplineExecutor to the service.
+
+        :param name: PiplineExecutors name.
+        :type name: str.
+        :param encoder: Service's encoder.
+        :type encoder: orkgnlp.common.service.base.ORKGNLPBaseEncoder.
+        :param runner: Service's runner.
+        :type runner: orkgnlp.common.service.base.ORKGNLPBaseRunner.
+        :param decoder: Service's decoder.
+        :type decoder: orkgnlp.common.service.base.ORKGNLPBaseDecoder.
+        """
+        if name in self._pipline_executors:
+            raise ORKGNLPValidationError('PiplineExecutor name already exists.')
+
+        self._pipline_executors[name] = PiplineExecutor(encoder, runner, decoder)
 
 
 class ORKGNLPBaseEncoder(EnforceOverrides):
@@ -77,7 +104,7 @@ class ORKGNLPBaseEncoder(EnforceOverrides):
 
         :param raw_input: The user's input to be encoded.
         :type raw_input: Any.
-        :return: The model-friendly output.
+        :return: The model-friendly output and kwargs.
         """
         return raw_input, kwargs
 
@@ -93,15 +120,15 @@ class ORKGNLPBaseDecoder(EnforceOverrides):
     def __init__(self):
         pass
 
-    def decode(self, output, **kwargs):
+    def decode(self, model_output, **kwargs):
         """
-        Decodes the model ``output`` to a user-friendly format.
+        Decodes the model's ``output`` to a user-friendly format.
 
-        :param output: The model's output to be decoded.
-        :type output: Any.
+        :param model_output: The model's output to be decoded.
+        :type model_output: Any.
         :return: The user-friendly output.
         """
-        return output, kwargs
+        return model_output, kwargs
 
 
 class ORKGNLPBaseRunner(EnforceOverrides):
@@ -110,6 +137,7 @@ class ORKGNLPBaseRunner(EnforceOverrides):
     This runner must be inherited and the `run(*args, **kwargs)` must be overridden,
     thus running this runner raises an ``NotImplementedError``.
     """
+
     def __init__(self, model):
         """
 

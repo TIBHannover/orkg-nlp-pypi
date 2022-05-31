@@ -17,6 +17,8 @@ config = StrictDict({
     'service_name': orkgnlp_context.get('CS_NER_SERVICE_NAME'),
     'paths': {
         'titles_model': os.path.join(_service_data_dir, _service_data_files['titles_model']),
-        'abstracts_model': os.path.join(_service_data_dir, _service_data_files['abstracts_model'])
+        'titles_alphabet': os.path.join(_service_data_dir, _service_data_files['titles_alphabet']),
+        'abstracts_model': os.path.join(_service_data_dir, _service_data_files['abstracts_model']),
+        'abstracts_alphabet': os.path.join(_service_data_dir, _service_data_files['abstracts_alphabet'])
     }
 })

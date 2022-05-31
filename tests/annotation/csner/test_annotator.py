@@ -15,7 +15,7 @@ class TestCSNer(TestCase):
         self.assertEqual(self.annotator, another_annotator)
 
     def test_annotate_title(self):
-        annotations = self.annotator.annotate_title(title=self.title)
+        annotations = self.annotator(title=self.title)
 
         self.assertIsInstance(annotations, list)
         for annotation in annotations:
@@ -24,7 +24,7 @@ class TestCSNer(TestCase):
             self.assertIn('entities', annotation)
 
     def test_annotate_abstract(self):
-        annotations = self.annotator.annotate_abstract(abstract=self.abstract)
+        annotations = self.annotator(abstract=self.abstract)
 
         self.assertIsInstance(annotations, list)
         for annotation in annotations:
@@ -33,7 +33,7 @@ class TestCSNer(TestCase):
             self.assertIn('entities', annotation)
 
     def test_annotate(self):
-        result = self.annotator.annotate(title=self.title, abstract=self.abstract)
+        result = self.annotator(title=self.title, abstract=self.abstract)
 
         self.assertIsInstance(result, dict)
         self.assertEqual(2, len(result))

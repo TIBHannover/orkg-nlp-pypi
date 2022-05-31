@@ -1,20 +1,29 @@
+""" Predicates recommendation service decoder. """
 import numpy as np
 from overrides import overrides
 
-from orkgnlp.common.base import ORKGNLPBaseDecoder
+from orkgnlp.common.service.base import ORKGNLPBaseDecoder
 
 
 class PredicatesRecommenderDecoder(ORKGNLPBaseDecoder):
     """
-    TODO:
+    The PredicatesRecommenderDecoder decodes the Predicates' recommendation service model's output
+    to a user-friendly one.
     """
 
     def __init__(self, train_df, predicates):
+        """
+
+        :param train_df: The training dataframe of the service.
+        :type train_df: Pandas.Dataframe.
+        :param predicates: Dict object representing the mapping from comparisons to predicates.
+        :type predicates: Dict[str, List[Dict[str, str]]].
+        """
         super().__init__()
         self._train_df = train_df
         self._predicates = predicates
 
-    @overrides(check_signature=False)
+    @overrides
     def decode(self, model_output, **kwargs):
         cluster_label, model_labels_ = model_output[0], model_output[1]
         cluster_instances_indices = np.argwhere(cluster_label == model_labels_).squeeze(1)

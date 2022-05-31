@@ -2,8 +2,8 @@
 from overrides import overrides
 
 from orkgnlp.common.util import text
-from orkgnlp.common.base import ORKGNLPBaseEncoder
-from orkgnlp.common.runners import ORKGNLPONNXRunner
+from orkgnlp.common.service.base import ORKGNLPBaseEncoder
+from orkgnlp.common.service.runners import ORKGNLPONNXRunner
 
 
 class TfidfKmeansEncoder(ORKGNLPBaseEncoder):
@@ -21,14 +21,14 @@ class TfidfKmeansEncoder(ORKGNLPBaseEncoder):
         super().__init__()
         self._vectorizer = ORKGNLPONNXRunner(vectorizer)
 
-    @overrides(check_signature=False)
+    @overrides
     def encode(self, raw_input, **kwargs):
         preprocessed_text = self._text_process(raw_input)
-        output = self._vectorizer.run(
+        output, _ = self._vectorizer.run(
             inputs=([preprocessed_text],),
             output_names=['variable']
         )
-        return (output[0][0], )
+        return (output[0][0], ), kwargs
 
     @staticmethod
     def _text_process(q):
