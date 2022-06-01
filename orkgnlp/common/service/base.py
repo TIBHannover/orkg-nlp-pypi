@@ -3,13 +3,20 @@ from overrides import EnforceOverrides
 
 from orkgnlp.common.service.executors import PiplineExecutor
 from orkgnlp.common.tools import downloader
+from orkgnlp.common.util.decorators import singleton
 from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateError, ORKGNLPValidationError
 
 
 class ORKGNLPBaseService:
     """
-        Base class for shared config parameters and functionalities.
+        Base class for shared config parameters and functionalities. All ORKG-NLP services must inherit from this class.
+
+        This class follows the singleton pattern,  i.e. only one instance can be obtained from it or its subclasses.
     """
+
+    @singleton
+    def __new__(cls):
+        pass
 
     def __init__(self, service, force_download=False):
         """

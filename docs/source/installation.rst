@@ -37,4 +37,5 @@ Now you can verify your installation with the following line:
     import orkgnlp
 
 
-If no error pops up, you are free to enjoy it!
+If no error pops up, you are free to enjoy it! Check our :doc:`basic usage <usage>` or jump right away
+to our :doc:`services <services/services>`.

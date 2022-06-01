@@ -6,23 +6,15 @@ from orkgnlp.clustering.predicates.decoder import PredicatesRecommenderDecoder
 from orkgnlp.common.service.base import ORKGNLPBaseService
 from orkgnlp.common.service.runners import ORKGNLPONNXRunner
 from orkgnlp.common.util import io
-from orkgnlp.common.util.decorators import singleton
 
 
 class PredicatesRecommender(ORKGNLPBaseService):
     """
-    The PredicatesRecommender follows the singleton pattern, i.e. only one instance can be obtained from it.
-
-    It requires a clustering model, vectorizer, training set and predicates. The required files are downloaded while
-    initiation, if it has not happened before.
+    The PredicatesRecommender requires a clustering model, vectorizer, training set and predicates.
+    The required files are downloaded while initiation, if it has not happened before.
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-
-    @singleton
-    def __new__(cls):
-        pass
-
     def __init__(self, *args, **kwargs):
         super().__init__(config['service_name'], *args, **kwargs)
 

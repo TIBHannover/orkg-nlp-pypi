@@ -17,7 +17,7 @@ Usage
     from orkgnlp.clustering import BioassaysSemantifier
 
     bioassays_semantifier = BioassaysSemantifier() # This will also download the required model files.
-    labels = bioassays_semantifier.semantify(text='BioAssay text description here')
+    labels = bioassays_semantifier(text='BioAssay text description here')
     print(labels)
 
 

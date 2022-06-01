@@ -5,24 +5,16 @@ from orkgnlp.clustering.encoders import TfidfKmeansEncoder
 from orkgnlp.common.service.base import ORKGNLPBaseService
 from orkgnlp.common.service.runners import ORKGNLPONNXRunner
 from orkgnlp.common.util import io
-from orkgnlp.common.util.decorators import singleton
 from orkgnlp.clustering.bioassays._config import config
 
 
 class BioassaysSemantifier(ORKGNLPBaseService):
     """
-    The BioassaysSemantifier follows the singleton pattern, i.e. only one instance can be obtained from it.
-
-    It requires a clustering model, vectorizer and mapping. The required files are downloaded while
-    initiation, if it has not happened before.
+    The BioassaysSemantifier  requires a clustering model, vectorizer and mapping.
+    The required files are downloaded while initiation, if it has not happened before.
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-
-    @singleton
-    def __new__(cls):
-        pass
-
     def __init__(self, *args, **kwargs):
         super().__init__(config['service_name'], *args, **kwargs)
 

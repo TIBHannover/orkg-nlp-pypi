@@ -5,23 +5,16 @@ from orkgnlp.annotation.csner.encoder import CSNerEncoder
 from orkgnlp.common.service.base import ORKGNLPBaseService
 from orkgnlp.common.service.runners import ORKGNLPTorchRunner
 from orkgnlp.common.util import io
-from orkgnlp.common.util.decorators import singleton
 from orkgnlp.common.util.exceptions import ORKGNLPValidationError
 
 
 class CSNer(ORKGNLPBaseService):
     """
-    The CSNer follows the singleton pattern, i.e. only one instance can be obtained from it.
-
-    It requires abstracts and titles models and their configurations obtained during the training.
+    The CSNer requires abstracts and titles models and their configurations obtained during the training.
     The required files are downloaded while initiation, if it has not happened before.
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-
-    @singleton
-    def __new__(cls):
-        pass
 
     def __init__(self, *args, **kwargs):
         super().__init__(config['service_name'], *args, **kwargs)
