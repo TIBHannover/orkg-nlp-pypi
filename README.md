@@ -5,3 +5,5 @@
 PyPI package wrapping the ORKG NLP services.
 
 Check our [Read the Docs](https://orkg-nlp-pypi.readthedocs.io/en/latest/) for more details!
+
+Your [contribution](https://orkg-nlp-pypi.readthedocs.io/en/latest/contribute.html) to `orkgnlp` will always be honored!
