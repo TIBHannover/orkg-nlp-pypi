@@ -1,7 +1,7 @@
-orkgnlp.common.runners.ORKGNLPONNXRunner
-========================================
+orkgnlp.common.service.runners.ORKGNLPONNXRunner
+================================================
 
-.. currentmodule:: orkgnlp.common.runners
+.. currentmodule:: orkgnlp.common.service.runners
 
 .. autoclass:: ORKGNLPONNXRunner
    :members:

@@ -1,7 +1,7 @@
-orkgnlp.common.runners
-======================
+orkgnlp.annotation.csner.encoder
+================================
 
-.. automodule:: orkgnlp.common.runners
+.. automodule:: orkgnlp.annotation.csner.encoder
 
    
    
@@ -20,7 +20,7 @@ orkgnlp.common.runners
       :template: custom-class-template.rst
       :nosignatures:
    
-      ORKGNLPONNXRunner
+      CSNerEncoder
    
    
 

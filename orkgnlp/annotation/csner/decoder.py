@@ -6,8 +6,17 @@ from orkgnlp.common.service.base import ORKGNLPBaseDecoder
 
 
 class CSNerDecoder(ORKGNLPBaseDecoder):
+    """
+    The CSNerDecoder decodes the CS-NER service model's output
+    to a user-friendly one.
+    """
 
     def __init__(self, alphabet):
+        """
+
+        :param alphabet: Dict representing the word, char and label alphabets.
+        :type alphabet: Dict[str, Dict[str, int]]
+        """
         super().__init__()
 
         self._alphabet = alphabet

@@ -10,8 +10,17 @@ from orkgnlp.common.service.base import ORKGNLPBaseEncoder
 
 
 class CSNerEncoder(ORKGNLPBaseEncoder):
+    """
+    The CSNerEncoder encodes the given input to the arguments
+    needed to execute a Sequence labeling TorchScript model.
+    """
 
     def __init__(self, alphabet):
+        """
+
+        :param alphabet: Dict representing the word, char and label alphabets.
+        :type alphabet: Dict[str, Dict[str, int]]
+        """
         super().__init__()
 
         self._alphabet = alphabet

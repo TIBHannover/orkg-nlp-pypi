@@ -90,7 +90,7 @@ class ORKGNLPBaseService:
 class ORKGNLPBaseEncoder(EnforceOverrides):
     """
     The ORKGNLPBaseEncoder is  the base encoder class. You can freely inherit this class, implement its
-    ``encode(*args, **kwargs)`` function and use it to encode your user input to a model-friendly format.
+    ``encode(raw_input, **kwargs)`` function and use it to encode your user input to a model-friendly format.
 
     Using the ORKGNLPBaseEncoder as your service encoder results in passing the same user's input to the model.
     """
@@ -112,7 +112,7 @@ class ORKGNLPBaseEncoder(EnforceOverrides):
 class ORKGNLPBaseDecoder(EnforceOverrides):
     """
     The ORKGNLPBaseDecoder is  the base decoder class. You can freely inherit this class, implement its
-    ``decode(*args, **kwargs)`` function and use it to decode your model output to a user-friendly format.
+    ``decode(model_output, **kwargs)`` function and use it to decode your model output to a user-friendly format.
 
     Using the ORKGNLPBaseDecoder as your service decoder results in returning the same model's output to the user.
     """

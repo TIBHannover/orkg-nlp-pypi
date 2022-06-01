@@ -1,7 +1,7 @@
-orkgnlp.common.base
-===================
+orkgnlp.common.service.executors
+================================
 
-.. automodule:: orkgnlp.common.base
+.. automodule:: orkgnlp.common.service.executors
 
    
    
@@ -20,10 +20,7 @@ orkgnlp.common.base
       :template: custom-class-template.rst
       :nosignatures:
    
-      ORKGNLPBaseDecoder
-      ORKGNLPBaseEncoder
-      ORKGNLPBaseRunner
-      ORKGNLPBaseService
+      PiplineExecutor
    
    
 

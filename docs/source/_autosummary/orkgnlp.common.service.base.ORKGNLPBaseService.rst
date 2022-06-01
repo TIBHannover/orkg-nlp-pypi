@@ -1,9 +1,9 @@
-orkgnlp.common.base.ORKGNLPBaseRunner
-=====================================
+orkgnlp.common.service.base.ORKGNLPBaseService
+==============================================
 
-.. currentmodule:: orkgnlp.common.base
+.. currentmodule:: orkgnlp.common.service.base
 
-.. autoclass:: ORKGNLPBaseRunner
+.. autoclass:: ORKGNLPBaseService
    :members:
    :show-inheritance:
    :inherited-members:
@@ -16,7 +16,6 @@ orkgnlp.common.base.ORKGNLPBaseRunner
    .. autosummary::
       :nosignatures:
    
-      ~ORKGNLPBaseRunner.run
    
    
 

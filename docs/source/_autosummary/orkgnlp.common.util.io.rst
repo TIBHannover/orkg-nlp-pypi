@@ -15,7 +15,7 @@ orkgnlp.common.util.io
       :toctree:
       :nosignatures:
    
-      load_torch
+      load_torch_jit
       read_df_from_json
       read_json
       read_onnx

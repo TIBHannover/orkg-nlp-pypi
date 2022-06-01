@@ -1,9 +1,9 @@
-orkgnlp.common.base.ORKGNLPBaseService
-======================================
+orkgnlp.annotation.csner.decoder.CSNerDecoder
+=============================================
 
-.. currentmodule:: orkgnlp.common.base
+.. currentmodule:: orkgnlp.annotation.csner.decoder
 
-.. autoclass:: ORKGNLPBaseService
+.. autoclass:: CSNerDecoder
    :members:
    :show-inheritance:
    :inherited-members:
@@ -16,6 +16,7 @@ orkgnlp.common.base.ORKGNLPBaseService
    .. autosummary::
       :nosignatures:
    
+      ~CSNerDecoder.decode
    
    
 
