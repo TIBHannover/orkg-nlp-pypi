@@ -27,5 +27,6 @@ orkgnlp.clustering
    :recursive:
 
    orkgnlp.clustering.bioassays
+   orkgnlp.clustering.encoders
    orkgnlp.clustering.predicates
 

@@ -16,7 +16,9 @@ Right after executing the following command,
 
 start navigating through our documentation structure below to gain some insights into our package and its background.
 
-Please visit the ORKG's `help-center <https://www.orkg.org/orkg/help-center>`_ to know more about the ORKG project and do NOT hesitate to `get involved <https://www.orkg.org/orkg/about/21/Get_involved>`_ in the team!
+Please visit the ORKG's `help-center <https://www.orkg.org/orkg/help-center>`_ to know more about the ORKG project
+and do NOT hesitate to `get involved <https://www.orkg.org/orkg/about/21/Get_involved>`_ in the team
+or :doc:`contribute <contribute>` to this package!
 
 
 .. toctree::
@@ -28,6 +30,7 @@ Please visit the ORKG's `help-center <https://www.orkg.org/orkg/help-center>`_ t
     services/services
     configure
     api
+    contribute
 
 ..
     Indices and tables

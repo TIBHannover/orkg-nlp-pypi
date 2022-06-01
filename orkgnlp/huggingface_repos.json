@@ -3,15 +3,15 @@
     {
       "repo_id": "orkg/orkgnlp-cs-ner-titles",
       "files": {
-        "titles_dset": "orkgnlp-cs-ner-titles.dset",
-        "titles_model": "orkgnlp-cs-ner-titles.model"
+        "titles_model": "orkgnlp-cs-ner-titles.pt",
+        "titles_alphabet": "orkgnlp-cs-ner-titles-alphabet.json"
       }
     },
     {
       "repo_id": "orkg/orkgnlp-cs-ner-abstracts",
       "files": {
-        "abstracts_dset": "orkgnlp-cs-ner-abstracts.dset",
-        "abstracts_model": "orkgnlp-cs-ner-abstracts.model"
+        "abstracts_model": "orkgnlp-cs-ner-abstracts.pt",
+        "abstracts_alphabet": "orkgnlp-cs-ner-abstracts-alphabet.json"
       }
     }
   ],

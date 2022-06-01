@@ -67,15 +67,15 @@ def read_pickle(input_path):
     return loaded_object
 
 
-def load_torch(input_path, device_name='cpu'):
+def load_torch_jit(input_path, device_name='cpu'):
     """
-    Loads the ``torch model`` file of the given ``input_path``.
+    Loads the scripted/traced ``torch model`` file (ScriptModule) of the given ``input_path``.
 
-    :param input_path: Path to the torch model file
+    :param input_path: Path to the scripted/traced torch model file (ScriptModule).
     :type input_path: str
     :param device_name: Defaults to ``cpu``
     :type device_name: str
-    :return: A loaded torch model file.
+    :return: A loaded torch model (ScriptModule) object.
     """
 
-    return torch.load(input_path, map_location=torch.device(device_name))
+    return torch.jit.load(input_path, map_location=torch.device(device_name))

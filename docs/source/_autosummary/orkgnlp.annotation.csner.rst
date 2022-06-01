@@ -27,4 +27,6 @@ orkgnlp.annotation.csner
    :recursive:
 
    orkgnlp.annotation.csner.annotator
+   orkgnlp.annotation.csner.decoder
+   orkgnlp.annotation.csner.encoder
 

@@ -13,15 +13,6 @@ orkgnlp.clustering.bioassays
 
    
    
-   .. rubric:: Classes
-
-   .. autosummary::
-      :toctree:
-      :template: custom-class-template.rst
-      :nosignatures:
-   
-      BioassaysSemantifier
-   
    
 
    
@@ -29,4 +20,12 @@ orkgnlp.clustering.bioassays
    
 
 
+
+.. autosummary::
+   :toctree:
+   :template: custom-module-template.rst
+   :recursive:
+
+   orkgnlp.clustering.bioassays.decoder
+   orkgnlp.clustering.bioassays.semantifier
 

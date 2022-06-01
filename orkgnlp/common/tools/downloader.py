@@ -39,7 +39,7 @@ def download(services):
 
     :param services: a string representing a service name or a list of them. Check :doc:`../services/services` for a full list.
     :type services: str or list[str]
-    :raise orkgnlp.util.exceptions.ORKGNLPValidationError: If one of the known passed service names is unknown.
+    :raise orkgnlp.common.util.exceptions.ORKGNLPValidationError: If one of the known passed service names is unknown.
     """
     if isinstance(services, str):
         services = [services]
@@ -70,6 +70,7 @@ def exists_or_download(service):
     :type service: str
     :return:
     """
+    # TODO: check for all required files and not only the dir.
     service_dir = os.path.join(orkgnlp_context.get('ORKG_NLP_DATA_CACHE_ROOT'), service)
     if not os.path.exists(service_dir):
         download(service)

@@ -26,8 +26,8 @@ orkgnlp.common
    :template: custom-module-template.rst
    :recursive:
 
-   orkgnlp.common.base
    orkgnlp.common.config
+   orkgnlp.common.service
    orkgnlp.common.tools
    orkgnlp.common.util
 

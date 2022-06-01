@@ -30,7 +30,7 @@ if you have not yet! Check this example.
     from orkgnlp.clustering import PredicatesRecommender
 
     predicates_recommender = PredicatesRecommender() # This will also download the required model files.
-    predicates = predicates_recommender.recommend(title='paper title', abstract='long abstract text here')
+    predicates = predicates_recommender(title='paper title', abstract='long abstract text here')
     print(predicates)
 
     # output: [{"id": "P1234", "label": "some predicate"}, {"id": "P4321", "label": "another predicate"}]

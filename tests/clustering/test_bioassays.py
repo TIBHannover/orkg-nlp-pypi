@@ -14,4 +14,4 @@ class TestBioassaysSemantifier(TestCase):
 
     def test_semantify(self):
         text = 'long text'
-        self.assertIsInstance(self.semantifier.semantify(text=text), list)
+        self.assertIsInstance(self.semantifier(text=text), list)

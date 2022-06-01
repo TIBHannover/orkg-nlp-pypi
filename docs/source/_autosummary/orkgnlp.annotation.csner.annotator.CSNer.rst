@@ -16,9 +16,6 @@ orkgnlp.annotation.csner.annotator.CSNer
    .. autosummary::
       :nosignatures:
    
-      ~CSNer.annotate
-      ~CSNer.annotate_abstract
-      ~CSNer.annotate_title
    
    
 

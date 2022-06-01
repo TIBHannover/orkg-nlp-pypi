@@ -29,7 +29,7 @@ Usage
     from orkgnlp.annotation import CSNer
 
     annotator = CSNer() # This will also download the required model files.
-    annotations = annotator.annotate(title='Your paper title here', abstract='Your paper abstract here')
+    annotations = annotator(title='Your paper title here', abstract='Your paper abstract here')
     print(annotations)
 
 
@@ -62,9 +62,9 @@ E.g:
     from orkgnlp.annotation import CSNer
 
     annotator = CSNer() # This will also download the required model files.
-    annotations = annotator.annotate_title(title='Your paper title here')
+    annotations = annotator(title='Your paper title here')
     # or
-    annotations = annotator.annotate_abstract(abstract='Your paper abstract here')
+    annotations = annotator(abstract='Your paper abstract here')
     print(annotations)
 
 and then each output has the following schema:

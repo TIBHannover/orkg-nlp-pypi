@@ -19,7 +19,7 @@ Usage
     from orkgnlp.clustering import PredicatesRecommender
 
     predicates_recommender = PredicatesRecommender() # This will also download the required model files.
-    predicates = predicates_recommender.recommend(title='paper title', abstract='long abstract text here')
+    predicates = predicates_recommender(title='paper title', abstract='long abstract text here')
     print(predicates)
 
 and the output has the following schema:

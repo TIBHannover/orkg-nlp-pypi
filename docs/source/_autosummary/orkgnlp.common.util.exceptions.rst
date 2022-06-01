@@ -22,6 +22,7 @@ orkgnlp.common.util.exceptions
    .. autosummary::
       :toctree:
    
+      ORKGNLPIllegalStateError
       ORKGNLPValidationError
    
    
