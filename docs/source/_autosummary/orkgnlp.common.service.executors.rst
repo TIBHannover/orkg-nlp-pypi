@@ -20,7 +20,7 @@ orkgnlp.common.service.executors
       :template: custom-class-template.rst
       :nosignatures:
    
-      PiplineExecutor
+      PipelineExecutor
    
    
 

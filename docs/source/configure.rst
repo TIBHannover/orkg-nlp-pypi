@@ -14,6 +14,10 @@ Configurable Variables
      - ``$USER_HOME/orkgnlp_data``
      - ``orkgnlp.config.set_data_cache_root``
      - Path of root cache directory where the required models and datasets are downloaded.
+   * - ORKG_NLP_VERBOSITY
+     - ``True``
+     - ``orkgnlp.config.set_verbosity``
+     - Indicates whether orkgnlp is in verbose mode.
 
 How to Configure
 """""""""""""""""

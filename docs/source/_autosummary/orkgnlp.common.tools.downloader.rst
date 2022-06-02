@@ -16,8 +16,6 @@ orkgnlp.common.tools.downloader
       :nosignatures:
    
       download
-      exists_or_download
-      force_download
    
    
 

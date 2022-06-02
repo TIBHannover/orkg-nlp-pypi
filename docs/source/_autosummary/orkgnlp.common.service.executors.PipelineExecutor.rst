@@ -1,9 +1,9 @@
-orkgnlp.common.service.executors.PiplineExecutor
-================================================
+orkgnlp.common.service.executors.PipelineExecutor
+=================================================
 
 .. currentmodule:: orkgnlp.common.service.executors
 
-.. autoclass:: PiplineExecutor
+.. autoclass:: PipelineExecutor
    :members:
    :show-inheritance:
    :inherited-members:
@@ -16,7 +16,7 @@ orkgnlp.common.service.executors.PiplineExecutor
    .. autosummary::
       :nosignatures:
    
-      ~PiplineExecutor.run
+      ~PipelineExecutor.run
    
    
 

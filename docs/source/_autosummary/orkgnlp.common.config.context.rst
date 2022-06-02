@@ -16,6 +16,7 @@ orkgnlp.common.config.context
       :nosignatures:
    
       set_data_cache_root
+      set_verbosity
    
    
 
