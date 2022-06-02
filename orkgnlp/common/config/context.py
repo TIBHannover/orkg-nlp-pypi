@@ -17,6 +17,7 @@ Values can be changed using the corresponding setter function.
 orkgnlp_context = StrictDict(
     {
         'ORKG_NLP_DATA_CACHE_ROOT': os.path.join(os.path.expanduser('~'), 'orkgnlp_data'),
+        'ORKG_NLP_VERBOSITY': True,
         'PREDICATES_CLUSTERING_SERVICE_NAME': 'predicates-clustering',
         'BIOASSAYS_SEMANTIFICATION_SERVICE_NAME': 'bioassays-semantification',
         'CS_NER_SERVICE_NAME': 'cs-ner',
@@ -33,3 +34,13 @@ def set_data_cache_root(cache_root):
     :type cache_root: str
     """
     orkgnlp_context['ORKG_NLP_DATA_CACHE_ROOT'] = cache_root
+
+
+def set_verbosity(verbose):
+    """
+    Overrides the value of ORKG_NLP_VERBOSITY. See :doc:`../configure`
+
+    :param verbose: Indicates whether orkgnlp is in verbose mode.
+    :type verbose: bool
+    """
+    orkgnlp_context['ORKG_NLP_VERBOSITY'] = verbose

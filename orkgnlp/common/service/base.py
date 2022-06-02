@@ -1,7 +1,7 @@
 """ Base interfaces. """
 from overrides import EnforceOverrides
 
-from orkgnlp.common.service.executors import PiplineExecutor
+from orkgnlp.common.service.executors import PipelineExecutor
 from orkgnlp.common.tools import downloader
 from orkgnlp.common.util.decorators import singleton
 from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateError, ORKGNLPValidationError
@@ -24,7 +24,7 @@ class ORKGNLPBaseService:
         :param force_download: Indicates whether the required files are to be downloaded again. Defaults to False.
         :type force_download: bool
         """
-        self._pipline_executors = {}
+        self._pipeline_executors = {}
         self._force_download = force_download
         self._download(service)
 
@@ -36,10 +36,7 @@ class ORKGNLPBaseService:
         :type service: str
         :return:
         """
-        if self._force_download:
-            downloader.force_download(service)
-        else:
-            downloader.exists_or_download(service)
+        downloader.download(service, self._force_download)
 
     def _run(self, raw_input, pipline_executor_name=None, **kwargs):
         """
@@ -58,28 +55,28 @@ class ORKGNLPBaseService:
         :raise orkgnlp.common.util.exceptions.ORKGNLPValidationError: If the given ``pipline_executor_name`` is unknown
             or not given, in case of multiple registered ones.
         """
-        if not self._pipline_executors:
+        if not self._pipeline_executors:
             raise ORKGNLPIllegalStateError('There is no PipelineRunner registered. Please consider registering'
                                            'one using the _register_pipline_runner() function.')
 
         if pipline_executor_name:
 
-            if pipline_executor_name not in self._pipline_executors:
-                raise ORKGNLPValidationError('PiplineExecutor name is unknown.')
+            if pipline_executor_name not in self._pipeline_executors:
+                raise ORKGNLPValidationError('PipelineExecutor name is unknown.')
 
-            return self._pipline_executors[pipline_executor_name].run(raw_input, **kwargs)
+            return self._pipeline_executors[pipline_executor_name].run(raw_input, **kwargs)
 
-        if len(self._pipline_executors) > 1:
-            raise ORKGNLPValidationError('PiplineExecutor is ambiguous. Consider passing pipline_executor_name in the '
+        if len(self._pipeline_executors) > 1:
+            raise ORKGNLPValidationError('PipelineExecutor is ambiguous. Consider passing pipline_executor_name in the '
                                          'input.')
 
-        return next(iter(self._pipline_executors.values())).run(raw_input, **kwargs)
+        return next(iter(self._pipeline_executors.values())).run(raw_input, **kwargs)
 
     def _register_pipeline(self, name, encoder, runner, decoder):
         """
-        Registers a PiplineExecutor to the service.
+        Registers a PipelineExecutor to the service.
 
-        :param name: PiplineExecutors name.
+        :param name: PipelineExecutors name.
         :type name: str.
         :param encoder: Service's encoder.
         :type encoder: orkgnlp.common.service.base.ORKGNLPBaseEncoder.
@@ -88,10 +85,10 @@ class ORKGNLPBaseService:
         :param decoder: Service's decoder.
         :type decoder: orkgnlp.common.service.base.ORKGNLPBaseDecoder.
         """
-        if name in self._pipline_executors:
-            raise ORKGNLPValidationError('PiplineExecutor name already exists.')
+        if name in self._pipeline_executors:
+            raise ORKGNLPValidationError('PipelineExecutor name already exists.')
 
-        self._pipline_executors[name] = PiplineExecutor(encoder, runner, decoder)
+        self._pipeline_executors[name] = PipelineExecutor(encoder, runner, decoder)
 
 
 class ORKGNLPBaseEncoder(EnforceOverrides):

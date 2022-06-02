@@ -3,9 +3,9 @@
 from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateError
 
 
-class PiplineExecutor:
+class PipelineExecutor:
     """
-    The PiplineExecutor executes a full service workflow given its encoder, runner and decoder.
+    The PipelineExecutor executes a full service workflow given its encoder, runner and decoder.
     See the ``run`` function description for further information.
     """
     def __init__(self, encoder, runner, decoder):
