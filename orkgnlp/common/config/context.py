@@ -21,6 +21,7 @@ orkgnlp_context = StrictDict(
         'PREDICATES_CLUSTERING_SERVICE_NAME': 'predicates-clustering',
         'BIOASSAYS_SEMANTIFICATION_SERVICE_NAME': 'bioassays-semantification',
         'CS_NER_SERVICE_NAME': 'cs-ner',
+        'TDM_EXTRACTION_SERVICE_NAME': 'tdm-extraction',
         'HUGGINGFACE_REPOS': io.read_json(os.path.join(_current_dir, '..', '..', 'huggingface_repos.json'))
     }
 )
