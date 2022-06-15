@@ -8,14 +8,14 @@ from orkgnlp.common.service.base import ORKGNLPBaseEncoder
 
 class TdmExtractorEncoder(ORKGNLPBaseEncoder):
 
-    def __init__(self, labels):
+    def __init__(self, labels, batch_size):
         super().__init__()
 
         self.labels = labels
+        self.batch_size = batch_size
         self.tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
         self.max_input_sizes = self.tokenizer.max_model_input_sizes['xlnet-base-cased'] or 512
         self.device = 'cpu'
-        self.batch_size = 16
 
     @overrides
     def encode(self, raw_input, **kwargs):

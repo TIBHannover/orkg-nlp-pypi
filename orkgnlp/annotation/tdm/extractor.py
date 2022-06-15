@@ -15,7 +15,11 @@ class TdmExtractor(ORKGNLPBaseService):
         super().__init__(config['service_name'], *args, **kwargs)
 
         labels = io.read_csv(config['paths']['labels'], sep='\t')
-        encoder = TdmExtractorEncoder(labels)
+
+        if self._test:
+            labels = labels.head()
+
+        encoder = TdmExtractorEncoder(labels, self._batch_size)
         runner = ORKGNLPTorchRunner(
             io.load_transformers_pretrained(config['paths']['model_dir'], XLNetForSequenceClassification)
         )
