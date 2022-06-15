@@ -1,3 +1,5 @@
+""" TDM-Extraction service encoder. """
+
 import torch
 from overrides import overrides
 from torch.utils.data import Dataset, DataLoader
@@ -7,8 +9,19 @@ from orkgnlp.common.service.base import ORKGNLPBaseEncoder
 
 
 class TdmExtractorEncoder(ORKGNLPBaseEncoder):
+    """
+    The TdmExtractorEncoder encodes the given input to the arguments
+    needed to execute an XLNetForSequenceClassification model.
+    """
 
     def __init__(self, labels, batch_size):
+        """
+
+        :param labels: TDM gold labels given as one-columned-dataframe
+        :type labels: pandas.DataFrame
+        :param batch_size: Size of the batches used during model prediction.
+        :type batch_size: int
+        """
         super().__init__()
 
         self.labels = labels
@@ -20,7 +33,7 @@ class TdmExtractorEncoder(ORKGNLPBaseEncoder):
     @overrides
     def encode(self, raw_input, **kwargs):
         dataset = TdmDataset(raw_input, self.labels, self.tokenizer, self.max_input_sizes)
-        dataloader = DataLoader(dataset, batch_size=self.batch_size, shuffle=False, collate_fn=self.collate_batch)
+        dataloader = DataLoader(dataset, batch_size=self.batch_size, shuffle=False, collate_fn=self._collate_batch)
 
         def batch_generator():
             for batch in dataloader:
@@ -33,7 +46,7 @@ class TdmExtractorEncoder(ORKGNLPBaseEncoder):
         return batch_generator(), kwargs
 
     @staticmethod
-    def collate_batch(batch):
+    def _collate_batch(batch):
         max_shape = max([instance[0].shape[0] for instance in batch])
 
         args_num = len(batch[0])
@@ -47,8 +60,23 @@ class TdmExtractorEncoder(ORKGNLPBaseEncoder):
 
 
 class TdmDataset(Dataset):
+    """
+    The TdmDataset is a customized torch.utils.data.Dataset that simplifies the tokenization of sequences and
+    can be used afterwards in a torch.utils.data.Dataloader for batch creation.
+    """
 
     def __init__(self, text, labels, tokenizer, max_input_sizes):
+        """
+
+        :param text: Input text (hypothesis) to be concatenated with all known labels (premises).
+        :type text: str
+        :param labels: TDM gold labels given as one-columned-dataframe
+        :type labels: pandas.DataFrame
+        :param tokenizer: Tokenizer for tokenizing the texts.
+        :type tokenizer: transformers.PreTrainedTokenizer
+        :param max_input_sizes: Max length of a sequence including special characters.
+        :type max_input_sizes: int
+        """
         self.labels = labels.values
         self.tokenizer = tokenizer
         self.hypothesis_ids = self.tokenizer.encode(text, add_special_tokens=False)
@@ -70,13 +98,13 @@ class TdmDataset(Dataset):
             *self.hypothesis_ids,
             self.tokenizer.sep_token_id
         ]
-        token_type_ids = self.get_token_type(sequence_token_ids, self.tokenizer.sep_token_id)
+        token_type_ids = self._get_token_type(sequence_token_ids, self.tokenizer.sep_token_id)
         attention_mask_ids = [1] * len(sequence_token_ids)
 
         return torch.tensor(sequence_token_ids), torch.tensor(token_type_ids), torch.tensor(attention_mask_ids)
 
     @staticmethod
-    def get_token_type(tokens, sep):
+    def _get_token_type(tokens, sep):
         sep_index = tokens.index(sep) + 1
         return [0] * sep_index + [1] * (len(tokens) - sep_index)
 

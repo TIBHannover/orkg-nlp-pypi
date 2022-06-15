@@ -1,3 +1,5 @@
+""" TDM-Extraction service. """
+
 from transformers import XLNetForSequenceClassification
 
 from orkgnlp.annotation.tdm.decoder import TdmExtractorDecoder
@@ -10,6 +12,12 @@ from orkgnlp.common.service.runners import ORKGNLPTorchRunner
 
 
 class TdmExtractor(ORKGNLPBaseService):
+    """
+    The TdmExtractor requires a transformers.XLNetForSequenceClassification pretrained model and a TDM gold labels file.
+    The required files are downloaded while initiation, if it has not happened before.
+
+    You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
+    """
 
     def __init__(self, *args, **kwargs):
         super().__init__(config['service_name'], *args, **kwargs)
@@ -28,10 +36,12 @@ class TdmExtractor(ORKGNLPBaseService):
 
     def __call__(self, text, top_n=5):
         """
-        TODO:
+        Extracts Task-Dataset-Metric (TDM) entities from a given
+        DocTAET (Title, Abstract, ExperimentalSetup, TableInfo) ``text``
 
-        :param text:
-        :return:
+        :param text: `DocTAET <https://doi.org/10.1007/978-3-030-91669-5_35>`_ represented text.
+        :type text: str
+        :return: A list of TDMs.
         """
         return self._run(
             raw_input=text,

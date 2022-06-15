@@ -1,3 +1,5 @@
+""" TDM-Extraction service decoder. """
+
 import numpy as np
 import torch
 from overrides import overrides
@@ -6,8 +8,17 @@ from orkgnlp.common.service.base import ORKGNLPBaseDecoder
 
 
 class TdmExtractorDecoder(ORKGNLPBaseDecoder):
+    """
+    The TdmExtractorDecoder decodes the TDM-Extraction service model's output
+    to a user-friendly one.
+    """
 
     def __init__(self, labels):
+        """
+
+        :param labels: TDM gold labels given as one-columned-dataframe
+        :type labels: pandas.DataFrame
+        """
         super().__init__()
 
         self.labels = labels

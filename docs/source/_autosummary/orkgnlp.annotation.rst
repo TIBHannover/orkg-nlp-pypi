@@ -1,4 +1,4 @@
-orkgnlp.annotation
+﻿orkgnlp.annotation
 ==================
 
 .. automodule:: orkgnlp.annotation
@@ -27,4 +27,5 @@ orkgnlp.annotation
    :recursive:
 
    orkgnlp.annotation.csner
+   orkgnlp.annotation.tdm
 
