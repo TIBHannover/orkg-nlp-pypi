@@ -47,5 +47,4 @@ class TdmExtractor(ORKGNLPBaseService):
             raw_input=text,
             top_n=top_n,
             multiple_batches=True,
-            logits=True
         )
