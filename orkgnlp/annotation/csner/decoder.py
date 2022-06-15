@@ -22,14 +22,12 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
         self._alphabet = alphabet
         self._UNKNOWN = '</unk>'
 
-    @overrides
-    def decode(self, model_output, **kwargs):
-        raw_texts = kwargs['raw_texts']
-        recover = kwargs['recover']
-
+    @overrides(check_signature=False)
+    def decode(self, model_output, raw_texts, recover, **kwargs):
         predicted_results = []
-        for i in range(len(model_output)):
-            _, nbest_tag_seq = model_output[i]
+
+        for i, batch in enumerate(model_output):
+            _, nbest_tag_seq = batch
             tag_seq = nbest_tag_seq[:, :, 0]
             pred_label, _ = self._recover_label(tag_seq, recover[i][0], recover[i][0], recover[i][2])
             predicted_results += pred_label

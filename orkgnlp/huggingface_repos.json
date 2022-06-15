@@ -16,6 +16,17 @@
     }
   ],
 
+  "tdm-extraction": [
+    {
+      "repo_id": "orkg/orkgnlp-tdm-extraction",
+      "files": {
+        "model": "pytorch_model.bin",
+        "model_config": "config.json",
+        "labels": "labels.tsv"
+      }
+    }
+  ],
+
   "predicates-clustering": [
     {
       "repo_id": "orkg/orkgnlp-predicates-clustering",

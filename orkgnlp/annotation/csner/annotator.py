@@ -62,5 +62,5 @@ class CSNer(ORKGNLPBaseService):
         return self._run(
             raw_input=q,
             pipline_executor_name=pipeline_name,
-            batch_eval=True
+            multiple_batches=True
         )

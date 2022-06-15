@@ -1,6 +1,7 @@
 """ Model runners. """
 
 import onnxruntime as rt
+import torch
 from overrides import overrides
 
 from orkgnlp.common.service.base import ORKGNLPBaseRunner
@@ -11,6 +12,7 @@ class ORKGNLPONNXRunner(ORKGNLPBaseRunner):
     The ORKGNLPONNXRunner is a runner specialized for ONNX model formats. It requires therefore a model object of type
     ``onnx``.
     """
+
     def __init__(self, *args):
         super().__init__(*args)
 
@@ -43,28 +45,43 @@ class ORKGNLPTorchRunner(ORKGNLPBaseRunner):
     The ORKGNLPTorchRunner is a runner specialized for Torch model formats. It requires therefore a model object of type
     ``torch``.
     """
+
     def __init__(self, *args):
         super().__init__(*args)
 
     @overrides(check_signature=False)
-    def run(self, inputs, batch_eval=False, **kwargs):
+    def run(self, inputs, multiple_batches=False, **kwargs):
         """
         Runs the given model while initiation in evaluation mode and returns its output.
 
-        :param inputs: Tuple of model arguments or a list of tuples if ``batch_eval=True``.
-        :type inputs: Tuple[Any] or List[Tuple[Any]].
-        :param batch_eval: Whether the model is to be executed x times for x batches, where
-            x is the length of ``inputs`` list. Defaults to False.
-        :type batch_eval: bool
+        :param inputs: Tuple of model arguments or dict of model named arguments.
+            A list of tuples or a list of dicts in case of batches.
+        :type inputs: Tuple[Any], List[Tuple[Any]], Dict[str, Any] or List[Dict[str, Any]]
+        :param multiple_batches: Whether the model is to be executed x times for each input instance or batch, where
+            x is the length of ``inputs`` list. Note that in this case the model's outputs
+            will be returned as a python generator. Defaults to False.
+        :type multiple_batches: bool
         :return: The model output as a tuple or list of tuples, and kwargs.
         """
         self._model.eval()
 
-        if not batch_eval:
-            return self._model(*inputs)
+        if not multiple_batches:
 
-        outputs = []
-        for batch in inputs:
-            outputs.append([*self._model(*batch)])
+            if isinstance(inputs, dict):
+                output = self._model(**inputs)
+            else:
+                output = self._model(*inputs)
 
-        return outputs, kwargs
+            return output, kwargs
+
+        def multiple_batch_generator():
+            for i, batch in enumerate(inputs):
+
+                if isinstance(batch, dict):
+                    output = self._model(**batch)
+                else:
+                    output = self._model(*batch)
+
+                yield output
+
+        return multiple_batch_generator(), kwargs
