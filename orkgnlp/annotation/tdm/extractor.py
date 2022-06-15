@@ -41,6 +41,8 @@ class TdmExtractor(ORKGNLPBaseService):
 
         :param text: `DocTAET <https://doi.org/10.1007/978-3-030-91669-5_35>`_ represented text.
         :type text: str
+        :param top_n: Top n results to be extracted. Defaults to 5.
+        :type top_n: int
         :return: A list of TDMs.
         """
         return self._run(
