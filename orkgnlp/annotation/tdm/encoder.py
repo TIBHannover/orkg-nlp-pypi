@@ -77,16 +77,16 @@ class TdmDataset(Dataset):
         :param max_input_sizes: Max length of a sequence including special characters.
         :type max_input_sizes: int
         """
-        self.labels = labels.values
+        self.labels = labels
         self.tokenizer = tokenizer
         self.hypothesis_ids = self.tokenizer.encode(text, add_special_tokens=False)
         self.max_input_sizes = max_input_sizes
 
     def __len__(self):
-        return self.labels.size
+        return len(self.labels.index)
 
     def __getitem__(self, idx):
-        premise_ids = self.tokenizer.encode(self.labels[idx].item(), add_special_tokens=False)
+        premise_ids = self.tokenizer.encode(self.labels.iloc[idx].tolist()[0], add_special_tokens=False)
 
         # -3 to account for the special characters
         self._truncate_seq_pair(premise_ids, self.hypothesis_ids, self.max_input_sizes - 3)

@@ -18,20 +18,17 @@ class ORKGNLPBaseService:
     def __new__(cls):
         pass
 
-    def __init__(self, service, *, force_download=False, test=False, batch_size=16):
+    def __init__(self, service, *, force_download=False, batch_size=16):
         """
 
         :param force_download: Indicates whether the required files are to be downloaded again. Defaults to False.
         :type force_download: bool
-        :param test: (Internal usage) Indicates whether the service is initiated for test purposes. Defaults to False.
-        :type test: bool
         :param batch_size: Size of the batches used during model prediction. This argument is used by services
             that applies batch evaluation. Defaults to 16.
         :type batch_size: int
         """
         self._pipeline_executors = {}
         self._force_download = force_download
-        self._test = test
         self._batch_size = batch_size
         self._download(service)
 

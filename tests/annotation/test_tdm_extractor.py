@@ -6,7 +6,7 @@ from orkgnlp.annotation import TdmExtractor
 class TestCSNer(TestCase):
 
     def setUp(self):
-        self.extractor = TdmExtractor(force_download=False, test=True)
+        self.extractor = TdmExtractor(force_download=False)
         self.text = 'Open Research Knowledge Graph: Next Generation Infrastructure for Semantic Scholarly Knowledge'
 
     def test_singleton(self):
