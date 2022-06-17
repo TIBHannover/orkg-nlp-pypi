@@ -1,0 +1,11 @@
+stages:
+  - test
+
+test-job:
+  stage: test
+  image: python:3.7
+  before_script:
+    - pip install poetry
+    - poetry install
+  script:
+    - poetry run python -m unittest discover -v
