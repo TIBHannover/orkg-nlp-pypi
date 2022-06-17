@@ -4,25 +4,26 @@ stages:
 default:
   image: python:3.7
 
+unittest-job:
+  stage: test
   before_script:
-    - pip install poetry
-    - poetry install
-    - pip install -r docs/requirements.txt
+    - pip install -r requirements.txt
     - apt-get update 
-    - apt-get install make
     - apt-get install -y locales
     - sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
     - locale-gen
     - export LANG=en_US.UTF-8
     - export LANGUAGE=en_US:en
     - export LC_ALL=en_US.UTF-8
-
-unittest-job:
-  stage: test
   script:
-    - poetry run python -m unittest discover -v
+    - python -m unittest discover -v
 
 docs-job:
   stage: test
+  before_script:
+    - pip install -r requirements.txt
+    - pip install -r docs/requirements.txt
+    - apt-get update 
+    - apt-get install make
   script:
     - make -C docs/ clean html
