@@ -5,8 +5,13 @@ from orkgnlp.clustering import BioassaysSemantifier
 
 class TestBioassaysSemantifier(TestCase):
 
-    def setUp(self):
-        self.semantifier = BioassaysSemantifier(force_download=False)
+    @classmethod
+    def setUpClass(cls):
+        cls.semantifier = BioassaysSemantifier(force_download=False)
+
+    @classmethod
+    def tearDownClass(cls):
+        del cls
 
     def test_singleton(self):
         another_semantifier = BioassaysSemantifier()
