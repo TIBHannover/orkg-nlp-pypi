@@ -18,7 +18,7 @@ class ORKGNLPBaseService:
     def __new__(cls):
         pass
 
-    def __init__(self, service, *, force_download=False, batch_size=16):
+    def __init__(self, service, *, force_download=False, batch_size=16, _unittest=False):
         """
 
         :param force_download: Indicates whether the required files are to be downloaded again. Defaults to False.
@@ -30,6 +30,7 @@ class ORKGNLPBaseService:
         self._pipeline_executors = {}
         self._force_download = force_download
         self._batch_size = batch_size
+        self._unittest = _unittest
         self._download(service)
 
     def _download(self, service):
