@@ -16,6 +16,7 @@ orkgnlp.annotation.tdm.extractor.TdmExtractor
    .. autosummary::
       :nosignatures:
    
+      ~TdmExtractor.release_memory
    
    
 

@@ -4,6 +4,8 @@ import sys
 import spacy
 import torch
 import numpy as np
+
+from typing import Any, Tuple, Dict
 from overrides import overrides
 
 from orkgnlp.common.service.base import ORKGNLPBaseEncoder
@@ -15,7 +17,7 @@ class CSNerEncoder(ORKGNLPBaseEncoder):
     needed to execute a Sequence labeling TorchScript model.
     """
 
-    def __init__(self, alphabet):
+    def __init__(self, alphabet: Dict[str, Dict[str, int]]):
         """
 
         :param alphabet: Dict representing the word, char and label alphabets.
@@ -30,7 +32,7 @@ class CSNerEncoder(ORKGNLPBaseEncoder):
         )
 
     @overrides
-    def encode(self, raw_input, **kwargs):
+    def encode(self, raw_input: Any, **kwargs: Any) -> Tuple[Any, Dict[str, Any]]:
         raw_texts, raw_ids = self._read_instance(raw_input)
 
         batch_size = 10

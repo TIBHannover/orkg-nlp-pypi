@@ -17,6 +17,7 @@ orkgnlp.common.service.base.ORKGNLPBaseEncoder
       :nosignatures:
    
       ~ORKGNLPBaseEncoder.encode
+      ~ORKGNLPBaseEncoder.release_memory
    
    
 

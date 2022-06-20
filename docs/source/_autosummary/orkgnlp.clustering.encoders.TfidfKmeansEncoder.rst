@@ -17,6 +17,7 @@ orkgnlp.clustering.encoders.TfidfKmeansEncoder
       :nosignatures:
    
       ~TfidfKmeansEncoder.encode
+      ~TfidfKmeansEncoder.release_memory
    
    
 

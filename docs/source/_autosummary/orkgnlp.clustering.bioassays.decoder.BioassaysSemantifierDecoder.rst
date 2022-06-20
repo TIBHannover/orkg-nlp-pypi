@@ -17,6 +17,7 @@ orkgnlp.clustering.bioassays.decoder.BioassaysSemantifierDecoder
       :nosignatures:
    
       ~BioassaysSemantifierDecoder.decode
+      ~BioassaysSemantifierDecoder.release_memory
    
    
 

@@ -1,8 +1,11 @@
 """ TDM-Extraction service decoder. """
+from ctypes import Union
+from typing import Any, Dict, Tuple, Generator, List, Iterable
 
 import numpy as np
 import torch
 from overrides import overrides
+from pandas import DataFrame
 
 from orkgnlp.common.service.base import ORKGNLPBaseDecoder
 
@@ -13,18 +16,22 @@ class TdmExtractorDecoder(ORKGNLPBaseDecoder):
     to a user-friendly one.
     """
 
-    def __init__(self, labels):
+    def __init__(self, labels: DataFrame):
         """
 
         :param labels: TDM gold labels given as one-columned-dataframe
-        :type labels: pandas.DataFrame
         """
         super().__init__()
 
-        self.labels = labels
+        self.labels: DataFrame = labels
 
     @overrides(check_signature=False)
-    def decode(self, model_output, top_n, **kwargs):
+    def decode(
+            self,
+            model_output: Generator[Any, None, None],
+            top_n: int,
+            **kwargs: Any
+    ) -> Any:
         self.labels['prob'] = np.NaN
 
         for batch_idx, batch in enumerate(model_output):
@@ -44,7 +51,7 @@ class TdmExtractorDecoder(ORKGNLPBaseDecoder):
         )
 
     @staticmethod
-    def _prepare_service_output(tdms, scores):
+    def _prepare_service_output(tdms: List[str], scores: List[float]) -> List[Dict[str, Any]]:
         service_output = []
 
         for i, tdm in enumerate(tdms):

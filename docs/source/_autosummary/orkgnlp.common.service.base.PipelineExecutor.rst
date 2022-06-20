@@ -1,7 +1,7 @@
-orkgnlp.common.service.executors.PipelineExecutor
-=================================================
+orkgnlp.common.service.base.PipelineExecutor
+============================================
 
-.. currentmodule:: orkgnlp.common.service.executors
+.. currentmodule:: orkgnlp.common.service.base
 
 .. autoclass:: PipelineExecutor
    :members:
@@ -16,6 +16,7 @@ orkgnlp.common.service.executors.PipelineExecutor
    .. autosummary::
       :nosignatures:
    
+      ~PipelineExecutor.release_memory
       ~PipelineExecutor.run
    
    

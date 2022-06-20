@@ -1,4 +1,4 @@
-﻿orkgnlp.common.util.io
+orkgnlp.common.util.io
 ======================
 
 .. automodule:: orkgnlp.common.util.io

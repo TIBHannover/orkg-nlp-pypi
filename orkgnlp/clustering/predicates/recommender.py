@@ -1,4 +1,5 @@
 """ Predicates recommendation service. """
+from typing import Any, Dict
 
 from orkgnlp.clustering.predicates._config import config
 from orkgnlp.clustering.encoders import TfidfKmeansEncoder
@@ -15,25 +16,23 @@ class PredicatesRecommender(ORKGNLPBaseService):
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(config['service_name'], *args, **kwargs)
 
-        encoder = TfidfKmeansEncoder(io.read_onnx(config['paths']['vectorizer']))
-        runner = ORKGNLPONNXRunner(io.read_onnx(config['paths']['model']))
-        decoder = PredicatesRecommenderDecoder(
+        encoder: TfidfKmeansEncoder = TfidfKmeansEncoder(io.read_onnx(config['paths']['vectorizer']))
+        runner: ORKGNLPONNXRunner = ORKGNLPONNXRunner(io.read_onnx(config['paths']['model']))
+        decoder: PredicatesRecommenderDecoder = PredicatesRecommenderDecoder(
             io.read_df_from_json(config['paths']['training_data'], key='instances'),
             io.read_json(config['paths']['mapping'])
         )
         self._register_pipeline('main', encoder, runner, decoder)
 
-    def __call__(self, title, abstract):
+    def __call__(self, title: str, abstract: str):
         """
         Recommends predicates for a research paper.
 
         :param title: Title of the research paper.
-        :type title: str
         :param abstract: Abstract of the research paper.
-        :type abstract: str
         :return: List of predicates.
         """
         return self._run(

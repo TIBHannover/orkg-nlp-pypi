@@ -1,5 +1,7 @@
 """ TDM-Extraction service. """
+from typing import Any
 
+from pandas import DataFrame
 from transformers import XLNetForSequenceClassification
 
 from orkgnlp.annotation.tdm.decoder import TdmExtractorDecoder
@@ -19,30 +21,28 @@ class TdmExtractor(ORKGNLPBaseService):
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(config['service_name'], *args, **kwargs)
 
-        labels = io.read_csv(config['paths']['labels'], sep='\t')
+        labels: DataFrame = io.read_csv(config['paths']['labels'], sep='\t')
 
         if self._unittest:
             labels = labels.head()
 
-        encoder = TdmExtractorEncoder(labels, self._batch_size)
-        runner = ORKGNLPTorchRunner(
+        encoder: TdmExtractorEncoder = TdmExtractorEncoder(labels, self._batch_size)
+        runner: ORKGNLPTorchRunner = ORKGNLPTorchRunner(
             io.load_transformers_pretrained(config['paths']['model_dir'], XLNetForSequenceClassification)
         )
-        decoder = TdmExtractorDecoder(labels)
+        decoder: TdmExtractorDecoder = TdmExtractorDecoder(labels)
         self._register_pipeline('main', encoder, runner, decoder)
 
-    def __call__(self, text, top_n=5):
+    def __call__(self, text: str, top_n: int = 5) -> Any:
         """
         Extracts Task-Dataset-Metric (TDM) entities from a given
         DocTAET (Title, Abstract, ExperimentalSetup, TableInfo) ``text``
 
         :param text: `DocTAET <https://doi.org/10.1007/978-3-030-91669-5_35>`_ represented text.
-        :type text: str
         :param top_n: Top n results to be extracted. Defaults to 5.
-        :type top_n: int
         :return: A list of TDMs.
         """
         return self._run(

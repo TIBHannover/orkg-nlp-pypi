@@ -1,4 +1,4 @@
-﻿orkgnlp.annotation.tdm.encoder.TdmDataset
+orkgnlp.annotation.tdm.encoder.TdmDataset
 =========================================
 
 .. currentmodule:: orkgnlp.annotation.tdm.encoder

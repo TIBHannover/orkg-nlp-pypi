@@ -1,4 +1,4 @@
-﻿orkgnlp.annotation
+orkgnlp.annotation
 ==================
 
 .. automodule:: orkgnlp.annotation

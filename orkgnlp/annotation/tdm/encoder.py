@@ -2,8 +2,10 @@
 
 import torch
 from overrides import overrides
+from pandas import DataFrame
 from torch.utils.data import Dataset, DataLoader
-from transformers import XLNetTokenizer
+from transformers import XLNetTokenizer, PreTrainedTokenizer
+from typing import Any, Dict, Tuple, List
 
 from orkgnlp.common.service.base import ORKGNLPBaseEncoder
 
@@ -14,24 +16,22 @@ class TdmExtractorEncoder(ORKGNLPBaseEncoder):
     needed to execute an XLNetForSequenceClassification model.
     """
 
-    def __init__(self, labels, batch_size):
+    def __init__(self, labels: DataFrame, batch_size: int):
         """
 
         :param labels: TDM gold labels given as one-columned-dataframe
-        :type labels: pandas.DataFrame
         :param batch_size: Size of the batches used during model prediction.
-        :type batch_size: int
         """
         super().__init__()
 
-        self.labels = labels
-        self.batch_size = batch_size
-        self.tokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
-        self.max_input_sizes = self.tokenizer.max_model_input_sizes['xlnet-base-cased'] or 512
-        self.device = 'cpu'
+        self.labels: DataFrame = labels
+        self.batch_size: int = batch_size
+        self.tokenizer: XLNetTokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
+        self.max_input_sizes: int = self.tokenizer.max_model_input_sizes['xlnet-base-cased'] or 512
+        self.device: str = 'cpu'
 
     @overrides
-    def encode(self, raw_input, **kwargs):
+    def encode(self, raw_input: Any, **kwargs: Any) -> Tuple[Any, Dict[str, Any]]:
         dataset = TdmDataset(raw_input, self.labels, self.tokenizer, self.max_input_sizes)
         dataloader = DataLoader(dataset, batch_size=self.batch_size, shuffle=False, collate_fn=self._collate_batch)
 
@@ -46,7 +46,7 @@ class TdmExtractorEncoder(ORKGNLPBaseEncoder):
         return batch_generator(), kwargs
 
     @staticmethod
-    def _collate_batch(batch):
+    def _collate_batch(batch: List[Tuple[Any, ...]]) -> Tuple[Any, ...]:
         max_shape = max([instance[0].shape[0] for instance in batch])
 
         args_num = len(batch[0])
@@ -65,22 +65,18 @@ class TdmDataset(Dataset):
     can be used afterwards in a torch.utils.data.Dataloader for batch creation.
     """
 
-    def __init__(self, text, labels, tokenizer, max_input_sizes):
+    def __init__(self, text: str, labels: DataFrame, tokenizer: PreTrainedTokenizer, max_input_sizes: int):
         """
 
         :param text: Input text (hypothesis) to be concatenated with all known labels (premises).
-        :type text: str
         :param labels: TDM gold labels given as one-columned-dataframe
-        :type labels: pandas.DataFrame
         :param tokenizer: Tokenizer for tokenizing the texts.
-        :type tokenizer: transformers.PreTrainedTokenizer
         :param max_input_sizes: Max length of a sequence including special characters.
-        :type max_input_sizes: int
         """
-        self.labels = labels
-        self.tokenizer = tokenizer
-        self.hypothesis_ids = self.tokenizer.encode(text, add_special_tokens=False)
-        self.max_input_sizes = max_input_sizes
+        self.labels: DataFrame = labels
+        self.tokenizer: PreTrainedTokenizer = tokenizer
+        self.hypothesis_ids: List[int] = self.tokenizer.encode(text, add_special_tokens=False)
+        self.max_input_sizes: int = max_input_sizes
 
     def __len__(self):
         return len(self.labels.index)
@@ -104,12 +100,12 @@ class TdmDataset(Dataset):
         return torch.tensor(sequence_token_ids), torch.tensor(token_type_ids), torch.tensor(attention_mask_ids)
 
     @staticmethod
-    def _get_token_type(tokens, sep):
+    def _get_token_type(tokens: List[int], sep: int) -> List[int]:
         sep_index = tokens.index(sep) + 1
         return [0] * sep_index + [1] * (len(tokens) - sep_index)
 
     @staticmethod
-    def _truncate_seq_pair(tokens_a, tokens_b, max_length):
+    def _truncate_seq_pair(tokens_a: List[int], tokens_b: List[int], max_length: int):
         """Truncates a sequence pair in place to the maximum length."""
 
         # This is a simple heuristic which will always truncate the longer sequence

@@ -1,9 +1,9 @@
-orkgnlp.common.service.base.ORKGNLPBaseDecoder
-==============================================
+orkgnlp.common.service.base.PipelineExecutorComponent
+=====================================================
 
 .. currentmodule:: orkgnlp.common.service.base
 
-.. autoclass:: ORKGNLPBaseDecoder
+.. autoclass:: PipelineExecutorComponent
    :members:
    :show-inheritance:
    :inherited-members:
@@ -16,8 +16,7 @@ orkgnlp.common.service.base.ORKGNLPBaseDecoder
    .. autosummary::
       :nosignatures:
    
-      ~ORKGNLPBaseDecoder.decode
-      ~ORKGNLPBaseDecoder.release_memory
+      ~PipelineExecutorComponent.release_memory
    
    
 

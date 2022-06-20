@@ -17,6 +17,7 @@ orkgnlp.annotation.csner.decoder.CSNerDecoder
       :nosignatures:
    
       ~CSNerDecoder.decode
+      ~CSNerDecoder.release_memory
    
    
 

@@ -17,6 +17,7 @@ orkgnlp.annotation.csner.encoder.CSNerEncoder
       :nosignatures:
    
       ~CSNerEncoder.encode
+      ~CSNerEncoder.release_memory
    
    
 
