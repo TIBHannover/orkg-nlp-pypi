@@ -4,20 +4,20 @@ stages:
 default:
   image: python:3.7
 
-# Our unittests exhaust the memory available in GitLab-Runner -> suspended for now.
-#unittest-job:
-#  stage: test
-#  before_script:
-#    - pip install -r requirements.txt
-#    - apt-get update
-#    - apt-get install -y locales
-#    - sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
-#    - locale-gen
-#    - export LANG=en_US.UTF-8
-#    - export LANGUAGE=en_US:en
-#    - export LC_ALL=en_US.UTF-8
-#  script:
-#    - python -m unittest discover -v
+unittest-job:
+  stage: test
+  before_script:
+    - apt-get update
+    - apt-get install poetry
+    - poetry install
+    - apt-get install -y locales
+    - sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
+    - locale-gen
+    - export LANG=en_US.UTF-8
+    - export LANGUAGE=en_US:en
+    - export LC_ALL=en_US.UTF-8
+  script:
+    - poetry run test
 
 docs-job:
   stage: test
