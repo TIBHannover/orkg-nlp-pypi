@@ -7,9 +7,9 @@ default:
 unittest-job:
   stage: test
   before_script:
-    - apt-get update
-    - apt-get install poetry
+    - pip install poetry
     - poetry install
+    - apt-get update
     - apt-get install -y locales
     - sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen
     - locale-gen
