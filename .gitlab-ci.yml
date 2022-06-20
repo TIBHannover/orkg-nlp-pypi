@@ -4,6 +4,11 @@ stages:
 default:
   image: python:3.7
 
+gitlab-runner-stats:
+  stage: test
+  script:
+    - watch -n 1 free -h
+
 unittest-job:
   stage: test
   before_script:
