@@ -27,21 +27,19 @@ orkgnlp_context = StrictDict(
 )
 
 
-def set_data_cache_root(cache_root):
+def set_data_cache_root(cache_root: str):
     """
     Overrides the value of ORKG_NLP_DATA_CACHE_ROOT. See :doc:`../configure`
 
     :param cache_root: Path to the data cache root. The path must be absolute.
-    :type cache_root: str
     """
     orkgnlp_context['ORKG_NLP_DATA_CACHE_ROOT'] = cache_root
 
 
-def set_verbosity(verbose):
+def set_verbosity(verbose: bool):
     """
     Overrides the value of ORKG_NLP_VERBOSITY. See :doc:`../configure`
 
     :param verbose: Indicates whether orkgnlp is in verbose mode.
-    :type verbose: bool
     """
     orkgnlp_context['ORKG_NLP_VERBOSITY'] = verbose

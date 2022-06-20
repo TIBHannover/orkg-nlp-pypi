@@ -17,6 +17,7 @@ orkgnlp.clustering.predicates.decoder.PredicatesRecommenderDecoder
       :nosignatures:
    
       ~PredicatesRecommenderDecoder.decode
+      ~PredicatesRecommenderDecoder.release_memory
    
    
 

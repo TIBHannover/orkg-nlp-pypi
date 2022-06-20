@@ -1,4 +1,5 @@
 """ Defines decorators used within the package """
+from typing import Type
 
 
 def singleton(_):
@@ -10,7 +11,7 @@ def singleton(_):
     :return:
     """
 
-    def apply_pattern(cls, *args, **kwargs):
+    def apply_pattern(cls: Type, *args, **kwargs):
         # attention: *args and **kwargs must be included even if not used!
         if not hasattr(cls, 'instance'):
             cls.instance = super(cls.__class__, cls).__new__(cls)

@@ -16,6 +16,7 @@ orkgnlp.common.service.runners.ORKGNLPONNXRunner
    .. autosummary::
       :nosignatures:
    
+      ~ORKGNLPONNXRunner.release_memory
       ~ORKGNLPONNXRunner.run
    
    

@@ -16,6 +16,7 @@ orkgnlp.clustering.predicates.recommender.PredicatesRecommender
    .. autosummary::
       :nosignatures:
    
+      ~PredicatesRecommender.release_memory
    
    
 

@@ -6,26 +6,23 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
 
-def remove_punctuation(text):
+def remove_punctuation(text: str) -> str:
     """
     Removes punctuations from the given ``text``.
 
     :param text:
-    :type text: str
     :return: text with punctuations removed.
     """
     return text.translate(str.maketrans('', '', string.punctuation))
 
 
-def remove_stopwords(text, language='english'):
+def remove_stopwords(text: str, language: str = 'english') -> str:
     """
     Removes stopwords from the given ``text``.
     Uses the stopwords defined in ``NLTK``.
 
     :param text:
-    :type text: str
     :param language: defaults to ``english``.
-    :type language: str
     :return: text with stopwords removed.
     """
     nltk.download('stopwords', quiet=True)
@@ -35,13 +32,12 @@ def remove_stopwords(text, language='english'):
     )
 
 
-def lemmatize(text):
+def lemmatize(text: str) -> str:
     """
     Lemmatizes the words in the given ``text``.
     Uses the WordNetLemmatizer defined in ``NLTK``.
 
     :param text:
-    :type text: str
     :return: text with its lemmatized words.
     """
     nltk.download('wordnet', quiet=True)

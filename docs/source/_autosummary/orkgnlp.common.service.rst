@@ -27,6 +27,5 @@ orkgnlp.common.service
    :recursive:
 
    orkgnlp.common.service.base
-   orkgnlp.common.service.executors
    orkgnlp.common.service.runners
 

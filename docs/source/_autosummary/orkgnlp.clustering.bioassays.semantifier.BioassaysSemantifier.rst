@@ -16,6 +16,7 @@ orkgnlp.clustering.bioassays.semantifier.BioassaysSemantifier
    .. autosummary::
       :nosignatures:
    
+      ~BioassaysSemantifier.release_memory
    
    
 

@@ -24,6 +24,8 @@ orkgnlp.common.service.base
       ORKGNLPBaseEncoder
       ORKGNLPBaseRunner
       ORKGNLPBaseService
+      PipelineExecutor
+      PipelineExecutorComponent
    
    
 

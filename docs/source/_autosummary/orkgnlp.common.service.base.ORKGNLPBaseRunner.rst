@@ -16,6 +16,7 @@ orkgnlp.common.service.base.ORKGNLPBaseRunner
    .. autosummary::
       :nosignatures:
    
+      ~ORKGNLPBaseRunner.release_memory
       ~ORKGNLPBaseRunner.run
    
    

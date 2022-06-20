@@ -16,6 +16,7 @@ orkgnlp.annotation.csner.annotator.CSNer
    .. autosummary::
       :nosignatures:
    
+      ~CSNer.release_memory
    
    
 

@@ -1,4 +1,7 @@
 """ Common encoders for the clustering services. """
+from typing import Any, Dict, Tuple
+
+from onnx import ModelProto
 from overrides import overrides
 
 from orkgnlp.common.util import text
@@ -12,17 +15,16 @@ class TfidfKmeansEncoder(ORKGNLPBaseEncoder):
     needed to execute a Kmeans onnx model.
     """
 
-    def __init__(self, vectorizer):
+    def __init__(self, vectorizer: ModelProto):
         """
 
         :param vectorizer: The TF-IDF vectorizer needed for the encoding.
-        :type vectorizer: Loaded ``onnx`` object.
         """
         super().__init__()
-        self._vectorizer = ORKGNLPONNXRunner(vectorizer)
+        self._vectorizer: ORKGNLPONNXRunner = ORKGNLPONNXRunner(vectorizer)
 
     @overrides
-    def encode(self, raw_input, **kwargs):
+    def encode(self, raw_input: Any, **kwargs: Any) -> Tuple[Any, Dict[str, Any]]:
         preprocessed_text = self._text_process(raw_input)
         output, _ = self._vectorizer.run(
             inputs=([preprocessed_text],),
@@ -31,7 +33,7 @@ class TfidfKmeansEncoder(ORKGNLPBaseEncoder):
         return (output[0][0], ), kwargs
 
     @staticmethod
-    def _text_process(q):
+    def _text_process(q: str) -> str:
         q = text.remove_punctuation(q)
         q = text.remove_stopwords(q)
         q = text.lemmatize(q)

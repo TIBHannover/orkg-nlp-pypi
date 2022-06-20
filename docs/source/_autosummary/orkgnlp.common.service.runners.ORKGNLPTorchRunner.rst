@@ -16,6 +16,7 @@ orkgnlp.common.service.runners.ORKGNLPTorchRunner
    .. autosummary::
       :nosignatures:
    
+      ~ORKGNLPTorchRunner.release_memory
       ~ORKGNLPTorchRunner.run
    
    

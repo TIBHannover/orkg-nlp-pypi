@@ -1,4 +1,5 @@
 """ CS-NER service decoder. """
+from typing import Union, Any, Generator, List, Dict
 
 from overrides import overrides
 
@@ -23,7 +24,13 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
         self._UNKNOWN = '</unk>'
 
     @overrides(check_signature=False)
-    def decode(self, model_output, raw_texts, recover, **kwargs):
+    def decode(
+            self,
+            model_output: Union[Any, Generator[Any, None, None]],
+            raw_texts,
+            recover,
+            **kwargs: Any
+    ) -> Any:
         predicted_results = []
 
         for i, batch in enumerate(model_output):
@@ -115,7 +122,7 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
             return instances[0]
 
     @staticmethod
-    def _prepare_annotations(entities):
+    def _prepare_annotations(entities: Dict[str, List[Any]]) -> List[Dict[str, Any]]:
         annotations = []
 
         for concept in entities:

@@ -1,4 +1,5 @@
 """ Model runners. """
+from typing import Tuple, Any, List, Dict, Union, Generator
 
 import onnxruntime as rt
 import torch
@@ -17,15 +18,19 @@ class ORKGNLPONNXRunner(ORKGNLPBaseRunner):
         super().__init__(*args)
 
     @overrides(check_signature=False)
-    def run(self, inputs, output_names=None, custom_input_dict=None, **kwargs):
+    def run(
+            self,
+            inputs: Tuple[Any],
+            output_names: List[str] = None,
+            custom_input_dict: Dict[str, List[Any]] = None,
+            **kwargs: Any
+    ) -> Tuple[Any, Dict[str, Any]]:
         """
         Runs the given model while initiation in evaluation mode and returns its output.
 
         :param inputs: Tuple of model arguments.
-        :type inputs: Tuple[Any].
         :param output_names: List of output names of the ONNX graph. Check your exporting code for further information!
             Defaults to None.
-        :type output_names: List[str].
         :param custom_input_dict: When given, the argument ``inputs`` will be ignored. This argument must have the
             following schema: {input_name_0: [input_value_0], ..., input_name_n: [input_value_n]}. Check your exporting
             code for further information! Defaults to None.
@@ -50,17 +55,19 @@ class ORKGNLPTorchRunner(ORKGNLPBaseRunner):
         super().__init__(*args)
 
     @overrides(check_signature=False)
-    def run(self, inputs, multiple_batches=False, **kwargs):
+    def run(self,
+            inputs: Union[Any, List[Tuple[Any]], Dict[str, Any], List[Dict[str, Any]]],
+            multiple_batches: bool = False,
+            **kwargs: Any
+            ) -> Union[Tuple[Any, Dict[str, Any]], Tuple[Generator[Any, None, None], Dict[str, Any]]]:
         """
         Runs the given model while initiation in evaluation mode and returns its output.
 
         :param inputs: Tuple of model arguments or dict of model named arguments.
             A list of tuples or a list of dicts in case of batches.
-        :type inputs: Tuple[Any], List[Tuple[Any]], Dict[str, Any] or List[Dict[str, Any]]
         :param multiple_batches: Whether the model is to be executed x times for each input instance or batch, where
             x is the length of ``inputs`` list. Note that in this case the model's outputs
             will be returned as a python generator. Defaults to False.
-        :type multiple_batches: bool
         :return: The model output as a tuple or list of tuples, and kwargs.
         """
         self._model.eval()

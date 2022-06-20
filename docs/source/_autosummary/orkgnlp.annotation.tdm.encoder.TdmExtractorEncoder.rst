@@ -1,4 +1,4 @@
-﻿orkgnlp.annotation.tdm.encoder.TdmExtractorEncoder
+orkgnlp.annotation.tdm.encoder.TdmExtractorEncoder
 ==================================================
 
 .. currentmodule:: orkgnlp.annotation.tdm.encoder
@@ -17,6 +17,7 @@
       :nosignatures:
    
       ~TdmExtractorEncoder.encode
+      ~TdmExtractorEncoder.release_memory
    
    
 

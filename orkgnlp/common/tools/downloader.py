@@ -7,6 +7,7 @@ huggingface `repositories <https://huggingface.co/orkg>`_.
 
 import os
 import shutil
+from typing import Union, List
 
 from huggingface_hub import hf_hub_download
 from wasabi import msg
@@ -15,7 +16,7 @@ from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.util.exceptions import ORKGNLPValidationError
 
 
-def download(services, force_download=False):
+def download(services: Union[str, List[str]], force_download: bool = False):
     """
     Downloads the models and data needed to use the supported services.
 
@@ -23,9 +24,7 @@ def download(services, force_download=False):
     You can also check how to :doc:`../configure` its value.
 
     :param services: a string representing a service name or a list of them. Check :doc:`../services/services` for a full list.
-    :type services: str or list[str]
     :param force_download: Indicates whether the required files are to be downloaded again. Defaults to False.
-    :type force_download: bool
     :raise orkgnlp.common.util.exceptions.ORKGNLPValidationError: If one of the known passed service names is unknown.
     """
     if isinstance(services, str):
@@ -37,13 +36,12 @@ def download(services, force_download=False):
     _download(services)
 
 
-def _download(services):
+def _download(services: List[str]):
     """
     Checks whether the service names are known and then for each service it downloads the required
     not-already-downloaded files.
 
     :param services: A list representing service names. Check :doc:`../services/services` for a full list.
-    :type services: List[str].
     :raise orkgnlp.common.util.exceptions.ORKGNLPValidationError: If one of the known passed service names is unknown.
     """
 
@@ -78,25 +76,22 @@ def _download(services):
                      show=orkgnlp_context.get('ORKG_NLP_VERBOSITY'))
 
 
-def _services_are_known(services, orkg_services):
+def _services_are_known(services: List[str], orkg_services: List[str]) -> bool:
     """
     Returns True if the given services names are subset of the known ORKG-NLP services
 
     :param services: list of service names
-    :type services: list[str]
     :param orkg_services: list of ORKG-NLP service names
-    :type services: list[str]
     :return:
     """
     return set(services).issubset(orkg_services)
 
 
-def _delete_services(services):
+def _delete_services(services: List[str]):
     """
     Removes pre-downloaded files of the given service names.
 
     :param services: A list representing service names. Check :doc:`../services/services` for a full list.
-    :type services: List[str].
     """
 
     for service in services:

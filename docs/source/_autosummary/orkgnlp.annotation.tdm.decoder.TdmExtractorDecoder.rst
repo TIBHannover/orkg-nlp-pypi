@@ -17,6 +17,7 @@ orkgnlp.annotation.tdm.decoder.TdmExtractorDecoder
       :nosignatures:
    
       ~TdmExtractorDecoder.decode
+      ~TdmExtractorDecoder.release_memory
    
    
 

@@ -1,4 +1,5 @@
 """ BioAssays semantification service. """
+from typing import Any
 
 from orkgnlp.clustering.bioassays.decoder import BioassaysSemantifierDecoder
 from orkgnlp.clustering.encoders import TfidfKmeansEncoder
@@ -15,21 +16,20 @@ class BioassaysSemantifier(ORKGNLPBaseService):
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(config['service_name'], *args, **kwargs)
 
-        encoder = TfidfKmeansEncoder(io.read_onnx(config['paths']['vectorizer']))
-        runner = ORKGNLPONNXRunner(io.read_onnx(config['paths']['model']))
-        decoder = BioassaysSemantifierDecoder(io.read_json(config['paths']['mapping']))
+        encoder: TfidfKmeansEncoder = TfidfKmeansEncoder(io.read_onnx(config['paths']['vectorizer']))
+        runner: ORKGNLPONNXRunner = ORKGNLPONNXRunner(io.read_onnx(config['paths']['model']))
+        decoder: BioassaysSemantifierDecoder = BioassaysSemantifierDecoder(io.read_json(config['paths']['mapping']))
 
         self._register_pipeline('main', encoder, runner, decoder)
 
-    def __call__(self, text):
+    def __call__(self, text: str) -> any:
         """
         Semantifies a given BioAssay's description text.
 
         :param text: BioAssay's text to be semantified.
-        :type text: str
         :return: Dictionary object of semantified properties, resources and labels.
         """
 
