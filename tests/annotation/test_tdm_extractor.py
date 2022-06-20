@@ -8,7 +8,7 @@ class TestCSNer(TestCase):
     def setUp(self):
         self.extractor = TdmExtractor(force_download=False, _unittest=True)
         self.text = 'short'
-        self.addCleanup(self.extractor._release_memory)
+        self.addCleanup(self.extractor.release_memory)
 
     def test_singleton(self):
         another_annotator = TdmExtractor()

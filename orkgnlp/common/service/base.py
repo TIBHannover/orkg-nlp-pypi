@@ -1,7 +1,7 @@
 """ Base interfaces. """
 from overrides import EnforceOverrides
 
-from orkgnlp.common.service.executors import PipelineExecutor
+from orkgnlp.common.service.executors import PipelineExecutor, PipelineExecutorComponent
 from orkgnlp.common.tools import downloader
 from orkgnlp.common.util.decorators import singleton
 from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateError, ORKGNLPValidationError
@@ -95,12 +95,15 @@ class ORKGNLPBaseService:
 
         self._pipeline_executors[name] = PipelineExecutor(encoder, runner, decoder)
 
-    def _release_memory(self):
+    def release_memory(self):
+        """
+        Releases the memory of all available executors.
+        """
         for executor in self._pipeline_executors.values():
-            executor._release_memory()
+            executor.release_memory()
 
 
-class ORKGNLPBaseEncoder(EnforceOverrides):
+class ORKGNLPBaseEncoder(EnforceOverrides, PipelineExecutorComponent):
     """
     The ORKGNLPBaseEncoder is  the base encoder class. You can freely inherit this class, implement its
     ``encode(raw_input, **kwargs)`` function and use it to encode your user input to a model-friendly format.
@@ -121,13 +124,8 @@ class ORKGNLPBaseEncoder(EnforceOverrides):
         """
         return raw_input, kwargs
 
-    def _release_memory(self):
-        attributes = list(self.__dict__.keys())
-        for attribute in attributes:
-            delattr(self, attribute)
 
-
-class ORKGNLPBaseDecoder(EnforceOverrides):
+class ORKGNLPBaseDecoder(EnforceOverrides, PipelineExecutorComponent):
     """
     The ORKGNLPBaseDecoder is  the base decoder class. You can freely inherit this class, implement its
     ``decode(model_output, **kwargs)`` function and use it to decode your model output to a user-friendly format.
@@ -148,13 +146,8 @@ class ORKGNLPBaseDecoder(EnforceOverrides):
         """
         return model_output, kwargs
 
-    def _release_memory(self):
-        attributes = list(self.__dict__.keys())
-        for attribute in attributes:
-            delattr(self, attribute)
 
-
-class ORKGNLPBaseRunner(EnforceOverrides):
+class ORKGNLPBaseRunner(EnforceOverrides, PipelineExecutorComponent):
     """
     The ORKGNLPBaseRunner is  the base runner class. It requires a model object while initialization.
     This runner must be inherited and the `run(*args, **kwargs)` must be overridden,
@@ -175,8 +168,3 @@ class ORKGNLPBaseRunner(EnforceOverrides):
         :raise: NotImplementedError
         """
         raise NotImplementedError('Subclass must implement abstract method')
-
-    def _release_memory(self):
-        attributes = list(self.__dict__.keys())
-        for attribute in attributes:
-            delattr(self, attribute)

@@ -7,7 +7,7 @@ class TestBioassaysSemantifier(TestCase):
 
     def setUp(self):
         self.semantifier = BioassaysSemantifier(force_download=False)
-        self.addCleanup(self.semantifier._release_memory)
+        self.addCleanup(self.semantifier.release_memory)
 
     def test_singleton(self):
         another_semantifier = BioassaysSemantifier()

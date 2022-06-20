@@ -3,6 +3,19 @@
 from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateError
 
 
+class PipelineExecutorComponent:
+    """
+    The PipelineExecutorComponent represents a component of a PipelineExecutor
+    """
+    def release_memory(self):
+        """
+        Releases the memory of all available attributes in a pipeline component.
+        """
+        attributes = list(self.__dict__.keys())
+        for attribute in attributes:
+            delattr(self, attribute)
+
+
 class PipelineExecutor:
     """
     The PipelineExecutor executes a full service workflow given its encoder, runner and decoder.
@@ -52,7 +65,10 @@ class PipelineExecutor:
 
         return self._decoder.decode(output, **kwargs)
 
-    def _release_memory(self):
-        self._encoder._release_memory()
-        self._runner._release_memory()
-        self._decoder._release_memory()
+    def release_memory(self):
+        """
+        Releases the memory of all available pipeline components.
+        """
+        self._encoder.release_memory()
+        self._runner.release_memory()
+        self._decoder.release_memory()

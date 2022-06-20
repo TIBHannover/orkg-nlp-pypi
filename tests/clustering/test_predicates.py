@@ -7,7 +7,7 @@ class TestPredicatesRecommender(TestCase):
 
     def setUp(self):
         self.recommender = PredicatesRecommender(force_download=False)
-        self.addCleanup(self.recommender._release_memory)
+        self.addCleanup(self.recommender.release_memory)
 
     def test_singleton(self):
         another_recommender = PredicatesRecommender()
