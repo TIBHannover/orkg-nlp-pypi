@@ -5,8 +5,8 @@ import unittest
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
 black_dirs = [
-    # 'annotation',
-    # 'clustering'
+    'annotation',
+    'clustering'
 ]
 
 
