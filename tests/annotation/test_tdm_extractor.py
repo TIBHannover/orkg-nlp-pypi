@@ -5,14 +5,10 @@ from orkgnlp.annotation import TdmExtractor
 
 class TestCSNer(TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.extractor = TdmExtractor(force_download=False, _unittest=True)
-        cls.text = 'short'
-
-    @classmethod
-    def tearDownClass(cls):
-        del cls
+    def setUp(self):
+        self.extractor = TdmExtractor(force_download=False, _unittest=True)
+        self.text = 'short'
+        self.addCleanup(self.extractor._release_memory)
 
     def test_singleton(self):
         another_annotator = TdmExtractor()

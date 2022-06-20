@@ -51,3 +51,8 @@ class PipelineExecutor:
         kwargs.update(additional_properties)
 
         return self._decoder.decode(output, **kwargs)
+
+    def _release_memory(self):
+        self._encoder._release_memory()
+        self._runner._release_memory()
+        self._decoder._release_memory()

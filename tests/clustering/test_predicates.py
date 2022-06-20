@@ -5,13 +5,9 @@ from orkgnlp.clustering import PredicatesRecommender
 
 class TestPredicatesRecommender(TestCase):
 
-    @classmethod
-    def setUpClass(cls):
-        cls.recommender = PredicatesRecommender(force_download=False)
-
-    @classmethod
-    def tearDownClass(cls):
-        del cls
+    def setUp(self):
+        self.recommender = PredicatesRecommender(force_download=False)
+        self.addCleanup(self.recommender._release_memory)
 
     def test_singleton(self):
         another_recommender = PredicatesRecommender()

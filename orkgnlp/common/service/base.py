@@ -95,6 +95,10 @@ class ORKGNLPBaseService:
 
         self._pipeline_executors[name] = PipelineExecutor(encoder, runner, decoder)
 
+    def _release_memory(self):
+        for executor in self._pipeline_executors.values():
+            executor._release_memory()
+
 
 class ORKGNLPBaseEncoder(EnforceOverrides):
     """
@@ -116,6 +120,11 @@ class ORKGNLPBaseEncoder(EnforceOverrides):
         :return: The model-friendly output and kwargs.
         """
         return raw_input, kwargs
+
+    def _release_memory(self):
+        attributes = list(self.__dict__.keys())
+        for attribute in attributes:
+            delattr(self, attribute)
 
 
 class ORKGNLPBaseDecoder(EnforceOverrides):
@@ -139,6 +148,11 @@ class ORKGNLPBaseDecoder(EnforceOverrides):
         """
         return model_output, kwargs
 
+    def _release_memory(self):
+        attributes = list(self.__dict__.keys())
+        for attribute in attributes:
+            delattr(self, attribute)
+
 
 class ORKGNLPBaseRunner(EnforceOverrides):
     """
@@ -161,3 +175,8 @@ class ORKGNLPBaseRunner(EnforceOverrides):
         :raise: NotImplementedError
         """
         raise NotImplementedError('Subclass must implement abstract method')
+
+    def _release_memory(self):
+        attributes = list(self.__dict__.keys())
+        for attribute in attributes:
+            delattr(self, attribute)
