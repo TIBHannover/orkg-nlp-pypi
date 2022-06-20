@@ -7,7 +7,9 @@ default:
 gitlab-runner-stats:
   stage: test
   script:
-    - watch -n 1 free -h
+    - free -m | grep -v "Swap" # RAM
+    - df -h| grep -E "Filesystem|overlay" # storage
+    - lscpu | grep -E "^CPU\(s\)" # CPUs
 
 unittest-job:
   stage: test
