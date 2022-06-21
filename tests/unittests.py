@@ -1,33 +1,39 @@
 import glob
 import os
 import unittest
+from argparse import ArgumentParser
 
 current_dir = os.path.dirname(os.path.realpath(__file__))
 
-black_dirs = [
-    'annotation',
-    'clustering'
-]
+
+def parse_args():
+    parser = ArgumentParser()
+    parser.add_argument('-i', '--ignore', nargs='+', required=False, help='directory names to be ignored.')
+
+    return parser.parse_args()
 
 
-def is_under_black_dir(file):
-    for black_dir in black_dirs:
-        if '/{}/'.format(black_dir) in file:
+def is_under_ignored_dir(file, ignored_dirs):
+    for ignored_dir in ignored_dirs:
+        if '/{}/'.format(ignored_dir) in file:
             return True
 
     return False
 
 
-def discover(root):
-    all_files = glob.glob('./**/test*.py'.format(root), recursive=True)
-    files = [file for file in all_files if not is_under_black_dir(file)]
+def discover(root, ignored_dirs=None):
+    files = glob.glob('./**/test*.py'.format(root), recursive=True)
+
+    if ignored_dirs:
+        files = [file for file in files if not is_under_ignored_dir(file, ignored_dirs)]
+
     files = [file[2:-3].replace('/', '.') for file in files]
 
     return files
 
 
-def test():
-    files = discover(current_dir)
+def test(args):
+    files = discover(current_dir, args.ignore)
     suite = unittest.TestSuite()
 
     for file in files:
@@ -36,5 +42,10 @@ def test():
     unittest.TextTestRunner().run(suite)
 
 
+def main():
+    args = parse_args()
+    test(args)
+
+
 if __name__ == '__main__':
-    test()
+    main()
