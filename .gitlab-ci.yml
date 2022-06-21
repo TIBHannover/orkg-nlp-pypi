@@ -1,20 +1,54 @@
 stages:
   - test
 
-default:
-  image: python:3.7
+cache:
+  paths:
+    - .cache/pip
+    - venv
 
-unittest-job:
+test-3.7:
   stage: test
+  image: python:3.7
   before_script:
     - pip install poetry
     - poetry install
     - source `poetry env info --path`/bin/activate
   script:
-    - tox
+    - tox -e py37
+
+test-3.8:
+  stage: test
+  image: python:3.8
+  before_script:
+    - pip install poetry
+    - poetry install
+    - source `poetry env info --path`/bin/activate
+  script:
+    - tox -e py38
+
+test-3.9:
+  stage: test
+  image: python:3.9
+  before_script:
+    - pip install poetry
+    - poetry install
+    - source `poetry env info --path`/bin/activate
+  script:
+    - tox -e py39
+
+test-3.10:
+  stage: test
+  image: python:3.10
+  before_script:
+    - pip install poetry
+    - poetry install
+    - source `poetry env info --path`/bin/activate
+  script:
+    - tox -e py310
 
 docs-job:
   stage: test
+  image: python:3.7
   before_script:
     - pip install -r requirements.txt
     - pip install -r docs/requirements.txt
