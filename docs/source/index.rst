@@ -6,6 +6,16 @@
 Welcome to orkg-nlp's python package documentation!
 ====================================================
 
+.. image:: https://readthedocs.org/projects/orkg-nlp-pypi/badge/?version=latest
+    :target: https://orkg-nlp-pypi.readthedocs.io/en/latest/?badge=latest
+
+.. image:: https://badge.fury.io/py/orkgnlp.svg
+    :target: https://badge.fury.io/py/orkgnlp
+
+.. image:: https://gitlab.com/TIBHannover/orkg/nlp/orkg-nlp-pypi/badges/main/pipeline.svg
+    :target: https://gitlab.com/TIBHannover/orkg/nlp/orkg-nlp-pypi/-/commits/main
+
+
 With the ``orkg-nlp`` python package we provide a wrapper to our NLP services.
 
 Right after executing the following command,
