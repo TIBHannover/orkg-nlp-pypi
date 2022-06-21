@@ -58,7 +58,7 @@ If you are intending to add a new service to the ``orkgnlp`` package, you should
     ``orkgnlp.common.service.base.ORKGNLPBaseDecoder`` as a decoder to your service. Otherwise, create a module in your
     service package named **decoder** where you implement a new Decoder class inheriting from the ORKGNLPBaseDecoder.
 
-8.  Finally, implement unittests for your service and submit your pull request for review!
+8.  Finally, do not forget to :ref:`test <testing>` your service and submit your pull request for review!
 
 Example Service
 """""""""""""""
@@ -151,3 +151,35 @@ to the service user.
     def decode(self, model_output, **kwargs):
         cluster_label = model_output[0][0]
         return self._mapping[str(cluster_label)]['labels']
+
+
+.. _testing:
+
+Testing
+"""""""
+We implement our tests with the `unittests <https://docs.python.org/3/library/unittest.html>`_ package and either use it
+or `pytest <https://docs.pytest.org/en/7.1.x/>`_ as test runner. For development purposes on your local machine you can
+run the tests by running the following command:
+
+.. code-block:: bash
+
+    poetry run test -i [ignored_dir_1 ignored_dir_2 ...]
+    # example:
+    poetry run test -i clustering annotation
+
+or also by simply executing `tox <https://tox.wiki/en/latest/>`_ with:
+
+.. code-block:: bash
+
+    tox
+
+Tox tries to test the package on all python environments listed in the ``tox.ini`` file as soon as they are already
+installed on your machine, otherwise tests for not found interpreters will be skipped.
+
+.. note::
+    Note that testing in our project is configured using ``pyproject.toml``, ``tox.ini`` and ``pytest.ini`` to divide
+    responsibilities :) You might need to check all config files in case you need to change anything.
+
+.. note::
+    Also note that we ignore some tests by default in our ``tox`` configurations for the sake of GitLab CI/CD pipeline.
+    We recommend running ``poetry run test`` on your local machine in order to check all tests locally.
