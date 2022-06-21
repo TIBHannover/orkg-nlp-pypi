@@ -4,6 +4,7 @@ stages:
 cache:
   paths:
     - .cache/pip
+    - .tox
     - venv
 
 test-3.7:
@@ -35,16 +36,6 @@ test-3.9:
     - source `poetry env info --path`/bin/activate
   script:
     - tox -e py39
-
-test-3.10:
-  stage: test
-  image: python:3.10
-  before_script:
-    - pip install poetry
-    - poetry install
-    - source `poetry env info --path`/bin/activate
-  script:
-    - tox -e py310
 
 docs-job:
   stage: test
