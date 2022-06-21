@@ -7,8 +7,9 @@ default:
 unittest-job:
   stage: test
   before_script:
-    - pip install poetry, tox, pytest
+    - pip install poetry
     - poetry install
+    - source `poetry env info --path`/bin/activate
   script:
     - tox
 
