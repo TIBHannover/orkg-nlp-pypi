@@ -2,51 +2,120 @@
   "cs-ner": [
     {
       "repo_id": "orkg/orkgnlp-cs-ner-titles",
-      "files": {
-        "titles_model": "orkgnlp-cs-ner-titles.pt",
-        "titles_alphabet": "orkgnlp-cs-ner-titles-alphabet.json"
-      }
+      "files": [
+        {
+          "internal_name": "titles_model",
+          "filename": "orkgnlp-cs-ner-titles.pt"
+        },
+        {
+          "internal_name": "titles_alphabet",
+          "filename": "orkgnlp-cs-ner-titles-alphabet.json"
+        }
+      ]
     },
     {
       "repo_id": "orkg/orkgnlp-cs-ner-abstracts",
-      "files": {
-        "abstracts_model": "orkgnlp-cs-ner-abstracts.pt",
-        "abstracts_alphabet": "orkgnlp-cs-ner-abstracts-alphabet.json"
-      }
+      "files": [
+        {
+          "internal_name": "abstracts_model",
+          "filename": "orkgnlp-cs-ner-abstracts.pt"
+        },
+        {
+          "internal_name": "abstracts_alphabet",
+          "filename": "orkgnlp-cs-ner-abstracts-alphabet.json"
+        }
+      ]
     }
   ],
-
   "tdm-extraction": [
     {
       "repo_id": "orkg/orkgnlp-tdm-extraction",
-      "files": {
-        "model": "pytorch_model.bin",
-        "model_config": "config.json",
-        "labels": "labels.tsv"
-      }
+      "files": [
+        {
+          "internal_name": "model",
+          "filename": "pytorch_model.bin"
+        },
+        {
+          "internal_name": "model_config",
+          "filename": "config.json"
+        },
+        {
+          "internal_name": "labels",
+          "filename": "labels.tsv"
+        }
+      ]
     }
   ],
-
+  "stem": [
+    {
+      "repo_id": "orkg/orkgnlp-stem",
+      "files": [
+        {
+          "internal_name": "model",
+          "filename": "best.th"
+        },
+        {
+          "internal_name": "model_config",
+          "filename": "config.json"
+        },
+        {
+          "subdir": "vocabulary",
+          "internal_name": "labels",
+          "filename": "labels.txt"
+        },
+        {
+          "subdir": "vocabulary",
+          "internal_name": "namespaces",
+          "filename": "non_padded_namespaces.txt"
+        },
+        {
+          "subdir": "vocabulary",
+          "internal_name": "token_characters",
+          "filename": "token_characters.txt"
+        }
+      ]
+    }
+  ],
   "predicates-clustering": [
     {
       "repo_id": "orkg/orkgnlp-predicates-clustering",
-      "files": {
-        "model": "orkgnlp-predicates-kmeans-1850.onnx",
-        "vectorizer": "orkgnlp-predicates-tfidf.onnx",
-        "training_data": "training_set.json",
-        "mapping": "comparisons_predicates.json"
-      }
+      "files": [
+        {
+          "internal_name": "model",
+          "filename": "orkgnlp-predicates-kmeans-1850.onnx"
+        },
+        {
+          "internal_name": "vectorizer",
+          "filename": "orkgnlp-predicates-tfidf.onnx"
+        },
+        {
+          "internal_name": "training_data",
+          "filename": "training_set.json"
+        },
+        {
+          "internal_name": "mapping",
+          "filename": "comparisons_predicates.json"
+        }
+      ]
     }
   ],
-
-    "bioassays-semantification": [
+  "bioassays-semantification": [
     {
       "repo_id": "orkg/orkgnlp-bioassays-semantification",
-      "files": {
-        "model": "orkgnlp-bioassays-kmeans-700.onnx",
-        "vectorizer": "orkgnlp-bioassays-tfidf.onnx",
-        "mapping": "mapping.json"
-      }
+      "files": [
+        {
+          "internal_name": "model",
+          "filename": "orkgnlp-bioassays-kmeans-700.onnx"
+        },
+        {
+          "internal_name": "vectorizer",
+          "filename": "orkgnlp-bioassays-tfidf.onnx"
+        },
+        {
+          "internal_name": "mapping",
+          "filename": "mapping.json"
+        }
+      ]
     }
   ]
 }

@@ -1,7 +1,10 @@
 """ Base interfaces. """
+import os
 from typing import Any, Dict, Tuple, Union, Generator
 
 from overrides import EnforceOverrides
+
+from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.tools import downloader
 from orkgnlp.common.util.decorators import singleton
 from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateError, ORKGNLPValidationError
@@ -142,6 +145,36 @@ class PipelineExecutor:
         self._decoder.release_memory()
 
 
+class ORKGNLPBaseConfig:
+    """
+    The ORKGNLPBaseConfig encapsulates the required configurations for a service given its name.
+    """
+
+    def __init__(self, service: str):
+        """
+
+        :param service: The service name.
+        """
+        service_data_dir = os.path.join(
+            orkgnlp_context.get('ORKG_NLP_DATA_CACHE_ROOT'),
+            service
+        )
+
+        self.service_name: str = service
+        self.service_dir: str = service_data_dir
+        self.requirements = self._get_requirement_paths()
+
+    def _get_requirement_paths(self) -> Dict[str, str]:
+        paths = {}
+        for repo in orkgnlp_context.get('HUGGINGFACE_REPOS')[self.service_name]:
+            for file_obj in repo['files']:
+                paths[file_obj['internal_name']] = os.path.join(
+                    self.service_dir, file_obj.get('subbdir', ''), file_obj['filename']
+                )
+
+        return paths
+
+
 class ORKGNLPBaseService:
     """
         Base class for shared config parameters and functionalities. All ORKG-NLP services must inherit from this class.
@@ -162,6 +195,7 @@ class ORKGNLPBaseService:
             that applies batch evaluation. Defaults to 16.
         """
         self._pipeline_executors: Dict[str, PipelineExecutor] = {}
+        self._config: ORKGNLPBaseConfig = ORKGNLPBaseConfig(service)
         self._force_download: bool = force_download
         self._batch_size: int = batch_size
         self._unittest: bool = _unittest
