@@ -39,7 +39,7 @@ def test(args):
     for file in files:
         suite.addTest(unittest.defaultTestLoader.loadTestsFromName(file))
 
-    unittest.TextTestRunner().run(suite)
+    unittest.TextTestRunner(verbosity=2).run(suite)
 
 
 def main():

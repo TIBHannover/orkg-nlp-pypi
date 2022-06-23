@@ -3,10 +3,9 @@ from typing import Any
 
 from orkgnlp.clustering.bioassays.decoder import BioassaysSemantifierDecoder
 from orkgnlp.clustering.encoders import TfidfKmeansEncoder
-from orkgnlp.common.service.base import ORKGNLPBaseService
+from orkgnlp.common.service.base import ORKGNLPBaseService, ORKGNLPBaseRunner, ORKGNLPBaseEncoder, ORKGNLPBaseDecoder
 from orkgnlp.common.service.runners import ORKGNLPONNXRunner
 from orkgnlp.common.util import io
-from orkgnlp.clustering.bioassays._config import config
 
 
 class BioassaysSemantifier(ORKGNLPBaseService):
@@ -16,12 +15,15 @@ class BioassaysSemantifier(ORKGNLPBaseService):
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-    def __init__(self, *args: Any, **kwargs: Any):
-        super().__init__(config['service_name'], *args, **kwargs)
+    SERVICE_NAME = 'bioassays-semantification'
 
-        encoder: TfidfKmeansEncoder = TfidfKmeansEncoder(io.read_onnx(config['paths']['vectorizer']))
-        runner: ORKGNLPONNXRunner = ORKGNLPONNXRunner(io.read_onnx(config['paths']['model']))
-        decoder: BioassaysSemantifierDecoder = BioassaysSemantifierDecoder(io.read_json(config['paths']['mapping']))
+    def __init__(self, *args: Any, **kwargs: Any):
+        super().__init__(self.SERVICE_NAME, *args, **kwargs)
+        requirements = self._config.requirements
+
+        encoder: ORKGNLPBaseEncoder = TfidfKmeansEncoder(io.read_onnx(requirements['vectorizer']))
+        runner: ORKGNLPBaseRunner = ORKGNLPONNXRunner(io.read_onnx(requirements['model']))
+        decoder: ORKGNLPBaseDecoder = BioassaysSemantifierDecoder(io.read_json(requirements['mapping']))
 
         self._register_pipeline('main', encoder, runner, decoder)
 

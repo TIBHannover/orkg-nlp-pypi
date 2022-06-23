@@ -56,13 +56,20 @@ def _download(services: List[str]):
         service_dir = os.path.join(cache_root, service)
 
         for repo in orkg_services[service]:
-            for filename in repo['files'].values():
+            for file_obj in repo['files']:
+
+                if file_obj.get('subdir'):
+                    filename = os.path.join(file_obj['subdir'], file_obj['filename'])
+                    os.makedirs(os.path.join(service_dir, file_obj['subdir']), exist_ok=True)
+                else:
+                    filename = file_obj['filename']
+
                 if not os.path.exists(os.path.join(service_dir, filename)):
                     hf_hub_download(
                         repo_id=repo['repo_id'],
                         filename=filename,
                         force_filename=filename,
-                        cache_dir=os.path.join(cache_root, service)
+                        cache_dir=service_dir
                     )
                     already_found = False
 

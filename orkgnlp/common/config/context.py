@@ -18,10 +18,6 @@ orkgnlp_context = StrictDict(
     {
         'ORKG_NLP_DATA_CACHE_ROOT': os.path.join(os.path.expanduser('~'), 'orkgnlp_data'),
         'ORKG_NLP_VERBOSITY': True,
-        'PREDICATES_CLUSTERING_SERVICE_NAME': 'predicates-clustering',
-        'BIOASSAYS_SEMANTIFICATION_SERVICE_NAME': 'bioassays-semantification',
-        'CS_NER_SERVICE_NAME': 'cs-ner',
-        'TDM_EXTRACTION_SERVICE_NAME': 'tdm-extraction',
         'HUGGINGFACE_REPOS': io.read_json(os.path.join(_current_dir, '..', '..', 'huggingface_repos.json'))
     }
 )

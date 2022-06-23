@@ -1,10 +1,9 @@
 """ CS-NER service. """
 from typing import Any
 
-from orkgnlp.annotation.csner._config import config
 from orkgnlp.annotation.csner.decoder import CSNerDecoder
 from orkgnlp.annotation.csner.encoder import CSNerEncoder
-from orkgnlp.common.service.base import ORKGNLPBaseService
+from orkgnlp.common.service.base import ORKGNLPBaseService, ORKGNLPBaseEncoder, ORKGNLPBaseRunner, ORKGNLPBaseDecoder
 from orkgnlp.common.service.runners import ORKGNLPTorchRunner
 from orkgnlp.common.util import io
 from orkgnlp.common.util.exceptions import ORKGNLPValidationError
@@ -17,19 +16,21 @@ class CSNer(ORKGNLPBaseService):
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
+    SERVICE_NAME = 'cs-ner'
 
     def __init__(self, *args: Any, **kwargs: Any):
-        super().__init__(config['service_name'], *args, **kwargs)
+        super().__init__(self.SERVICE_NAME, *args, **kwargs)
+        requirements = self._config.requirements
 
-        titles_encoder: CSNerEncoder = CSNerEncoder(io.read_json(config['paths']['titles_alphabet']))
-        titles_runner: ORKGNLPTorchRunner = ORKGNLPTorchRunner(io.load_torch_jit(config['paths']['titles_model']))
-        titles_decoder: CSNerDecoder = CSNerDecoder(io.read_json(config['paths']['titles_alphabet']))
+        titles_encoder: ORKGNLPBaseEncoder = CSNerEncoder(io.read_json(requirements['titles_alphabet']))
+        titles_runner: ORKGNLPBaseRunner = ORKGNLPTorchRunner(io.load_torch_jit(requirements['titles_model']))
+        titles_decoder: ORKGNLPBaseDecoder = CSNerDecoder(io.read_json(requirements['titles_alphabet']))
         self._titles_pipeline_name = 'titles'
         self._register_pipeline(self._titles_pipeline_name, titles_encoder, titles_runner, titles_decoder)
 
-        abstracts_encoder: CSNerEncoder = CSNerEncoder(io.read_json(config['paths']['abstracts_alphabet']))
-        abstracts_runner: ORKGNLPTorchRunner = ORKGNLPTorchRunner(io.load_torch_jit(config['paths']['abstracts_model']))
-        abstracts_decoder: CSNerDecoder = CSNerDecoder(io.read_json(config['paths']['abstracts_alphabet']))
+        abstracts_encoder: ORKGNLPBaseEncoder = CSNerEncoder(io.read_json(requirements['abstracts_alphabet']))
+        abstracts_runner: ORKGNLPBaseRunner = ORKGNLPTorchRunner(io.load_torch_jit(requirements['abstracts_model']))
+        abstracts_decoder: ORKGNLPBaseDecoder = CSNerDecoder(io.read_json(requirements['abstracts_alphabet']))
         self._abstracts_pipeline_name = 'abstracts'
         self._register_pipeline(self._abstracts_pipeline_name, abstracts_encoder, abstracts_runner, abstracts_decoder)
 
