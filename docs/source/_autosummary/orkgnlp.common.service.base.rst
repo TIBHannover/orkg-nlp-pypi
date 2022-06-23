@@ -1,4 +1,4 @@
-orkgnlp.common.service.base
+﻿orkgnlp.common.service.base
 ===========================
 
 .. automodule:: orkgnlp.common.service.base
@@ -20,6 +20,7 @@ orkgnlp.common.service.base
       :template: custom-class-template.rst
       :nosignatures:
    
+      ORKGNLPBaseConfig
       ORKGNLPBaseDecoder
       ORKGNLPBaseEncoder
       ORKGNLPBaseRunner

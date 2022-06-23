@@ -1,4 +1,4 @@
-orkgnlp.annotation.csner.annotator.CSNer
+﻿orkgnlp.annotation.csner.annotator.CSNer
 ========================================
 
 .. currentmodule:: orkgnlp.annotation.csner.annotator
@@ -21,5 +21,11 @@ orkgnlp.annotation.csner.annotator.CSNer
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~CSNer.SERVICE_NAME
    
    

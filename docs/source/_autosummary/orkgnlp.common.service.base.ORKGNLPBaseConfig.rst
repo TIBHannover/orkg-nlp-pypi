@@ -1,9 +1,9 @@
-﻿orkgnlp.annotation.tdm.extractor.TdmExtractor
+orkgnlp.common.service.base.ORKGNLPBaseConfig
 =============================================
 
-.. currentmodule:: orkgnlp.annotation.tdm.extractor
+.. currentmodule:: orkgnlp.common.service.base
 
-.. autoclass:: TdmExtractor
+.. autoclass:: ORKGNLPBaseConfig
    :members:
    :show-inheritance:
    :inherited-members:
@@ -16,16 +16,9 @@
    .. autosummary::
       :nosignatures:
    
-      ~TdmExtractor.release_memory
    
    
 
    
-   
-   .. rubric:: Attributes
-
-   .. autosummary::
-   
-      ~TdmExtractor.SERVICE_NAME
    
    

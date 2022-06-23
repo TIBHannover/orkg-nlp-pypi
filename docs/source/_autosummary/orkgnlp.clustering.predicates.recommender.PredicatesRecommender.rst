@@ -1,4 +1,4 @@
-orkgnlp.clustering.predicates.recommender.PredicatesRecommender
+﻿orkgnlp.clustering.predicates.recommender.PredicatesRecommender
 ===============================================================
 
 .. currentmodule:: orkgnlp.clustering.predicates.recommender
@@ -21,5 +21,11 @@ orkgnlp.clustering.predicates.recommender.PredicatesRecommender
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~PredicatesRecommender.SERVICE_NAME
    
    

@@ -1,4 +1,4 @@
-orkgnlp.clustering.bioassays.semantifier.BioassaysSemantifier
+﻿orkgnlp.clustering.bioassays.semantifier.BioassaysSemantifier
 =============================================================
 
 .. currentmodule:: orkgnlp.clustering.bioassays.semantifier
@@ -21,5 +21,11 @@ orkgnlp.clustering.bioassays.semantifier.BioassaysSemantifier
    
 
    
+   
+   .. rubric:: Attributes
+
+   .. autosummary::
+   
+      ~BioassaysSemantifier.SERVICE_NAME
    
    

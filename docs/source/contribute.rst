@@ -29,6 +29,7 @@ Contribution Steps
 
 If you are intending to add a new service to the ``orkgnlp`` package, you should simply follow the following instructions:
 
+0. Can your service be integrated into orkgnlp ? Check :ref:`this <integration requirements>` first!
 1.  Create a pull request on our `repository <https://gitlab.com/TIBHannover/orkg/nlp/orkg-nlp-pypi.git>`_.
 2.  Clone the source code and install the dependencies manually as described in the :doc:`installation` section.
 3.  If your service depends on models or data file,
@@ -153,6 +154,44 @@ to the service user.
         return self._mapping[str(cluster_label)]['labels']
 
 
+
+.. _integration requirements:
+
+Integration Requirements
+""""""""""""""""""""""""
+Before starting to implement a new machine learning model that is planned to be integrated into ``orkgnlp`` you need to
+think about some of its limitations. One of the most important challenges of ``orkgnlp`` is that its NLP-services are
+implemented and experimented with different code-bases and frameworks,
+say `scikit-learn <https://scikit-learn.org/stable/>`_ or `pytorch <https://pytorch.org/docs/stable/torch.html>`_ for
+example. Exporting a scikit-learn model can usually be done with `pickle <https://docs.python.org/3/library/pickle.html>`_
+that already has its `drawbacks <https://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations>`_
+on production systems due to code-base dependency as well as security ones. On the other hand, loading a typical pytorch
+Module requires the the Modules class(es) to be present so that a class object can be instantiated, on which we load the
+model weights. Moreover, implementing different models with different python or package versions makes it even more
+difficult for a public package!
+
+The golden rule is ``trained models must NOT be dependent on their training source code!``
+Therefore, we kindly ask you to export your trained model to one of the following currently supported formats, so that
+they can easily be integrated into ``orkgnlp`` and published afterwards!
+
+.. list-table::
+   :header-rows: 1
+
+   * - Format
+     - Useful Links
+   * - ONNX (ModelProto).
+     -
+        * `ONNX <https://github.com/onnx/onnx>`_
+        * `Converting to ONNX <https://github.com/onnx/tutorials#converting-to-onnx-format>`_
+   * - TorchScript (ScriptModule).
+     -
+        * `TorchScript <https://pytorch.org/docs/stable/jit.html>`_
+        * `Intro to TorchScript <https://pytorch.org/tutorials/beginner/Intro_to_TorchScript_tutorial.html>`_
+   * - Transformers (PreTrainedModel).
+     -
+        * `Transformers <https://huggingface.co/docs/transformers/index>`_
+        * `save_pretrained() <https://huggingface.co/docs/transformers/index>`_
+
 .. _testing:
 
 Testing
@@ -163,7 +202,7 @@ run the tests by running the following command:
 
 .. code-block:: bash
 
-    poetry run test -i [ignored_dir_1 ignored_dir_2 ...]
+    poetry run test [ -i ignored_dir_1 ignored_dir_2 ...]
     # example:
     poetry run test -i clustering annotation
 
