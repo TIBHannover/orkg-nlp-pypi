@@ -3,7 +3,7 @@ from unittest import TestCase
 from orkgnlp.annotation import TdmExtractor
 
 
-class TestCSNer(TestCase):
+class TestTdmExtractor(TestCase):
 
     def setUp(self):
         self.extractor = TdmExtractor(force_download=False, _unittest=True)

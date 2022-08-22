@@ -1,4 +1,4 @@
-﻿orkgnlp.clustering.predicates.recommender.PredicatesRecommender
+orkgnlp.clustering.predicates.recommender.PredicatesRecommender
 ===============================================================
 
 .. currentmodule:: orkgnlp.clustering.predicates.recommender

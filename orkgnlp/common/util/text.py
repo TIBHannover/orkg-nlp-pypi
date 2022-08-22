@@ -1,11 +1,16 @@
 """ Utility file for text processing functionalities. """
+import re
 import string
-
 import nltk
+
+from typing import Union, List
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
+from orkgnlp.common.util.decorators import sanitize_text
 
+
+@sanitize_text
 def remove_punctuation(text: str) -> str:
     """
     Removes punctuations from the given ``text``.
@@ -16,6 +21,7 @@ def remove_punctuation(text: str) -> str:
     return text.translate(str.maketrans('', '', string.punctuation))
 
 
+@sanitize_text
 def remove_stopwords(text: str, language: str = 'english') -> str:
     """
     Removes stopwords from the given ``text``.
@@ -32,6 +38,7 @@ def remove_stopwords(text: str, language: str = 'english') -> str:
     )
 
 
+@sanitize_text
 def lemmatize(text: str) -> str:
     """
     Lemmatizes the words in the given ``text``.
@@ -46,3 +53,28 @@ def lemmatize(text: str) -> str:
     return ' '.join(
         [stemmer.lemmatize(word) for word in text.split()]
     )
+
+
+@sanitize_text
+def replace(text: str, chars: Union[str, List[str]], replacement: str) -> str:
+    """
+    Replaces the occurrences of any item in ``chars`` in ``text`` with ``replacement``.
+
+    :param text:
+    :param chars: Regex or list of regexes that will be separated with | as OR operator,
+        their occurrences to be replaced.
+    :param replacement: The replacement string
+    """
+    chars = chars if isinstance(chars, list) else [chars]
+    regex = '|'.join(chars)
+    return re.sub(regex, replacement, text)
+
+
+@sanitize_text
+def trim(text: str) -> str:
+    """
+    Removes any whitespace character and returns the same input only with single spaces.
+
+    :param text:
+    """
+    return ' '.join(text.split())

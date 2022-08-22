@@ -117,5 +117,24 @@
         }
       ]
     }
+  ],
+  "templates-recommendation": [
+    {
+      "repo_id": "orkg/orkgnlp-templates-recommendation",
+      "files": [
+        {
+          "internal_name": "model",
+          "filename": "pytorch_model.bin"
+        },
+        {
+          "internal_name": "model_config",
+          "filename": "config.json"
+        },
+        {
+          "internal_name": "labels",
+          "filename": "labels.json"
+        }
+      ]
+    }
   ]
 }

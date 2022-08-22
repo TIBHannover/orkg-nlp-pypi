@@ -1,4 +1,4 @@
-﻿orkgnlp.clustering.bioassays.semantifier.BioassaysSemantifier
+orkgnlp.clustering.bioassays.semantifier.BioassaysSemantifier
 =============================================================
 
 .. currentmodule:: orkgnlp.clustering.bioassays.semantifier

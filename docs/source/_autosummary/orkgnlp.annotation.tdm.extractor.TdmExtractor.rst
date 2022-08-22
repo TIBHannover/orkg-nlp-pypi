@@ -1,4 +1,4 @@
-﻿orkgnlp.annotation.tdm.extractor.TdmExtractor
+orkgnlp.annotation.tdm.extractor.TdmExtractor
 =============================================
 
 .. currentmodule:: orkgnlp.annotation.tdm.extractor
