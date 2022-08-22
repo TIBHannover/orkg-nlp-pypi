@@ -1,4 +1,4 @@
-﻿orkgnlp.annotation.csner.annotator.CSNer
+orkgnlp.annotation.csner.annotator.CSNer
 ========================================
 
 .. currentmodule:: orkgnlp.annotation.csner.annotator

@@ -1,4 +1,4 @@
-﻿orkgnlp.common.service.base
+orkgnlp.common.service.base
 ===========================
 
 .. automodule:: orkgnlp.common.service.base

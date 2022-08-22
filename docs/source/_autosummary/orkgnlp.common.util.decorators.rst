@@ -15,6 +15,7 @@ orkgnlp.common.util.decorators
       :toctree:
       :nosignatures:
    
+      sanitize_text
       singleton
    
    

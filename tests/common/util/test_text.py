@@ -11,3 +11,11 @@ class TestText(TestCase):
     def test_remove_stopwords(self):
         s = 'hello the was'
         self.assertEqual('hello', text.remove_stopwords(s))
+
+    def test_replace(self):
+        s = 'hello_ wo.rld-'
+        self.assertEqual('hello  wo rld ', text.replace(s, ['\s+-\s+', '-', '_', '\.'], ' '))
+
+    def test_trim(self):
+        s = 'hello     world '
+        self.assertEqual('hello world', text.trim(s))
