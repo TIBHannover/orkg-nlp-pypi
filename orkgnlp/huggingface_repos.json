@@ -82,11 +82,7 @@
       "files": [
         {
           "internal_name": "model",
-          "filename": "orkgnlp-predicates-kmeans-1850.onnx"
-        },
-        {
-          "internal_name": "vectorizer",
-          "filename": "orkgnlp-predicates-tfidf.onnx"
+          "filename": "orkgnlp-predicates-kmeans-3150.onnx"
         },
         {
           "internal_name": "training_data",
@@ -94,7 +90,7 @@
         },
         {
           "internal_name": "mapping",
-          "filename": "comparisons_predicates.json"
+          "filename": "mapping.json"
         }
       ]
     }

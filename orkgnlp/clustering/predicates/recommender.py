@@ -1,7 +1,7 @@
 """ Predicates recommendation service. """
 from typing import Any, Dict
 
-from orkgnlp.clustering.encoders import TfidfKmeansEncoder
+from orkgnlp.clustering.encoders import TransformerKmeansEncoder
 from orkgnlp.clustering.predicates.decoder import PredicatesRecommenderDecoder
 from orkgnlp.common.service.base import ORKGNLPBaseService, ORKGNLPBaseEncoder, ORKGNLPBaseRunner, ORKGNLPBaseDecoder
 from orkgnlp.common.service.runners import ORKGNLPONNXRunner
@@ -21,7 +21,7 @@ class PredicatesRecommender(ORKGNLPBaseService):
         super().__init__(self.SERVICE_NAME, *args, **kwargs)
         requirements = self._config.requirements
 
-        encoder: ORKGNLPBaseEncoder = TfidfKmeansEncoder(io.read_onnx(requirements['vectorizer']))
+        encoder: ORKGNLPBaseEncoder = TransformerKmeansEncoder('allenai/scibert_scivocab_uncased')
         runner: ORKGNLPBaseRunner = ORKGNLPONNXRunner(io.read_onnx(requirements['model']))
         decoder: ORKGNLPBaseDecoder = PredicatesRecommenderDecoder(
             io.read_df_from_json(requirements['training_data'], key='instances'),
