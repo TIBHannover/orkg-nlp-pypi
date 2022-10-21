@@ -11,7 +11,7 @@ Supported Services
      - Huggingface Repository
      - Description
    * - ``predicates-clustering``
-     - `v0.1.0 <https://gitlab.com/TIBHannover/orkg/nlp/experiments/orkg-predicates-clustering/-/releases/v0.1.0>`_
+     - `v0.2.0 <https://gitlab.com/TIBHannover/orkg/nlp/experiments/orkg-predicates-clustering/-/releases/v0.2.0>`_
      - `orkg/orkgnlp-predicates-clustering <https://huggingface.co/orkg/orkgnlp-predicates-clustering>`_
      - Recommendation service for ORKG predicates based on clustering.
    * - ``bioassays-semantification``

@@ -37,15 +37,9 @@ class PredicatesRecommenderDecoder(ORKGNLPBaseDecoder):
         return self._map_to_predicates(comparison_ids)
 
     def _map_to_predicates(self, comparison_ids: List[str]) -> List[Dict[str, str]]:
-        predicate_ids = []
         predicates = []
 
         for comparison_id in comparison_ids:
-            for predicate in self._predicates[comparison_id]:
-                if predicate['id'] in predicate_ids:
-                    continue
-
-                predicate_ids.append(predicate['id'])
-                predicates.append(predicate)
+            predicates.extend(self._predicates[comparison_id])
 
         return predicates
