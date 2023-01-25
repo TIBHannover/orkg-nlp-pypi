@@ -2,6 +2,9 @@ Installation
 ============
 Currently we support the installation with :ref:`pip <with pip>` and :ref:`manually <manually>`
 
+.. note::
+    **Prerequisites**: python version ``^3.7.1,<3.10``
+
 .. _with pip:
 
 With PIP

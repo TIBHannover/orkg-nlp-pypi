@@ -1,4 +1,4 @@
-orkgnlp.clustering.encoders
+﻿orkgnlp.clustering.encoders
 ===========================
 
 .. automodule:: orkgnlp.clustering.encoders
@@ -21,6 +21,7 @@ orkgnlp.clustering.encoders
       :nosignatures:
    
       TfidfKmeansEncoder
+      TransformerKmeansEncoder
    
    
 
