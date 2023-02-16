@@ -4,6 +4,7 @@
 ## Project stuff
 orkgnlp_data/
 tox_local.ini
+/docs/source/_autosummary/
 
 ### PyCharm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio, WebStorm and Rider

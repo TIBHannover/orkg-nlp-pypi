@@ -132,5 +132,20 @@
         }
       ]
     }
+  ],
+    "agri-ner": [
+    {
+      "repo_id": "orkg/orkgnlp-agri-ner",
+      "files": [
+        {
+          "internal_name": "model",
+          "filename": "pytorch_model.bin"
+        },
+        {
+          "internal_name": "model_config",
+          "filename": "config.json"
+        }
+      ]
+    }
   ]
 }

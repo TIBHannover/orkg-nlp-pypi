@@ -70,7 +70,9 @@ class ORKGNLPTorchRunner(ORKGNLPBaseRunner):
             will be returned as a python generator. Defaults to False.
         :return: The model output as a tuple or list of tuples, and kwargs.
         """
-        self._model.eval()
+
+        if hasattr(self._model, 'eval'):
+            self._model.eval()
 
         if not multiple_batches:
 

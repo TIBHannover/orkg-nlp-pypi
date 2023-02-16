@@ -41,7 +41,7 @@ class ORKGNLPBaseEncoder(EnforceOverrides, PipelineExecutorComponent):
         :param raw_input: The user's input to be encoded.
         :return: The model-friendly output and kwargs.
         """
-        return raw_input, kwargs
+        return (raw_input, ), kwargs
 
 
 class ORKGNLPBaseDecoder(EnforceOverrides, PipelineExecutorComponent):
