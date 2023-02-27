@@ -15,7 +15,7 @@ class TestText(TestCase):
 
     def test_replace(self):
         s = "hello_ wo.rld-"
-        self.assertEqual("hello  wo rld ", text.replace(s, [r"\\s+-\\s+", "-", "_", r"\\."], " "))
+        self.assertEqual("hello  wo rld ", text.replace(s, [r"\s+-\s+", "-", "_", r"\."], " "))
 
     def test_trim(self):
         s = "hello     world "

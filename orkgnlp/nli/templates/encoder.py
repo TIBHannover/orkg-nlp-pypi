@@ -73,5 +73,5 @@ class TemplatesRecommenderEncoder(ORKGNLPBaseEncoder):
 
     @staticmethod
     def _post_process(string):
-        string = text.replace(string, [r"\\s+-\\s+", "-", "_", r"\\."], " ")
+        string = text.replace(string, [r"\s+-\s+", "-", "_", r"\."], " ")
         return text.trim(string).lower()
