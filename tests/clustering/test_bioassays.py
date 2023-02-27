@@ -1,10 +1,10 @@
+# -*- coding: utf-8 -*-
 from unittest import TestCase
 
 from orkgnlp.clustering import BioassaysSemantifier
 
 
 class TestBioassaysSemantifier(TestCase):
-
     def setUp(self):
         self.semantifier = BioassaysSemantifier(force_download=False)
         self.addCleanup(self.semantifier.release_memory)
@@ -14,5 +14,5 @@ class TestBioassaysSemantifier(TestCase):
         self.assertEqual(self.semantifier, another_semantifier)
 
     def test_semantify(self):
-        text = 'long text'
+        text = "long text"
         self.assertIsInstance(self.semantifier(text=text), list)

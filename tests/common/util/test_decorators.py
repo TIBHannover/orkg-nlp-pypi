@@ -1,17 +1,16 @@
+# -*- coding: utf-8 -*-
 from unittest import TestCase
 
 from orkgnlp.common.util.decorators import singleton
 
 
 class A:
-
     @singleton
     def __new__(cls):
         pass
 
 
 class B:
-
     @singleton
     def __new__(cls):
         pass
@@ -22,7 +21,6 @@ class C:
 
 
 class TestSingleton(TestCase):
-
     def test_singleton(self):
         a = A()
         another_a = A()

@@ -1,11 +1,13 @@
+# -*- coding: utf-8 -*-
 """ TDM-Extraction service encoder. """
+
+from typing import Any, Dict, List, Tuple
 
 import torch
 from overrides import overrides
 from pandas import DataFrame
-from torch.utils.data import Dataset, DataLoader
-from transformers import XLNetTokenizer, PreTrainedTokenizer
-from typing import Any, Dict, Tuple, List
+from torch.utils.data import DataLoader, Dataset
+from transformers import PreTrainedTokenizer, XLNetTokenizer
 
 from orkgnlp.common.service.base import ORKGNLPBaseEncoder
 
@@ -26,21 +28,26 @@ class TdmExtractorEncoder(ORKGNLPBaseEncoder):
 
         self.labels: DataFrame = labels
         self.batch_size: int = batch_size
-        self.tokenizer: XLNetTokenizer = XLNetTokenizer.from_pretrained('xlnet-base-cased')
-        self.max_input_sizes: int = self.tokenizer.max_model_input_sizes['xlnet-base-cased'] or 512
-        self.device: str = 'cpu'
+        self.tokenizer: XLNetTokenizer = XLNetTokenizer.from_pretrained("xlnet-base-cased")
+        self.max_input_sizes: int = self.tokenizer.max_model_input_sizes["xlnet-base-cased"] or 512
+        self.device: str = "cpu"
 
     @overrides
     def encode(self, raw_input: Any, **kwargs: Any) -> Tuple[Any, Dict[str, Any]]:
         dataset = TdmDataset(raw_input, self.labels, self.tokenizer, self.max_input_sizes)
-        dataloader = DataLoader(dataset, batch_size=self.batch_size, shuffle=False, collate_fn=self._collate_batch)
+        dataloader = DataLoader(
+            dataset,
+            batch_size=self.batch_size,
+            shuffle=False,
+            collate_fn=self._collate_batch,
+        )
 
         def batch_generator():
             for batch in dataloader:
                 yield {
-                    'input_ids': batch[0].to(self.device),
-                    'token_type_ids': batch[1].to(self.device),
-                    'attention_mask': batch[2].to(self.device)
+                    "input_ids": batch[0].to(self.device),
+                    "token_type_ids": batch[1].to(self.device),
+                    "attention_mask": batch[2].to(self.device),
                 }
 
         return batch_generator(), kwargs
@@ -65,7 +72,13 @@ class TdmDataset(Dataset):
     can be used afterwards in a torch.utils.data.Dataloader for batch creation.
     """
 
-    def __init__(self, text: str, labels: DataFrame, tokenizer: PreTrainedTokenizer, max_input_sizes: int):
+    def __init__(
+        self,
+        text: str,
+        labels: DataFrame,
+        tokenizer: PreTrainedTokenizer,
+        max_input_sizes: int,
+    ):
         """
 
         :param text: Input text (hypothesis) to be concatenated with all known labels (premises).
@@ -82,7 +95,9 @@ class TdmDataset(Dataset):
         return len(self.labels.index)
 
     def __getitem__(self, idx):
-        premise_ids = self.tokenizer.encode(self.labels.iloc[idx].tolist()[0], add_special_tokens=False)
+        premise_ids = self.tokenizer.encode(
+            self.labels.iloc[idx].tolist()[0], add_special_tokens=False
+        )
 
         # -3 to account for the special characters
         self._truncate_seq_pair(premise_ids, self.hypothesis_ids, self.max_input_sizes - 3)
@@ -92,12 +107,16 @@ class TdmDataset(Dataset):
             *premise_ids,
             self.tokenizer.sep_token_id,
             *self.hypothesis_ids,
-            self.tokenizer.sep_token_id
+            self.tokenizer.sep_token_id,
         ]
         token_type_ids = self._get_token_type(sequence_token_ids, self.tokenizer.sep_token_id)
         attention_mask_ids = [1] * len(sequence_token_ids)
 
-        return torch.tensor(sequence_token_ids), torch.tensor(token_type_ids), torch.tensor(attention_mask_ids)
+        return (
+            torch.tensor(sequence_token_ids),
+            torch.tensor(token_type_ids),
+            torch.tensor(attention_mask_ids),
+        )
 
     @staticmethod
     def _get_token_type(tokens: List[int], sep: int) -> List[int]:

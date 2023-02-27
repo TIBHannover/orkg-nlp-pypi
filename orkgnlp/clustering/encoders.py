@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ Common encoders for the clustering services. """
 from typing import Any, Dict, Tuple
 
@@ -5,9 +6,9 @@ from onnx import ModelProto
 from overrides import overrides
 from sentence_transformers import SentenceTransformer
 
-from orkgnlp.common.util import text
 from orkgnlp.common.service.base import ORKGNLPBaseEncoder
 from orkgnlp.common.service.runners import ORKGNLPONNXRunner
+from orkgnlp.common.util import text
 
 
 class TfidfKmeansEncoder(ORKGNLPBaseEncoder):
@@ -27,11 +28,8 @@ class TfidfKmeansEncoder(ORKGNLPBaseEncoder):
     @overrides
     def encode(self, raw_input: Any, **kwargs: Any) -> Tuple[Any, Dict[str, Any]]:
         preprocessed_text = self._text_process(raw_input)
-        output, _ = self._vectorizer.run(
-            inputs=([preprocessed_text],),
-            output_names=['variable']
-        )
-        return (output[0][0], ), kwargs
+        output, _ = self._vectorizer.run(inputs=([preprocessed_text],), output_names=["variable"])
+        return (output[0][0],), kwargs
 
     @staticmethod
     def _text_process(q: str) -> str:
@@ -57,4 +55,4 @@ class TransformerKmeansEncoder(ORKGNLPBaseEncoder):
 
     @overrides
     def encode(self, raw_input: Any, **kwargs: Any) -> Tuple[Any, Dict[str, Any]]:
-        return (self._vectorizer.encode([raw_input])[0], ), kwargs
+        return (self._vectorizer.encode([raw_input])[0],), kwargs

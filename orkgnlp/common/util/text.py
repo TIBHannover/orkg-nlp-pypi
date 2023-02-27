@@ -1,11 +1,12 @@
+# -*- coding: utf-8 -*-
 """ Utility file for text processing functionalities. """
 import re
 import string
-import nltk
+from typing import List, Union
 
-from typing import Union, List
-from nltk.stem import WordNetLemmatizer
+import nltk
 from nltk.corpus import stopwords
+from nltk.stem import WordNetLemmatizer
 
 from orkgnlp.common.util.decorators import sanitize_text
 
@@ -18,11 +19,11 @@ def remove_punctuation(text: str) -> str:
     :param text:
     :return: text with punctuations removed.
     """
-    return text.translate(str.maketrans('', '', string.punctuation))
+    return text.translate(str.maketrans("", "", string.punctuation))
 
 
 @sanitize_text
-def remove_stopwords(text: str, language: str = 'english') -> str:
+def remove_stopwords(text: str, language: str = "english") -> str:
     """
     Removes stopwords from the given ``text``.
     Uses the stopwords defined in ``NLTK``.
@@ -31,11 +32,9 @@ def remove_stopwords(text: str, language: str = 'english') -> str:
     :param language: defaults to ``english``.
     :return: text with stopwords removed.
     """
-    nltk.download('stopwords', quiet=True)
+    nltk.download("stopwords", quiet=True)
 
-    return ' '.join(
-        [word for word in text.split() if word not in stopwords.words(language)]
-    )
+    return " ".join([word for word in text.split() if word not in stopwords.words(language)])
 
 
 @sanitize_text
@@ -47,12 +46,10 @@ def lemmatize(text: str) -> str:
     :param text:
     :return: text with its lemmatized words.
     """
-    nltk.download('wordnet', quiet=True)
+    nltk.download("wordnet", quiet=True)
 
     stemmer = WordNetLemmatizer()
-    return ' '.join(
-        [stemmer.lemmatize(word) for word in text.split()]
-    )
+    return " ".join([stemmer.lemmatize(word) for word in text.split()])
 
 
 @sanitize_text
@@ -66,7 +63,7 @@ def replace(text: str, chars: Union[str, List[str]], replacement: str) -> str:
     :param replacement: The replacement string
     """
     chars = chars if isinstance(chars, list) else [chars]
-    regex = '|'.join(chars)
+    regex = "|".join(chars)
     return re.sub(regex, replacement, text)
 
 
@@ -77,4 +74,4 @@ def trim(text: str) -> str:
 
     :param text:
     """
-    return ' '.join(text.split())
+    return " ".join(text.split())

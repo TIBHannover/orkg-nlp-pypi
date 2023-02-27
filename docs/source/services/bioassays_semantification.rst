@@ -41,4 +41,3 @@ and the output has the following schema:
         }
         ...
     ]
-

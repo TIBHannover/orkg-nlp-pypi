@@ -1,6 +1,6 @@
+# -*- coding: utf-8 -*-
 """ TDM-Extraction service decoder. """
-from ctypes import Union
-from typing import Any, Dict, Tuple, Generator, List, Iterable
+from typing import Any, Dict, Generator, List
 
 import numpy as np
 import torch
@@ -26,13 +26,8 @@ class TdmExtractorDecoder(ORKGNLPBaseDecoder):
         self.labels: DataFrame = labels
 
     @overrides(check_signature=False)
-    def decode(
-            self,
-            model_output: Generator[Any, None, None],
-            top_n: int,
-            **kwargs: Any
-    ) -> Any:
-        self.labels['prob'] = np.NaN
+    def decode(self, model_output: Generator[Any, None, None], top_n: int, **kwargs: Any) -> Any:
+        self.labels["prob"] = np.NaN
 
         for batch_idx, batch in enumerate(model_output):
             predictions = torch.sigmoid(batch.logits)
@@ -40,14 +35,13 @@ class TdmExtractorDecoder(ORKGNLPBaseDecoder):
             for predictions_idx, (true, false) in enumerate(predictions):
                 if true.item() > false.item():
                     label_index = batch_idx * predictions.shape[0] + predictions_idx
-                    self.labels.at[label_index, 'prob'] = true.item()
+                    self.labels.at[label_index, "prob"] = true.item()
 
-        candidates = self.labels[self.labels['prob'].notnull()]
-        candidates = candidates.sort_values(by='prob', ascending=False)
+        candidates = self.labels[self.labels["prob"].notnull()]
+        candidates = candidates.sort_values(by="prob", ascending=False)
 
         return self._prepare_service_output(
-            candidates[0][:top_n].tolist(),
-            candidates['prob'][:top_n].tolist()
+            candidates[0][:top_n].tolist(), candidates["prob"][:top_n].tolist()
         )
 
     @staticmethod
@@ -55,13 +49,8 @@ class TdmExtractorDecoder(ORKGNLPBaseDecoder):
         service_output = []
 
         for i, tdm in enumerate(tdms):
-            t, d, m = tdm.split('#')
+            t, d, m = tdm.split("#")
 
-            service_output.append({
-                'task': t,
-                'dataset': d,
-                'metric': m,
-                'score': scores[i]
-            })
+            service_output.append({"task": t, "dataset": d, "metric": m, "score": scores[i]})
 
         return service_output

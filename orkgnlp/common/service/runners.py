@@ -1,8 +1,8 @@
+# -*- coding: utf-8 -*-
 """ Model runners. """
-from typing import Tuple, Any, List, Dict, Union, Generator
+from typing import Any, Dict, Generator, List, Tuple, Union
 
 import onnxruntime as rt
-import torch
 from overrides import overrides
 
 from orkgnlp.common.service.base import ORKGNLPBaseRunner
@@ -19,11 +19,11 @@ class ORKGNLPONNXRunner(ORKGNLPBaseRunner):
 
     @overrides(check_signature=False)
     def run(
-            self,
-            inputs: Tuple[Any],
-            output_names: List[str] = None,
-            custom_input_dict: Dict[str, List[Any]] = None,
-            **kwargs: Any
+        self,
+        inputs: Tuple[Any],
+        output_names: List[str] = None,
+        custom_input_dict: Dict[str, List[Any]] = None,
+        **kwargs: Any
     ) -> Tuple[Any, Dict[str, Any]]:
         """
         Runs the given model while initiation in evaluation mode and returns its output.
@@ -55,11 +55,12 @@ class ORKGNLPTorchRunner(ORKGNLPBaseRunner):
         super().__init__(*args)
 
     @overrides(check_signature=False)
-    def run(self,
-            inputs: Union[Any, List[Tuple[Any]], Dict[str, Any], List[Dict[str, Any]]],
-            multiple_batches: bool = False,
-            **kwargs: Any
-            ) -> Union[Tuple[Any, Dict[str, Any]], Tuple[Generator[Any, None, None], Dict[str, Any]]]:
+    def run(
+        self,
+        inputs: Union[Any, List[Tuple[Any]], Dict[str, Any], List[Dict[str, Any]]],
+        multiple_batches: bool = False,
+        **kwargs: Any
+    ) -> Union[Tuple[Any, Dict[str, Any]], Tuple[Generator[Any, None, None], Dict[str, Any]]]:
         """
         Runs the given model while initiation in evaluation mode and returns its output.
 
@@ -71,11 +72,10 @@ class ORKGNLPTorchRunner(ORKGNLPBaseRunner):
         :return: The model output as a tuple or list of tuples, and kwargs.
         """
 
-        if hasattr(self._model, 'eval'):
+        if hasattr(self._model, "eval"):
             self._model.eval()
 
         if not multiple_batches:
-
             if isinstance(inputs, dict):
                 output = self._model(**inputs)
             else:
@@ -85,7 +85,6 @@ class ORKGNLPTorchRunner(ORKGNLPBaseRunner):
 
         def multiple_batch_generator():
             for i, batch in enumerate(inputs):
-
                 if isinstance(batch, dict):
                     output = self._model(**batch)
                 else:

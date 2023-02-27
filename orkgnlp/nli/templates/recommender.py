@@ -1,8 +1,15 @@
+# -*- coding: utf-8 -*-
 """ Templates Recommendation service. """
 from typing import Any
+
 from transformers import BertForSequenceClassification
 
-from orkgnlp.common.service.base import ORKGNLPBaseService, ORKGNLPBaseEncoder, ORKGNLPBaseRunner, ORKGNLPBaseDecoder
+from orkgnlp.common.service.base import (
+    ORKGNLPBaseDecoder,
+    ORKGNLPBaseEncoder,
+    ORKGNLPBaseRunner,
+    ORKGNLPBaseService,
+)
 from orkgnlp.common.service.runners import ORKGNLPTorchRunner
 from orkgnlp.common.util import io
 from orkgnlp.nli.templates.decoder import TemplatesRecommenderDecoder
@@ -17,19 +24,22 @@ class TemplatesRecommender(ORKGNLPBaseService):
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-    SERVICE_NAME = 'templates-recommendation'
+
+    SERVICE_NAME = "templates-recommendation"
 
     def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(self.SERVICE_NAME, *args, **kwargs)
-        templates = io.read_json(self._config.requirements['labels'])['templates']
+        templates = io.read_json(self._config.requirements["labels"])["templates"]
 
         encoder: ORKGNLPBaseEncoder = TemplatesRecommenderEncoder(templates)
         runner: ORKGNLPBaseRunner = ORKGNLPTorchRunner(
-            io.load_transformers_pretrained(self._config.service_dir, BertForSequenceClassification)
+            io.load_transformers_pretrained(
+                self._config.service_dir, BertForSequenceClassification
+            )
         )
         decoder: ORKGNLPBaseDecoder = TemplatesRecommenderDecoder(templates)
 
-        self._register_pipeline('main', encoder, runner, decoder)
+        self._register_pipeline("main", encoder, runner, decoder)
 
     def __call__(self, title: str, abstract: str, top_n: int = 5):
         """
@@ -41,7 +51,7 @@ class TemplatesRecommender(ORKGNLPBaseService):
         :return: List of templates.
         """
         return self._run(
-            raw_input='{} {}'.format(title, abstract),
+            raw_input="{} {}".format(title, abstract),
             top_n=top_n,
-            multiple_batches=True
+            multiple_batches=True,
         )

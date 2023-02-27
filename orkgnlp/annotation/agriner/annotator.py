@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ Agri-NER service. """
 
 from typing import Any
@@ -5,7 +6,12 @@ from typing import Any
 from transformers import pipeline
 
 from orkgnlp.annotation.agriner.decoder import AgriNerDecoder
-from orkgnlp.common.service.base import ORKGNLPBaseService, ORKGNLPBaseRunner, ORKGNLPBaseEncoder, ORKGNLPBaseDecoder
+from orkgnlp.common.service.base import (
+    ORKGNLPBaseDecoder,
+    ORKGNLPBaseEncoder,
+    ORKGNLPBaseRunner,
+    ORKGNLPBaseService,
+)
 from orkgnlp.common.service.runners import ORKGNLPTorchRunner
 
 
@@ -16,21 +22,22 @@ class AgriNer(ORKGNLPBaseService):
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-    SERVICE_NAME = 'agri-ner'
+
+    SERVICE_NAME = "agri-ner"
 
     def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(self.SERVICE_NAME, *args, **kwargs)
 
         encoder: ORKGNLPBaseEncoder = ORKGNLPBaseEncoder()
         _model = pipeline(
-            task='token-classification',
+            task="token-classification",
             model=self._config.service_dir,
-            tokenizer='bert-base-cased',
-            aggregation_strategy='simple'
+            tokenizer="bert-base-cased",
+            aggregation_strategy="simple",
         )
         runner: ORKGNLPBaseRunner = ORKGNLPTorchRunner(_model)
         decoder: ORKGNLPBaseDecoder = AgriNerDecoder()
-        self._register_pipeline('main', encoder, runner, decoder)
+        self._register_pipeline("main", encoder, runner, decoder)
 
     def __call__(self, title: str) -> Any:
         """
@@ -39,6 +46,4 @@ class AgriNer(ORKGNLPBaseService):
         :param title: Paper's title.
         :return: A list of the annotated parts for the given text is returned.
         """
-        return self._run(
-            raw_input=title
-        )
+        return self._run(raw_input=title)

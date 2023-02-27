@@ -1,13 +1,13 @@
+# -*- coding: utf-8 -*-
 from unittest import TestCase
 
 from orkgnlp.annotation import TdmExtractor
 
 
 class TestTdmExtractor(TestCase):
-
     def setUp(self):
         self.extractor = TdmExtractor(force_download=False, _unittest=True)
-        self.text = 'short'
+        self.text = "short"
         self.addCleanup(self.extractor.release_memory)
 
     def test_singleton(self):
@@ -20,8 +20,7 @@ class TestTdmExtractor(TestCase):
         self.assertIsInstance(tdms, list)
         for tdm in tdms:
             self.assertIsInstance(tdm, dict)
-            self.assertIn('task', tdm)
-            self.assertIn('dataset', tdm)
-            self.assertIn('metric', tdm)
-            self.assertIn('score', tdm)
-
+            self.assertIn("task", tdm)
+            self.assertIn("dataset", tdm)
+            self.assertIn("metric", tdm)
+            self.assertIn("score", tdm)

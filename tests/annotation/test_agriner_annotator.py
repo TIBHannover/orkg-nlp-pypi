@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from unittest import TestCase
 
 from orkgnlp.annotation import AgriNer
@@ -6,7 +7,10 @@ from orkgnlp.annotation import AgriNer
 class TestAgriNer(TestCase):
     def setUp(self):
         self.annotator = AgriNer(force_download=False)
-        self.title = 'Beyond aerodynamics: The critical roles of the circulatory and systems in maintaining insect functionality'
+        self.title = (
+            "Beyond aerodynamics: The critical roles of the circulatory"
+            " and systems in maintaining insect functionality"
+        )
         self.addCleanup(self.annotator.release_memory)
 
     def test_singleton(self):
@@ -19,5 +23,5 @@ class TestAgriNer(TestCase):
         self.assertIsInstance(annotations, list)
         for annotation in annotations:
             self.assertIsInstance(annotation, dict)
-            self.assertIn('concept', annotation)
-            self.assertIn('entities', annotation)
+            self.assertIn("concept", annotation)
+            self.assertIn("entities", annotation)
