@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ TDM-Extraction service. """
 from typing import Any
 
@@ -6,10 +7,14 @@ from transformers import XLNetForSequenceClassification
 
 from orkgnlp.annotation.tdm.decoder import TdmExtractorDecoder
 from orkgnlp.annotation.tdm.encoder import TdmExtractorEncoder
-from orkgnlp.common.util import io
-
-from orkgnlp.common.service.base import ORKGNLPBaseService, ORKGNLPBaseRunner, ORKGNLPBaseEncoder, ORKGNLPBaseDecoder
+from orkgnlp.common.service.base import (
+    ORKGNLPBaseDecoder,
+    ORKGNLPBaseEncoder,
+    ORKGNLPBaseRunner,
+    ORKGNLPBaseService,
+)
 from orkgnlp.common.service.runners import ORKGNLPTorchRunner
+from orkgnlp.common.util import io
 
 
 class TdmExtractor(ORKGNLPBaseService):
@@ -19,23 +24,26 @@ class TdmExtractor(ORKGNLPBaseService):
 
     You can pass the parameter ``force_download=True`` to remove and re-download the previous downloaded service files.
     """
-    SERVICE_NAME = 'tdm-extraction'
+
+    SERVICE_NAME = "tdm-extraction"
 
     def __init__(self, *args: Any, **kwargs: Any):
         super().__init__(self.SERVICE_NAME, *args, **kwargs)
         requirements = self._config.requirements
 
-        labels: DataFrame = io.read_csv(requirements['labels'], sep='\t')
+        labels: DataFrame = io.read_csv(requirements["labels"], sep="\t")
 
         if self._unittest:
             labels = labels.head()
 
         encoder: ORKGNLPBaseEncoder = TdmExtractorEncoder(labels, self._batch_size)
         runner: ORKGNLPBaseRunner = ORKGNLPTorchRunner(
-            io.load_transformers_pretrained(self._config.service_dir, XLNetForSequenceClassification)
+            io.load_transformers_pretrained(
+                self._config.service_dir, XLNetForSequenceClassification
+            )
         )
         decoder: ORKGNLPBaseDecoder = TdmExtractorDecoder(labels)
-        self._register_pipeline('main', encoder, runner, decoder)
+        self._register_pipeline("main", encoder, runner, decoder)
 
     def __call__(self, text: str, top_n: int = 5) -> Any:
         """

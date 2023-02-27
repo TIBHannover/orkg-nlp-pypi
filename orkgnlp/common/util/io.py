@@ -1,17 +1,17 @@
+# -*- coding: utf-8 -*-
 """
 Includes Input/Output (I/O) functionalities like reading and writing from and into specific file formats.
 """
 
 import json
 import pickle
-import torch
-import onnx
+from typing import Any, Dict, Type
 
+import onnx
 import pandas as pd
+import torch
 from onnx import ModelProto
 from pandas import DataFrame
-from typing import Dict, Any, Type
-
 from torch.jit import ScriptModule
 from transformers import PreTrainedModel
 
@@ -23,7 +23,7 @@ def read_json(input_path: str) -> Dict[str, Any]:
     :param input_path: Path to the json file
     :return: A loaded json object.
     """
-    with open(input_path, encoding='utf-8') as f:
+    with open(input_path, encoding="utf-8") as f:
         json_data = json.load(f)
 
     return json_data
@@ -62,13 +62,13 @@ def read_pickle(input_path: str) -> Any:
     :param input_path: Path to the pickle file
     :return: A loaded pickle object.
     """
-    with open(input_path, 'rb') as f:
+    with open(input_path, "rb") as f:
         loaded_object = pickle.load(f)
 
     return loaded_object
 
 
-def read_csv(input_path: str, header: str = None, sep: str = ',') -> DataFrame:
+def read_csv(input_path: str, header: str = None, sep: str = ",") -> DataFrame:
     """
     Reads the ``csv`` file of the given ``input_path``.
 
@@ -80,7 +80,7 @@ def read_csv(input_path: str, header: str = None, sep: str = ',') -> DataFrame:
     return pd.read_csv(input_path, header=header, sep=sep)
 
 
-def load_torch_jit(input_path: str, device_name: str = 'cpu') -> ScriptModule:
+def load_torch_jit(input_path: str, device_name: str = "cpu") -> ScriptModule:
     """
     Loads the scripted/traced ``torch model`` file (ScriptModule) of the given ``input_path``.
 
@@ -92,7 +92,9 @@ def load_torch_jit(input_path: str, device_name: str = 'cpu') -> ScriptModule:
     return torch.jit.load(input_path, map_location=torch.device(device_name))
 
 
-def load_transformers_pretrained(input_path: str, transformers_cls: Type[PreTrainedModel]) -> PreTrainedModel:
+def load_transformers_pretrained(
+    input_path: str, transformers_cls: Type[PreTrainedModel]
+) -> PreTrainedModel:
     """
     Loads a transformers model weights given of the given ``input_path`` to the given ``transformers_cls``.
 

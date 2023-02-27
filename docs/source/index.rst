@@ -49,5 +49,3 @@ or :doc:`contribute <contribute>` to this package!
     * :ref:`genindex`
     * :ref:`modindex`
     * :ref:`search`
-
-

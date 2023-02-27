@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 Includes help classes useful for encapsulating data.
 """

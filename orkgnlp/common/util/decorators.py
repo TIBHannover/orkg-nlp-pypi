@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ Defines decorators used within the package """
 from typing import Type
 
@@ -12,7 +13,7 @@ def singleton(_):
 
     def apply_pattern(cls: Type, *args, **kwargs):
         # attention: *args and **kwargs must be included even if not used!
-        if not hasattr(cls, 'instance'):
+        if not hasattr(cls, "instance"):
             cls.instance = super(cls.__class__, cls).__new__(cls)
         return cls.instance
 
@@ -26,9 +27,10 @@ def sanitize_text(f):
 
     :param f: The decorated function.
     """
+
     def wrapper(text: str, *args):
         if not text:
-            return f('', *args)
+            return f("", *args)
 
         return f(text, *args)
 

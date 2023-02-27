@@ -1,19 +1,24 @@
+# -*- coding: utf-8 -*-
 """ Base interfaces. """
 import os
-from typing import Any, Dict, Tuple, Union, Generator
+from typing import Any, Dict, Generator, Tuple, Union
 
 from overrides import EnforceOverrides
 
 from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.tools import downloader
 from orkgnlp.common.util.decorators import singleton
-from orkgnlp.common.util.exceptions import ORKGNLPIllegalStateError, ORKGNLPValidationError
+from orkgnlp.common.util.exceptions import (
+    ORKGNLPIllegalStateError,
+    ORKGNLPValidationError,
+)
 
 
 class PipelineExecutorComponent:
     """
     The PipelineExecutorComponent represents a component of a PipelineExecutor
     """
+
     def release_memory(self):
         """
         Releases the memory of all available attributes in a pipeline component.
@@ -41,7 +46,7 @@ class ORKGNLPBaseEncoder(EnforceOverrides, PipelineExecutorComponent):
         :param raw_input: The user's input to be encoded.
         :return: The model-friendly output and kwargs.
         """
-        return (raw_input, ), kwargs
+        return (raw_input,), kwargs
 
 
 class ORKGNLPBaseDecoder(EnforceOverrides, PipelineExecutorComponent):
@@ -55,11 +60,7 @@ class ORKGNLPBaseDecoder(EnforceOverrides, PipelineExecutorComponent):
     def __init__(self):
         pass
 
-    def decode(
-            self,
-            model_output: Union[Any, Generator[Any, None, None]],
-            **kwargs: Any
-    ) -> Any:
+    def decode(self, model_output: Union[Any, Generator[Any, None, None]], **kwargs: Any) -> Any:
         """
         Decodes the model's ``output`` to a user-friendly format.
 
@@ -89,7 +90,7 @@ class ORKGNLPBaseRunner(EnforceOverrides, PipelineExecutorComponent):
 
         :raise: NotImplementedError
         """
-        raise NotImplementedError('Subclass must implement abstract method')
+        raise NotImplementedError("Subclass must implement abstract method")
 
 
 class PipelineExecutor:
@@ -97,7 +98,13 @@ class PipelineExecutor:
     The PipelineExecutor executes a full service workflow given its encoder, runner and decoder.
     See the ``run`` function description for further information.
     """
-    def __init__(self, encoder: ORKGNLPBaseEncoder, runner: ORKGNLPBaseRunner, decoder: ORKGNLPBaseDecoder):
+
+    def __init__(
+        self,
+        encoder: ORKGNLPBaseEncoder,
+        runner: ORKGNLPBaseRunner,
+        decoder: ORKGNLPBaseDecoder,
+    ):
         """
 
         :param encoder: Service's encoder.
@@ -126,7 +133,7 @@ class PipelineExecutor:
             initialized.
         """
         if not (self._encoder and self._runner and self._decoder):
-            raise ORKGNLPIllegalStateError('Encoder, Runner and Decoder must be initialized!')
+            raise ORKGNLPIllegalStateError("Encoder, Runner and Decoder must be initialized!")
 
         inputs, additional_properties = self._encoder.encode(raw_input, **kwargs)
         kwargs.update(additional_properties)
@@ -155,10 +162,7 @@ class ORKGNLPBaseConfig:
 
         :param service: The service name.
         """
-        service_data_dir = os.path.join(
-            orkgnlp_context.get('ORKG_NLP_DATA_CACHE_ROOT'),
-            service
-        )
+        service_data_dir = os.path.join(orkgnlp_context.get("ORKG_NLP_DATA_CACHE_ROOT"), service)
 
         self.service_name: str = service
         self.service_dir: str = service_data_dir
@@ -166,10 +170,10 @@ class ORKGNLPBaseConfig:
 
     def _get_requirement_paths(self) -> Dict[str, str]:
         paths = {}
-        for repo in orkgnlp_context.get('HUGGINGFACE_REPOS')[self.service_name]:
-            for file_obj in repo['files']:
-                paths[file_obj['internal_name']] = os.path.join(
-                    self.service_dir, file_obj.get('subbdir', ''), file_obj['filename']
+        for repo in orkgnlp_context.get("HUGGINGFACE_REPOS")[self.service_name]:
+            for file_obj in repo["files"]:
+                paths[file_obj["internal_name"]] = os.path.join(
+                    self.service_dir, file_obj.get("subbdir", ""), file_obj["filename"]
                 )
 
         return paths
@@ -177,16 +181,23 @@ class ORKGNLPBaseConfig:
 
 class ORKGNLPBaseService:
     """
-        Base class for shared config parameters and functionalities. All ORKG-NLP services must inherit from this class.
+    Base class for shared config parameters and functionalities. All ORKG-NLP services must inherit from this class.
 
-        This class follows the singleton pattern,  i.e. only one instance can be obtained from it or its subclasses.
+    This class follows the singleton pattern,  i.e. only one instance can be obtained from it or its subclasses.
     """
 
     @singleton
     def __new__(cls, *args, **kwargs):
         pass
 
-    def __init__(self, service: str, *, force_download: bool = False, batch_size: int = 16, _unittest: bool = False):
+    def __init__(
+        self,
+        service: str,
+        *,
+        force_download: bool = False,
+        batch_size: int = 16,
+        _unittest: bool = False
+    ):
         """
 
         :param service: Service name.
@@ -205,7 +216,8 @@ class ORKGNLPBaseService:
         """
         Downloads the required files for the given service name based on the ``force_download`` class attribute.
 
-        :param service: a string representing a ORKG-NLP service name. Check :doc:`../services/services` for a full list.
+        :param service: a string representing a ORKG-NLP service name.
+            Check :doc:`../services/services` for a full list.
         :return:
         """
         downloader.download(service, self._force_download)
@@ -225,28 +237,31 @@ class ORKGNLPBaseService:
             or not given, in case of multiple registered ones.
         """
         if not self._pipeline_executors:
-            raise ORKGNLPIllegalStateError('There is no PipelineRunner registered. Please consider registering'
-                                           'one using the _register_pipline_runner() function.')
+            raise ORKGNLPIllegalStateError(
+                "There is no PipelineRunner registered. Please consider registering"
+                "one using the _register_pipline_runner() function."
+            )
 
         if pipline_executor_name:
-
             if pipline_executor_name not in self._pipeline_executors:
-                raise ORKGNLPValidationError('PipelineExecutor name is unknown.')
+                raise ORKGNLPValidationError("PipelineExecutor name is unknown.")
 
             return self._pipeline_executors[pipline_executor_name].run(raw_input, **kwargs)
 
         if len(self._pipeline_executors) > 1:
-            raise ORKGNLPValidationError('PipelineExecutor is ambiguous. Consider passing pipline_executor_name in the '
-                                         'input.')
+            raise ORKGNLPValidationError(
+                "PipelineExecutor is ambiguous. Consider passing pipline_executor_name in the "
+                "input."
+            )
 
         return next(iter(self._pipeline_executors.values())).run(raw_input, **kwargs)
 
     def _register_pipeline(
-            self,
-            name: str,
-            encoder: ORKGNLPBaseEncoder,
-            runner: ORKGNLPBaseRunner,
-            decoder: ORKGNLPBaseDecoder
+        self,
+        name: str,
+        encoder: ORKGNLPBaseEncoder,
+        runner: ORKGNLPBaseRunner,
+        decoder: ORKGNLPBaseDecoder,
     ):
         """
         Registers a PipelineExecutor to the service.
@@ -257,7 +272,7 @@ class ORKGNLPBaseService:
         :param decoder: Service's decoder.
         """
         if name in self._pipeline_executors:
-            raise ORKGNLPValidationError('PipelineExecutor name already exists.')
+            raise ORKGNLPValidationError("PipelineExecutor name already exists.")
 
         self._pipeline_executors[name] = PipelineExecutor(encoder, runner, decoder)
 

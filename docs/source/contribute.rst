@@ -1,6 +1,39 @@
 How to Contribute
 =================
 
+Contribution Steps
+""""""""""""""""""
+
+1. Clone the repository to your local machine:
+
+.. code-block:: bash
+
+    git clone https://gitlab.com/TIBHannover/orkg/nlp/orkg-nlp-pypi.git
+    cd orkg-nlp-pypi
+
+
+2. Create a virtual environment with `python=3.8`, activate it, install the required
+   dependencies and install the pre-commit configuration:
+
+.. code-block:: bash
+
+    conda create -n orkg-nlp-pypi python=3.8
+    conda activate orkg-nlp-pypi
+    pip install -r requirements.txt
+    pre-commit install
+
+
+3. Create a branch and commit your changes:
+
+.. code-block:: bash
+
+    git switch -c <name-your-branch>
+    # do your changes
+    git add .
+    git commit -m "your commit msg"
+    git push
+
+
 Internal Workflow
 """""""""""""""""
 As the architecture :ref:`figure <architecture>` suggests, all our services inherit from the **ORKGNLPBaseService**
@@ -24,8 +57,8 @@ is to be handled in the __call__() function of the service.
    Internal architecture of orkgnlp.
 
 
-Contribution Steps
-""""""""""""""""""
+Adding a new Service
+""""""""""""""""""""
 
 If you are intending to add a new service to the ``orkgnlp`` package, you should simply follow the following instructions:
 

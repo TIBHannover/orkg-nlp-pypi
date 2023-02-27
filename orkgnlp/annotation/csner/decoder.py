@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 """ CS-NER service decoder. """
-from typing import Union, Any, Generator, List, Dict
+from typing import Any, Dict, Generator, List, Union
 
 from overrides import overrides
 
@@ -21,22 +22,24 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
         super().__init__()
 
         self._alphabet = alphabet
-        self._UNKNOWN = '</unk>'
+        self._UNKNOWN = "</unk>"
 
     @overrides(check_signature=False)
     def decode(
-            self,
-            model_output: Union[Any, Generator[Any, None, None]],
-            raw_texts,
-            recover,
-            **kwargs: Any
+        self,
+        model_output: Union[Any, Generator[Any, None, None]],
+        raw_texts,
+        recover,
+        **kwargs: Any
     ) -> Any:
         predicted_results = []
 
         for i, batch in enumerate(model_output):
             _, nbest_tag_seq = batch
             tag_seq = nbest_tag_seq[:, :, 0]
-            pred_label, _ = self._recover_label(tag_seq, recover[i][0], recover[i][0], recover[i][2])
+            pred_label, _ = self._recover_label(
+                tag_seq, recover[i][0], recover[i][0], recover[i][2]
+            )
             predicted_results += pred_label
 
         entities = self._get_entities(raw_texts, predicted_results)
@@ -44,10 +47,10 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
 
     def _recover_label(self, pred_variable, gold_variable, mask_variable, word_recover):
         """
-            input:
-                pred_variable (batch_size, sent_len): pred tag result
-                gold_variable (batch_size, sent_len): gold result variable
-                mask_variable (batch_size, sent_len): mask variable
+        input:
+            pred_variable (batch_size, sent_len): pred tag result
+            gold_variable (batch_size, sent_len): gold result variable
+            mask_variable (batch_size, sent_len): mask variable
         """
         pred_variable = pred_variable[word_recover]
         gold_variable = gold_variable[word_recover]
@@ -62,10 +65,18 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
         gold_label = []
 
         for idx in range(batch_size):
-            labels = list(self._alphabet['label'].keys())
+            labels = list(self._alphabet["label"].keys())
 
-            pred = [self._get_instance(labels, pred_tag[idx][idy]) for idy in range(seq_len) if mask[idx][idy] != 0]
-            gold = [self._get_instance(labels, gold_tag[idx][idy]) for idy in range(seq_len) if mask[idx][idy] != 0]
+            pred = [
+                self._get_instance(labels, pred_tag[idx][idy])
+                for idy in range(seq_len)
+                if mask[idx][idy] != 0
+            ]
+            gold = [
+                self._get_instance(labels, gold_tag[idx][idy])
+                for idy in range(seq_len)
+                if mask[idx][idy] != 0
+            ]
 
             pred_label.append(pred)
             gold_label.append(gold)
@@ -78,36 +89,35 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
 
         for idx in range(len(predicted_results)):
             sent_length = len(predicted_results[idx])
-            key = ''
-            entity_txt = ''
+            key = ""
+            entity_txt = ""
 
             for idy in range(sent_length):
-
-                if 'S-' in predicted_results[idx][idy]:
-                    key = predicted_results[idx][idy].split('-')[1]
+                if "S-" in predicted_results[idx][idy]:
+                    key = predicted_results[idx][idy].split("-")[1]
 
                     if key in entities.keys():
                         entities[key].append(raw_texts[idx][0][idy])
                     else:
                         entities[key] = [raw_texts[idx][0][idy]]
 
-                elif 'B-' in predicted_results[idx][idy]:
-                    key = predicted_results[idx][idy].split('-')[1]
+                elif "B-" in predicted_results[idx][idy]:
+                    key = predicted_results[idx][idy].split("-")[1]
                     entity_txt = raw_texts[idx][0][idy].strip()
 
-                elif 'I-' in predicted_results[idx][idy]:
-                    entity_txt += ' ' + raw_texts[idx][0][idy].strip()
+                elif "I-" in predicted_results[idx][idy]:
+                    entity_txt += " " + raw_texts[idx][0][idy].strip()
 
-                elif 'E-' in predicted_results[idx][idy]:
-                    entity_txt += ' ' + raw_texts[idx][0][idy].strip()
+                elif "E-" in predicted_results[idx][idy]:
+                    entity_txt += " " + raw_texts[idx][0][idy].strip()
 
                     if key in entities.keys():
                         entities[key].append(entity_txt.strip())
                     else:
                         entities[key] = [entity_txt.strip()]
 
-                    key = ''
-                    entity_txt = ''
+                    key = ""
+                    entity_txt = ""
 
         return entities
 
@@ -118,7 +128,7 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
         try:
             return instances[index - 1]
         except IndexError:
-            print('WARNING:Alphabet get_instance, unknown instance, return the first label.')
+            print("WARNING:Alphabet get_instance, unknown instance, return the first label.")
             return instances[0]
 
     @staticmethod
@@ -126,9 +136,6 @@ class CSNerDecoder(ORKGNLPBaseDecoder):
         annotations = []
 
         for concept in entities:
-            annotations.append({
-                'concept': concept,
-                'entities': entities[concept]
-            })
+            annotations.append({"concept": concept, "entities": entities[concept]})
 
         return annotations

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """ Agri-NER service decoder. """
 
 from typing import Any, Dict, List
@@ -14,33 +15,33 @@ class AgriNerDecoder(ORKGNLPBaseDecoder):
     """
 
     CONCEPTS_MAP = {
-        'RP': 'RESEARCH_PROBLEM',
-        'P': 'PROCESS',
-        'METH': 'METHOD',
-        'R': 'RESOURCE',
-        'S': 'SOLUTION',
-        'LOC': 'LOCATION',
-        'T': 'TECHNOLOGY'
+        "RP": "RESEARCH_PROBLEM",
+        "P": "PROCESS",
+        "METH": "METHOD",
+        "R": "RESOURCE",
+        "S": "SOLUTION",
+        "LOC": "LOCATION",
+        "T": "TECHNOLOGY",
     }
 
     @overrides(check_signature=False)
-    def decode(
-            self,
-            model_output: List[Dict[str, Any]],
-            **kwargs: Any
-    ) -> Any:
-
+    def decode(self, model_output: List[Dict[str, Any]], **kwargs: Any) -> Any:
         annotations = []
         seen = []
         for entity in model_output:
-
-            if entity['entity_group'] in seen:
+            if entity["entity_group"] in seen:
                 continue
 
-            seen.append(entity['entity_group'])
-            annotations.append({
-                'concept': self.CONCEPTS_MAP[entity['entity_group']],
-                'entities': [i['word'] for i in model_output if i['entity_group'] == entity['entity_group']]
-            })
+            seen.append(entity["entity_group"])
+            annotations.append(
+                {
+                    "concept": self.CONCEPTS_MAP[entity["entity_group"]],
+                    "entities": [
+                        i["word"]
+                        for i in model_output
+                        if i["entity_group"] == entity["entity_group"]
+                    ],
+                }
+            )
 
         return annotations

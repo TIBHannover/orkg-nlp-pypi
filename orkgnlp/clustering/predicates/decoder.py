@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 """ Predicates recommendation service decoder. """
-from typing import Union, Tuple, Dict, Any, Generator, List
+from typing import Any, Dict, Generator, List, Union
 
 import numpy as np
 from overrides import overrides
@@ -25,15 +26,11 @@ class PredicatesRecommenderDecoder(ORKGNLPBaseDecoder):
         self._predicates = predicates
 
     @overrides
-    def decode(
-            self,
-            model_output: Union[Any, Generator[Any, None, None]],
-            **kwargs: Any
-    ) -> Any:
+    def decode(self, model_output: Union[Any, Generator[Any, None, None]], **kwargs: Any) -> Any:
         cluster_label, model_labels_ = model_output[0], model_output[1]
         cluster_instances_indices = np.argwhere(cluster_label == model_labels_).squeeze(1)
         cluster_instances = self._train_df.iloc[cluster_instances_indices]
-        comparison_ids = cluster_instances['comparison_id'].unique()
+        comparison_ids = cluster_instances["comparison_id"].unique()
         return self._map_to_predicates(comparison_ids)
 
     def _map_to_predicates(self, comparison_ids: List[str]) -> List[Dict[str, str]]:
