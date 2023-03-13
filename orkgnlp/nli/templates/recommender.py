@@ -4,6 +4,7 @@ from typing import Any
 
 from transformers import BertForSequenceClassification
 
+from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.service.base import (
     ORKGNLPBaseDecoder,
     ORKGNLPBaseEncoder,
@@ -55,3 +56,6 @@ class TemplatesRecommender(ORKGNLPBaseService):
             top_n=top_n,
             multiple_batches=True,
         )
+
+
+orkgnlp_context.get("SERVICE_MAP")[TemplatesRecommender.SERVICE_NAME] = TemplatesRecommender

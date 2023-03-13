@@ -4,6 +4,7 @@ from typing import Any
 
 from orkgnlp.annotation.csner.decoder import CSNerDecoder
 from orkgnlp.annotation.csner.encoder import CSNerEncoder
+from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.service.base import (
     ORKGNLPBaseDecoder,
     ORKGNLPBaseEncoder,
@@ -89,3 +90,6 @@ class CSNer(ORKGNLPBaseService):
 
     def _annotate(self, q, pipeline_name):
         return self._run(raw_input=q, pipline_executor_name=pipeline_name, multiple_batches=True)
+
+
+orkgnlp_context.get("SERVICE_MAP")[CSNer.SERVICE_NAME] = CSNer

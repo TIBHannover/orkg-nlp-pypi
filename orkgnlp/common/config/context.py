@@ -22,6 +22,7 @@ orkgnlp_context = StrictDict(
         "HUGGINGFACE_REPOS": io.read_json(
             os.path.join(_current_dir, "..", "..", "huggingface_repos.json")
         ),
+        "SERVICE_MAP": {},
     }
 )
 

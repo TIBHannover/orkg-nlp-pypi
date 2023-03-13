@@ -4,6 +4,7 @@ from typing import Any
 
 from orkgnlp.clustering.bioassays.decoder import BioassaysSemantifierDecoder
 from orkgnlp.clustering.encoders import TfidfKmeansEncoder
+from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.service.base import (
     ORKGNLPBaseDecoder,
     ORKGNLPBaseEncoder,
@@ -45,3 +46,6 @@ class BioassaysSemantifier(ORKGNLPBaseService):
         """
 
         return self._run(raw_input=text)
+
+
+orkgnlp_context.get("SERVICE_MAP")[BioassaysSemantifier.SERVICE_NAME] = BioassaysSemantifier

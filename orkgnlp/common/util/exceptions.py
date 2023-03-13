@@ -20,3 +20,12 @@ class ORKGNLPIllegalStateError(RuntimeError):
 
     def __init__(self, message: str):
         super().__init__(message)
+
+
+class ORKGNLPUnknownServiceError(Exception):
+    """
+    Indicates a request for a service that does not exist.
+    """
+
+    def __init__(self, message: str):
+        super().__init__(message)
