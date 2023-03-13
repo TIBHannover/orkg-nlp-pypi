@@ -39,6 +39,19 @@ Supported Services
 
 (*) Please refer to the release notes or README.md file in the release assets for more information about the version.
 
+To get started with any ORKG NLP service, you can use ``orkgnlp.load()`` and pass the service name from the table above.
+
+.. code-block:: python
+
+    import orkgnlp
+    service = orkgnlp.load('predicates-clustering') # This will also download the required model files.
+    predicates = service(title='paper title', abstract='long abstract text here')
+
+    service = orkgnlp.load('tdm-extraction') # This will also download the required model files.
+    tdms = service(text='DocTAET represented text here', top_n=10)
+
+Read more about each service below!
+
 .. include:: ./predicates_clustering.rst
 .. include:: ./bioassays_semantification.rst
 .. include:: ./cs_ner.rst

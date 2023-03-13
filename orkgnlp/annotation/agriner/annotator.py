@@ -6,6 +6,7 @@ from typing import Any
 from transformers import pipeline
 
 from orkgnlp.annotation.agriner.decoder import AgriNerDecoder
+from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.service.base import (
     ORKGNLPBaseDecoder,
     ORKGNLPBaseEncoder,
@@ -47,3 +48,6 @@ class AgriNer(ORKGNLPBaseService):
         :return: A list of the annotated parts for the given text is returned.
         """
         return self._run(raw_input=title)
+
+
+orkgnlp_context.get("SERVICE_MAP")[AgriNer.SERVICE_NAME] = AgriNer

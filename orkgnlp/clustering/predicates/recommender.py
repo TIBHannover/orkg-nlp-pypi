@@ -4,6 +4,7 @@ from typing import Any
 
 from orkgnlp.clustering.encoders import TransformerKmeansEncoder
 from orkgnlp.clustering.predicates.decoder import PredicatesRecommenderDecoder
+from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.service.base import (
     ORKGNLPBaseDecoder,
     ORKGNLPBaseEncoder,
@@ -47,3 +48,6 @@ class PredicatesRecommender(ORKGNLPBaseService):
         return self._run(
             raw_input="{} {}".format(title, abstract), output_names=["label", "labels_"]
         )
+
+
+orkgnlp_context.get("SERVICE_MAP")[PredicatesRecommender.SERVICE_NAME] = PredicatesRecommender

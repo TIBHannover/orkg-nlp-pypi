@@ -3,14 +3,25 @@
 Root package of orkgnlp.
 """
 
-__version__ = "0.9.0"
+__version__ = "0.10.0"
 
 import logging
 
+from orkgnlp import annotation, clustering, nli
 from orkgnlp.common import config, service, tools, util
-from orkgnlp.common.tools import download
+from orkgnlp.common.tools import download, load
 
-__all__ = ["config", "service", "tools", "util", "download"]
+__all__ = [
+    "annotation",
+    "clustering",
+    "nli",
+    "config",
+    "service",
+    "tools",
+    "util",
+    "download",
+    "load",
+]
 
 
 # Root logger configuration

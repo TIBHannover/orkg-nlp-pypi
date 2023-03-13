@@ -7,6 +7,7 @@ from transformers import XLNetForSequenceClassification
 
 from orkgnlp.annotation.tdm.decoder import TdmExtractorDecoder
 from orkgnlp.annotation.tdm.encoder import TdmExtractorEncoder
+from orkgnlp.common.config import orkgnlp_context
 from orkgnlp.common.service.base import (
     ORKGNLPBaseDecoder,
     ORKGNLPBaseEncoder,
@@ -59,3 +60,6 @@ class TdmExtractor(ORKGNLPBaseService):
             top_n=top_n,
             multiple_batches=True,
         )
+
+
+orkgnlp_context.get("SERVICE_MAP")[TdmExtractor.SERVICE_NAME] = TdmExtractor
