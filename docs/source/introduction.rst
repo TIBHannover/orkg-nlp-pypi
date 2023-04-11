@@ -5,7 +5,7 @@ The ORKG-NLP package is a wrapper to the **Natural Language Processing** (NLP) s
 Why ?
 """"""
 The Open Research Knowledge Graph (**ORKG**) is a next-generation digital library that provides
-modern techniques foracquiring, curating, publishing and processing semantic scholarly knowledge.
+modern techniques for acquiring, curating, publishing and processing semantic scholarly knowledge.
 All that happens with leveraging a **Knowledge Graph** that increases the *FAIRness* of the data,
 following the RDF triple paradigm.
 
