@@ -15,7 +15,7 @@ Supported Services
      - `orkg/orkgnlp-predicates-clustering <https://huggingface.co/orkg/orkgnlp-predicates-clustering>`_
      - Recommendation service for ORKG predicates based on clustering.
    * - ``bioassays-semantification``
-     - `v0.1.0`
+     - `v0.1.0 <https://gitlab.com/TIBHannover/orkg/nlp/experiments/orkg-bioassays-semantification/-/releases/v0.1.0>`_
      - `orkg/orkgnlp-bioassays-semantification <https://huggingface.co/orkg/orkgnlp-bioassays-semantification>`_
      - Semantification service for BioAssays based on clustering.
    * - ``cs-ner``
