@@ -19,7 +19,7 @@ Supported Services
      - `orkg/orkgnlp-bioassays-semantification <https://huggingface.co/orkg/orkgnlp-bioassays-semantification>`_
      - Semantification service for BioAssays based on clustering.
    * - ``cs-ner``
-     - `v0.1.0`
+     - `v0.1.0 <https://gitlab.com/TIBHannover/orkg/nlp/experiments/orkg-cs-ner/-/releases/v0.1.0>`_
      -
         * `orkg/orkgnlp-cs-ner-titles <https://huggingface.co/orkg/orkgnlp-cs-ner-titles>`_
         * `orkg/orkgnlp-cs-ner-abstracts <https://huggingface.co/orkg/orkgnlp-cs-ner-abstracts>`_
