@@ -18,7 +18,7 @@ Usage
     from orkgnlp.annotation import ResearchFieldClassifier
 
     rf_classifier = ResearchFieldClassifier() # This will also download the required model files.
-    rfs = rf_classifier(abstract='paper abstract represented text here', top_n=10)
+    rfs = rf_classifier(abstract='Your paper abstract here', top_n=10)
     print(rfs)
 
 and the output has the following schema:
