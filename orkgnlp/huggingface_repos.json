@@ -147,5 +147,21 @@
         }
       ]
     }
+  ],
+  "research-fields-classification":[
+    {
+      "repo_id":"orkg/orkgnlp-research-fields-classification",
+      "files":[
+        {
+          "internal_name": "model",
+          "filename":"orkg-research-fields-classification.pt"
+        },
+        {
+          "internal_name":"label_dict",
+          "filename": "label_dict.json"
+        }
+
+      ]
+    }
   ]
 }
