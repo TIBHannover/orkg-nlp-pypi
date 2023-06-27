@@ -36,7 +36,10 @@ Supported Services
      - `v0.1.0 <https://gitlab.com/TIBHannover/orkg/nlp/experiments/orkg-agriculture-ner/-/releases/v0.1.0>`_
      - `orkg/orkgnlp-agri-ner <https://huggingface.co/orkg/orkgnlp-agri-ner>`_
      - Annotation service for research papers in the Agriculture domain based on named entity recognition.
-
+   * - ``research-fields-classification``
+     - `v0.1.0`
+     - `orkg/orkgnlp-research-fields-classification <https://huggingface.co/orkg/orkgnlp-research-fields-classification>`_
+     - Classification service for research field identifications in different domains based on multi-class classification.
 (*) Please refer to the release notes or README.md file in the release assets for more information about the version.
 
 To get started with any ORKG NLP service, you can use ``orkgnlp.load()`` and pass the service name from the table above.
@@ -58,3 +61,4 @@ Read more about each service below!
 .. include:: ./tdm_extraction.rst
 .. include:: ./templates_recommendation.rst
 .. include:: ./agri_ner.rst
+.. include:: ./research_fields_classification.rst

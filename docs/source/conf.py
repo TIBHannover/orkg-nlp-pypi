@@ -19,11 +19,11 @@ sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
 # -- Project information -----------------------------------------------------
 
 project = "orkg-nlp"
-copyright = "2022, ORKG team"
-author = "Omar Arab Oghli"
+copyright = "2023, ORKG team"
+author = "Omar Arab Oghli, Hamed Babaei Giglou"
 
 # The full version, including alpha/beta/rc tags
-release = "0.10.0"
+release = "0.11.0"
 
 # -- General configuration ---------------------------------------------------
 
