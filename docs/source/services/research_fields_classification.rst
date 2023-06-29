@@ -27,7 +27,7 @@ and the output has the following schema:
 
     [
         {
-            "research-field": "some_research_field",
+            "research_field": "some_research_field",
             "score": 0.991233
         }
         ...

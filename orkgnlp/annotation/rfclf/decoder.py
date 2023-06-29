@@ -31,7 +31,7 @@ class ResearchFieldClassifierDecoder(ORKGNLPBaseDecoder):
         logits = model_output["logits"]
         top_n_scores, top_n_indices = torch.topk(logits, k=top_n)
         top_n_predicts = [
-            {"research-field": self.label_dict[indices.item()], "score": score.item()}
+            {"research_field": self.label_dict[indices.item()], "score": score.item()}
             for score, indices in zip(top_n_scores[0], top_n_indices[0])
         ]
         return top_n_predicts
