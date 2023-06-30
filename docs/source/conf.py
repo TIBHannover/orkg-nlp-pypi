@@ -22,7 +22,7 @@ project = "orkg-nlp"
 copyright = "2023, ORKG team"
 author = "Omar Arab Oghli, Hamed Babaei Giglou"
 # The full version, including alpha/beta/rc tags
-release = "0.11.1"
+release = "0.11.2"
 
 # -- General configuration ---------------------------------------------------
 

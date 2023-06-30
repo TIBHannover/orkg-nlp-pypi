@@ -39,19 +39,19 @@ class ResearchFieldClassifier(ORKGNLPBaseService):
 
         self._register_pipeline("main", encoder, runner, decoder)
 
-    def __call__(self, abstract: str, top_n: int = 5) -> Any:
+    def __call__(self, raw_input: str, top_n: int = 5) -> Any:
         """
         Classifies a paper into a research field by processing the given abstract.
 
-        :param abstract: Paper's abstract
+        :param raw_input: Combined paper's title and abstract
         :param top_n: The top n research fields to be retrieved
         :return: A list of n most likely research fields for the paper
         :raise orkgnlp.common.util.exceptions.ORKGNLPValidationError: If no abstract is given
         """
-        if not abstract:
+        if not raw_input:
             raise ORKGNLPValidationError("Abstract must be provided")
 
-        return self._run(raw_input=abstract, top_n=top_n)
+        return self._run(raw_input=raw_input, top_n=top_n)
 
 
 orkgnlp_context.get("SERVICE_MAP")[ResearchFieldClassifier.SERVICE_NAME] = ResearchFieldClassifier
